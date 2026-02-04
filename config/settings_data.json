@@ -20,6 +20,7 @@
     "color_bg_3": "#eeeeeb",
     "color_overlay": "#000000",
     "overlay_opacity": 40,
+    "use_asset_fonts": true,
     "font_heading": "cormorant_n4",
     "font_body": "poppins_n4",
     "font_additional": "poppins_n4",
