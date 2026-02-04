@@ -1,4 +1,10 @@
 {
+  "search": {
+    "placeholder": "Search our store",
+    "submit": "Search",
+    "title": "Search",
+    "no_results": "No results found"
+  },
   "general": {
     "share": "Share",
     "breadcrumb": { "home": "Home" },
@@ -33,6 +39,10 @@
     "success": "Thanks for subscribing"
   },
   "products": {
+    "compare": {
+      "title": "Compare products",
+      "empty": "Add products to compare from the product page."
+    },
     "facets": {
       "sort_by_label": "Sort by",
       "filter_by_label": "Filter by",
