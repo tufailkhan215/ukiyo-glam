@@ -76,7 +76,7 @@
       "type": "ug-featured-collection",
       "settings": {
         "title": "Featured collection",
-        "collection": "",
+        "collection": "frontpage",
         "products_to_show": 8,
         "show_view_all": true,
         "padding_top": 36,
@@ -89,6 +89,7 @@
         "banner-1": {
           "type": "banner",
           "settings": {
+            "image": "shopify://shop_images/13.webp",
             "heading": "",
             "description": "",
             "button_label": "",
@@ -101,6 +102,7 @@
         "banner-2": {
           "type": "banner",
           "settings": {
+            "image": "shopify://shop_images/grid-banner-1.webp",
             "heading": "",
             "description": "",
             "button_label": "",
@@ -113,6 +115,7 @@
         "banner-3": {
           "type": "banner",
           "settings": {
+            "image": "shopify://shop_images/AdobeStock_449020288_2x_6f4b8aaa-2cef-4608-82da-b2523103fc92.webp",
             "heading": "",
             "description": "",
             "button_label": "",
@@ -145,28 +148,28 @@
           "type": "tab",
           "settings": {
             "title": "Tab title",
-            "collection": ""
+            "collection": "frontpage"
           }
         },
         "tab_pKcxtb": {
           "type": "tab",
           "settings": {
             "title": "Tab title",
-            "collection": ""
+            "collection": "frontpage"
           }
         },
         "tab_dYdihx": {
           "type": "tab",
           "settings": {
             "title": "Tab title",
-            "collection": ""
+            "collection": "frontpage"
           }
         },
         "tab_dAEj8G": {
           "type": "tab",
           "settings": {
             "title": "Tab title",
-            "collection": ""
+            "collection": "frontpage"
           }
         }
       },
@@ -186,6 +189,43 @@
     },
     "ug-multicolumn": {
       "type": "ug-multicolumn",
+      "blocks": {
+        "column_kJqzgX": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/12.webp",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_P9Kh3r": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/collection-crown.webp",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_UkKynn": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/collection-bracelets_2448b96f-1178-45b6-8e31-372c1929f52d.webp",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_kJqzgX",
+        "column_P9Kh3r",
+        "column_UkKynn"
+      ],
       "settings": {
         "heading": "Why shop with us",
         "subheading": "",
@@ -197,6 +237,28 @@
     },
     "ug-testimonials": {
       "type": "ug-testimonials",
+      "blocks": {
+        "testimonial_GtRdPa": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/blog-3.webp",
+            "quote": "Quote Quote",
+            "author": "Author"
+          }
+        },
+        "testimonial_GJJDTJ": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/team-image-1.webp",
+            "quote": "Quote Quote Quote",
+            "author": "Author"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_GtRdPa",
+        "testimonial_GJJDTJ"
+      ],
       "settings": {
         "heading": "What our customers say",
         "subheading": "",
