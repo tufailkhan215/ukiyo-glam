@@ -1,4 +1,4 @@
-<header class="ug-header color-{{ section.settings.color_scheme }}" role="banner">
+<header class="ug-header ug-header--logo-{{ section.settings.logo_position }} color-{{ section.settings.color_scheme }}" role="banner">
   <div class="page-width">
     <div class="ug-header__inner">
       <div class="ug-header__mobile-toggle" aria-label="Menu" data-open-menu>
@@ -22,8 +22,8 @@
                   {% break %}
                 {% endif %}
               {% endfor %}
-              <li class="ug-header__nav-item{% if has_mega %} ug-header__nav-item--mega{% endif %}">
-                <a href="{{ link.url }}" class="ug-header__nav-link">{{ link.title }}</a>
+              <li class="ug-header__nav-item{% if has_mega %} ug-header__nav-item--mega{% endif %}{% if link.links != blank or has_mega %} ug-header__nav-item--has-dropdown{% endif %}">
+                <a href="{{ link.url }}" class="ug-header__nav-link">{{ link.title }}{% if section.settings.show_dropdown_arrows and (link.links != blank or has_mega) %}<span class="ug-header__nav-arrow" aria-hidden="true">{% render 'ug-icon-caret' %}</span>{% endif %}</a>
                 {% if link.links != blank or has_mega %}
                   <div class="ug-header__subnav">
                     {% if link.links != blank %}
@@ -75,6 +75,15 @@
           {% render 'ug-icon-cart' %}
           <span class="ug-header__cart-count" data-cart-count>{{ cart.item_count }}</span>
         </a>
+        {% if section.settings.show_currency_in_header and localization.available_countries.size > 1 %}
+          <div class="ug-header__currency">
+            {% form 'localization', id: 'HeaderCountryForm' %}
+              <label for="HeaderCountry" class="visually-hidden">{{ 'localization.country_label' | t }}</label>
+              <select id="HeaderCountry" name="country_code" class="ug-header__currency-select">{% for country in localization.available_countries %}<option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>{{ country.currency.iso_code }} {{ country.currency.symbol }}</option>{% endfor %}</select>
+              <button type="submit" class="visually-hidden">{{ 'localization.update_country' | t }}</button>
+            {% endform %}
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -100,9 +109,15 @@
   "settings": [
     { "type": "image_picker", "id": "logo", "label": "Logo" },
     { "type": "range", "id": "logo_width", "min": 50, "max": 250, "step": 10, "default": 120, "unit": "px", "label": "Logo width" },
+    { "type": "select", "id": "logo_position", "options": [
+      { "value": "left", "label": "Logo left" },
+      { "value": "center", "label": "Logo center (nav left, icons right)" }
+    ], "default": "left", "label": "Logo position" },
     { "type": "link_list", "id": "menu", "default": "main-menu", "label": "Menu" },
+    { "type": "checkbox", "id": "show_dropdown_arrows", "default": true, "label": "Show dropdown arrows on menu" },
     { "type": "checkbox", "id": "show_search", "default": true, "label": "Show search" },
     { "type": "checkbox", "id": "show_account", "default": true, "label": "Show account" },
+    { "type": "checkbox", "id": "show_currency_in_header", "default": false, "label": "Show currency in header" },
     { "type": "select", "id": "color_scheme", "options": [
       { "value": "background-1", "label": "Background 1" },
       { "value": "background-2", "label": "Background 2" },

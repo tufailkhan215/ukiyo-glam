@@ -1,39 +1,55 @@
 {% if section.settings.disable_top_bar == false %}
-<div class="ug-top-bar-announcement{% if section.settings.disable_top_bar_mobile %} ug-top-bar--hide-mobile{% endif %}">{% render 'ug-announcement-bar', section: section %}</div>
-{% if section.settings.show_currency_selector or section.settings.show_locale_selector %}
-<section class="ug-top-bar color-{{ section.settings.color_scheme }} ug-top-bar--{{ section.settings.top_bar_alignment }}{% if section.settings.disable_top_bar_mobile %} ug-top-bar--hide-mobile{% endif %}" aria-label="Top bar">
+<section class="ug-top-bar color-{{ section.settings.color_scheme }} ug-top-bar--{{ section.settings.top_bar_layout }} ug-top-bar--{{ section.settings.top_bar_alignment }}{% if section.settings.disable_top_bar_mobile %} ug-top-bar--hide-mobile{% endif %}" aria-label="Top bar">
   <div class="page-width">
     <div class="ug-top-bar__inner">
-      {% if section.settings.show_currency_selector and localization.available_countries.size > 1 %}
-        <div class="ug-top-bar__localization">
-          {% form 'localization', id: 'TopBarCountryForm' %}
-            <label for="TopBarCountry" class="visually-hidden">{{ 'localization.country_label' | t }}</label>
-            <select id="TopBarCountry" name="country_code" class="ug-top-bar__select">
-              {% for country in localization.available_countries %}
-                <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }})</option>
-              {% endfor %}
-            </select>
-            <button type="submit">{{ 'localization.update_country' | t }}</button>
-          {% endform %}
+      {% if section.settings.top_bar_layout == 'three_column' %}
+        <div class="ug-top-bar__left">{{ section.settings.text_left }}</div>
+        <div class="ug-top-bar__center">
+          {% if section.settings.message != blank %}<p class="ug-top-bar__text">{% if section.settings.link != blank %}<a href="{{ section.settings.link }}" class="ug-top-bar__link">{{ section.settings.message }}</a>{% else %}{{ section.settings.message }}{% endif %}</p>{% endif %}
         </div>
-      {% endif %}
-      {% if section.settings.show_locale_selector and localization.available_languages.size > 1 %}
-        <div class="ug-top-bar__localization">
-          {% form 'localization', id: 'TopBarLanguageForm' %}
-            <label for="TopBarLanguage" class="visually-hidden">{{ 'localization.language_label' | t }}</label>
-            <select id="TopBarLanguage" name="locale_code" class="ug-top-bar__select">
-              {% for language in localization.available_languages %}
-                <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>{{ language.endonym_name }}</option>
-              {% endfor %}
-            </select>
-            <button type="submit">{{ 'localization.update_language' | t }}</button>
-          {% endform %}
+        <div class="ug-top-bar__right">
+          {% if section.settings.text_right != blank %}{{ section.settings.text_right }}{% endif %}
+          {% if section.settings.show_currency_selector and localization.available_countries.size > 1 %}
+            {% form 'localization', id: 'TopBarCountryForm' %}
+              <label for="TopBarCountry" class="visually-hidden">{{ 'localization.country_label' | t }}</label>
+              <select id="TopBarCountry" name="country_code" class="ug-top-bar__select"><option value="">{{ localization.country.name }} ({{ localization.country.currency.iso_code }})</option>{% for country in localization.available_countries %}<option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }})</option>{% endfor %}</select>
+              <button type="submit" class="visually-hidden">{{ 'localization.update_country' | t }}</button>
+            {% endform %}
+          {% endif %}
+          {% if section.settings.show_locale_selector and localization.available_languages.size > 1 %}
+            {% form 'localization', id: 'TopBarLanguageForm' %}
+              <label for="TopBarLanguage" class="visually-hidden">{{ 'localization.language_label' | t }}</label>
+              <select id="TopBarLanguage" name="locale_code" class="ug-top-bar__select">{% for language in localization.available_languages %}<option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>{{ language.endonym_name }}</option>{% endfor %}</select>
+              <button type="submit" class="visually-hidden">{{ 'localization.update_language' | t }}</button>
+            {% endform %}
+          {% endif %}
         </div>
+      {% else %}
+        <div class="ug-top-bar__center ug-top-bar__center--single">
+          {% if section.settings.message != blank %}<p class="ug-top-bar__text">{% if section.settings.link != blank %}<a href="{{ section.settings.link }}" class="ug-top-bar__link">{{ section.settings.message }}</a>{% else %}{{ section.settings.message }}{% endif %}</p>{% endif %}
+        </div>
+        {% if section.settings.show_currency_selector or section.settings.show_locale_selector %}
+          <div class="ug-top-bar__right">
+            {% if section.settings.show_currency_selector and localization.available_countries.size > 1 %}
+              {% form 'localization', id: 'TopBarCountryForm' %}
+                <label for="TopBarCountry" class="visually-hidden">{{ 'localization.country_label' | t }}</label>
+                <select id="TopBarCountry" name="country_code" class="ug-top-bar__select">{% for country in localization.available_countries %}<option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }})</option>{% endfor %}</select>
+                <button type="submit" class="visually-hidden">{{ 'localization.update_country' | t }}</button>
+              {% endform %}
+            {% endif %}
+            {% if section.settings.show_locale_selector and localization.available_languages.size > 1 %}
+              {% form 'localization', id: 'TopBarLanguageForm' %}
+                <label for="TopBarLanguage" class="visually-hidden">{{ 'localization.language_label' | t }}</label>
+                <select id="TopBarLanguage" name="locale_code" class="ug-top-bar__select">{% for language in localization.available_languages %}<option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>{{ language.endonym_name }}</option>{% endfor %}</select>
+                <button type="submit" class="visually-hidden">{{ 'localization.update_language' | t }}</button>
+              {% endform %}
+            {% endif %}
+          </div>
+        {% endif %}
       {% endif %}
     </div>
   </div>
 </section>
-{% endif %}
 {% endif %}
 
 {% schema %}
@@ -43,14 +59,22 @@
     { "type": "header", "content": "Visibility" },
     { "type": "checkbox", "id": "disable_top_bar", "default": false, "label": "Disable top bar" },
     { "type": "checkbox", "id": "disable_top_bar_mobile", "default": false, "label": "Hide top bar on mobile" },
+    { "type": "select", "id": "top_bar_layout", "options": [
+      { "value": "announcement_only", "label": "Announcement only" },
+      { "value": "three_column", "label": "Left / Center / Right (like source)" }
+    ], "default": "announcement_only", "label": "Top bar layout" },
     { "type": "select", "id": "top_bar_alignment", "options": [
       { "value": "default", "label": "Default" },
       { "value": "center", "label": "Center" }
     ], "default": "default", "label": "Top bar alignment" },
-    { "type": "header", "content": "Announcement" },
-    { "type": "text", "id": "message", "label": "Announcement message", "default": "Free shipping on orders over $50" },
-    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "header", "content": "Left zone (three column only)" },
+    { "type": "text", "id": "text_left", "label": "Left text", "default": "" },
+    { "type": "header", "content": "Center (announcement)" },
+    { "type": "text", "id": "message", "label": "Center / announcement message", "default": "Free shipping on orders over $50" },
+    { "type": "url", "id": "link", "label": "Center link" },
     { "type": "text", "id": "link_text", "label": "Link text" },
+    { "type": "header", "content": "Right zone (three column only)" },
+    { "type": "text", "id": "text_right", "label": "Right text", "default": "" },
     { "type": "header", "content": "Localization" },
     { "type": "checkbox", "id": "show_currency_selector", "default": false, "label": "Show country/currency selector" },
     { "type": "checkbox", "id": "show_locale_selector", "default": false, "label": "Show language selector" },
