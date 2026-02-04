@@ -73,7 +73,10 @@
         "subheading": "Subheading",
         "heading_alignment": "center",
         "collection_list": [
-          "frontpage"
+          "collection-4",
+          "collection-3",
+          "collection-2",
+          "collection-1"
         ],
         "collections_to_show": 4,
         "columns": 4,
@@ -156,29 +159,29 @@
         "tab_edjUbQ": {
           "type": "tab",
           "settings": {
-            "title": "Tab title",
+            "title": "Tab title 0",
             "collection": "frontpage"
           }
         },
         "tab_pKcxtb": {
           "type": "tab",
           "settings": {
-            "title": "Tab title",
-            "collection": "frontpage"
+            "title": "Tab title 1",
+            "collection": "collection-1"
           }
         },
         "tab_dYdihx": {
           "type": "tab",
           "settings": {
-            "title": "Tab title",
-            "collection": "frontpage"
+            "title": "Tab title 2",
+            "collection": "collection-2"
           }
         },
         "tab_dAEj8G": {
           "type": "tab",
           "settings": {
             "title": "Tab title",
-            "collection": "frontpage"
+            "collection": "collection-3"
           }
         }
       },
@@ -279,8 +282,8 @@
       "type": "ug-featured-blog",
       "settings": {
         "heading": "From the blog",
-        "subheading": "",
-        "blog": "",
+        "subheading": "Subheading",
+        "blog": "news",
         "posts_to_show": 3,
         "show_view_all": true,
         "padding_top": 36,
@@ -289,6 +292,46 @@
     },
     "ug-instagram-gallery": {
       "type": "ug-instagram-gallery",
+      "blocks": {
+        "image_RYjrWm": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/12.webp",
+            "alt": "",
+            "link": ""
+          }
+        },
+        "image_C8Lzzy": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/collection-crown.webp",
+            "alt": "",
+            "link": ""
+          }
+        },
+        "image_MjUadT": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/grid-banner-top.webp",
+            "alt": "",
+            "link": ""
+          }
+        },
+        "image_aGLKfr": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/collection-necklace_b8dd172a-ed81-4fa9-b8da-8b89105aea08.webp",
+            "alt": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_RYjrWm",
+        "image_C8Lzzy",
+        "image_MjUadT",
+        "image_aGLKfr"
+      ],
       "settings": {
         "heading": "Follow us",
         "columns": 4,
@@ -303,6 +346,52 @@
         "button_label": "Subscribe",
         "color_scheme": "background-2"
       }
+    },
+    "ug_home_slider_width_tabs_nTAggq": {
+      "type": "ug-home-slider-width-tabs",
+      "blocks": {
+        "slide_VM6jNF": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Multi-2x-1_1.webp",
+            "heading": "",
+            "button_label": "",
+            "link": "",
+            "tab_label": ""
+          }
+        },
+        "slide_b8gEVk": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Multi-2x-3.webp",
+            "heading": "",
+            "button_label": "",
+            "link": "",
+            "tab_label": ""
+          }
+        },
+        "slide_wBd7pA": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Multi-2x-2.webp",
+            "heading": "",
+            "button_label": "",
+            "link": "",
+            "tab_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_VM6jNF",
+        "slide_b8gEVk",
+        "slide_wBd7pA"
+      ],
+      "name": "Home slider with tabs",
+      "settings": {
+        "show_tabs": true,
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -315,6 +404,7 @@
     "ug-testimonials",
     "ug-featured-blog",
     "ug-instagram-gallery",
-    "ug-newsletter"
+    "ug-newsletter",
+    "ug_home_slider_width_tabs_nTAggq"
   ]
 }

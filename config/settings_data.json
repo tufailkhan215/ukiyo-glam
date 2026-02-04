@@ -20,7 +20,7 @@
     "color_bg_3": "#eeeeeb",
     "color_overlay": "#000000",
     "overlay_opacity": 40,
-    "use_asset_fonts": true,
+    "use_asset_fonts": false,
     "font_heading": "cormorant_n4",
     "font_body": "poppins_n4",
     "font_additional": "poppins_n4",
@@ -31,9 +31,12 @@
     "section_spacing": 48,
     "grid_spacing": 20,
     "cart_type": "drawer",
+    "social_facebook_link": "#",
+    "social_instagram_link": "#",
+    "social_twitter_link": "#",
     "footer_style": "default",
     "enable_predictive_search": true,
-    "search_popup_type": "overlay",
+    "search_popup_type": "predictive",
     "enable_scroll_to_top": true,
     "sections": {
       "ug-top-bar": {
@@ -56,11 +59,12 @@
           "mega_promo_mXUagH": {
             "type": "mega_promo",
             "settings": {
-              "menu_link_handle": "",
+              "menu_link_handle": "catalog",
               "columns": "3",
-              "heading_1": "",
-              "button_label_1": "",
-              "link_1": "",
+              "image_1": "shopify://shop_images/AdobeStock_449020288_2x_6f4b8aaa-2cef-4608-82da-b2523103fc92.webp",
+              "heading_1": "Heading",
+              "button_label_1": "Button",
+              "link_1": "#",
               "heading_2": "",
               "button_label_2": "",
               "link_2": "",
@@ -116,7 +120,7 @@
         ],
         "settings": {
           "show_payment_icons": true,
-          "color_scheme": "background-2"
+          "color_scheme": "background-1"
         }
       },
       "ug-cookie-banner": {
@@ -143,6 +147,30 @@
       "ug-predictive-search": {
         "type": "ug-predictive-search",
         "settings": {}
+      },
+      "ug-footer-style-a": {
+        "type": "ug-footer-style-a",
+        "settings": {
+          "color_scheme": "background-2"
+        }
+      },
+      "ug-footer-style-b": {
+        "type": "ug-footer-style-b",
+        "settings": {
+          "color_scheme": "background-2"
+        }
+      },
+      "ug-footer-style-c": {
+        "type": "ug-footer-style-c",
+        "settings": {
+          "color_scheme": "background-2"
+        }
+      },
+      "ug-footer-style-d": {
+        "type": "ug-footer-style-d",
+        "settings": {
+          "color_scheme": "background-2"
+        }
       }
     },
     "content_for_index": []
