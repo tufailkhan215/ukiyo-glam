@@ -1,0 +1,7 @@
+{% comment %} Discount code display / apply (dt-discount-code equivalent) {% endcomment %}
+<div class="ug-discount-code">
+  {% if code != blank %}
+    <span class="ug-discount-code__label">{{ 'cart.discount_code' | t | default: 'Code' }}:</span>
+    <code class="ug-discount-code__code">{{ code }}</code>
+  {% endif %}
+</div>

@@ -1,0 +1,22 @@
+<section class="ug-pickup section-{{ section.id }}-padding">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}<h2 class="ug-pickup__heading">{{ section.settings.heading }}</h2>{% endif %}
+    <div class="ug-pickup__content">
+      {% comment %} Pickup availability is typically rendered on product page via snippet; this section can show global store pickup info or be used as placeholder for app blocks. {% endcomment %}
+      <p class="ug-pickup__text">{{ section.settings.text }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pickup availability",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Check availability at your local store." },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 60, "step": 4, "default": 24, "unit": "px", "label": "Padding top" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 60, "step": 4, "default": 24, "unit": "px", "label": "Padding bottom" }
+  ],
+  "presets": [{ "name": "Pickup availability" }]
+}
+{% endschema %}

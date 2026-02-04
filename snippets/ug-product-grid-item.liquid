@@ -1,0 +1,8 @@
+{% comment %} Product grid item – used in collection/product grids (adv-product-grid-item equivalent) {% endcomment %}
+<li class="ug-product-grid-item">
+  {% if product != blank %}
+    {% render 'ug-card-product', product: product, show_vendor: show_vendor %}
+  {% else %}
+    {% render 'ug-product-card-placeholder' %}
+  {% endif %}
+</li>

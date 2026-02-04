@@ -1,0 +1,19 @@
+{% comment %} Megamenu brands block. Accepts: block {% endcomment %}
+<div class="ug-mega-brands">
+  <div class="ug-mega-brands__grid">
+    {% for i in (1..6) %}
+      {% assign img_key = 'image_' | append: i %}
+      {% assign title_key = 'title_' | append: i %}
+      {% assign link_key = 'link_' | append: i %}
+      {% if block.settings[img_key] != blank or block.settings[title_key] != blank %}
+        <a href="{{ block.settings[link_key] | default: '#' }}" class="ug-mega-brands__item">
+          {% if block.settings[img_key] != blank %}
+            <img src="{{ block.settings[img_key] | image_url: width: 150 }}" alt="{{ block.settings[title_key] | escape }}" width="150" loading="lazy">
+          {% else %}
+            <span>{{ block.settings[title_key] }}</span>
+          {% endif %}
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

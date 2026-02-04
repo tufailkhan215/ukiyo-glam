@@ -1,0 +1,14 @@
+{% comment %} Megamenu products block. Accepts: block (product_1..product_4) {% endcomment %}
+<div class="ug-mega-products">
+  <div class="ug-mega-products__grid">
+    {% for i in (1..4) %}
+      {% assign product_key = 'product_' | append: i %}
+      {% assign product = block.settings[product_key] %}
+      {% if product != blank %}
+        <div class="ug-mega-products__item">
+          {% render 'ug-card-product-2', product: product %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

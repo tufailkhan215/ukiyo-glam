@@ -1,0 +1,39 @@
+<section class="ug-main-blog page-width">
+  <header class="ug-main-blog__header">
+    <h1 class="ug-main-blog__title">{{ blog.title }}</h1>
+  </header>
+  <div class="ug-main-blog__grid">
+    {% paginate blog.articles by 12 %}
+    {% for article in blog.articles %}
+      <article class="ug-article-card">
+        <a href="{{ article.url }}" class="ug-article-card__link">
+          {% if article.image %}
+            <div class="ug-article-card__media">
+              <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.image.alt | escape }}" width="600" loading="lazy">
+            </div>
+          {% endif %}
+          <div class="ug-article-card__info">
+            <h2 class="ug-article-card__title">{{ article.title }}</h2>
+            <time class="ug-article-card__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>
+            {% if article.excerpt != blank %}
+              <p class="ug-article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+            {% endif %}
+          </div>
+        </a>
+      </article>
+    {% endfor %}
+    {% endpaginate %}
+  </div>
+  {% if paginate.pages > 1 %}
+    <nav class="ug-pagination" aria-label="Blog pagination">
+      {{ paginate | default_pagination }}
+    </nav>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": []
+}
+{% endschema %}

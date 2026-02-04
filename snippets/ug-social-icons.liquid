@@ -1,0 +1,24 @@
+{% comment %}
+  Accepts: class (optional wrapper class)
+  Uses: settings.social_facebook_link, settings.social_instagram_link, etc.
+{% endcomment %}
+<div class="ug-social-icons {{ class }}">
+  {% if settings.social_facebook_link != blank %}
+    <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Facebook">{% render 'ug-icon-facebook' %}</a>
+  {% endif %}
+  {% if settings.social_instagram_link != blank %}
+    <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Instagram">{% render 'ug-icon-instagram' %}</a>
+  {% endif %}
+  {% if settings.social_twitter_link != blank %}
+    <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener" aria-label="Twitter">{% render 'ug-icon-twitter' %}</a>
+  {% endif %}
+  {% if settings.social_pinterest_link != blank %}
+    <a href="{{ settings.social_pinterest_link }}" target="_blank" rel="noopener" aria-label="Pinterest">{% render 'ug-icon-pinterest' %}</a>
+  {% endif %}
+  {% if settings.social_youtube_link != blank %}
+    <a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener" aria-label="YouTube">{% render 'ug-icon-youtube' %}</a>
+  {% endif %}
+  {% if settings.social_tiktok_link != blank %}
+    <a href="{{ settings.social_tiktok_link }}" target="_blank" rel="noopener" aria-label="TikTok">{% render 'ug-icon-tiktok' %}</a>
+  {% endif %}
+</div>

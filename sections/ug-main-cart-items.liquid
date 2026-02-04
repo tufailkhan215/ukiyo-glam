@@ -1,0 +1,49 @@
+{% comment %} Cart page – line items section (mirror source main-cart structure) {% endcomment %}
+<section class="ug-main-cart-items">
+  <div class="page-width">
+    <h1 class="ug-main-cart-items__title">{{ 'sections.cart.title' | t | default: 'Cart' }}</h1>
+    {% if cart.item_count > 0 %}
+      <form action="{{ routes.cart_url }}" method="post" id="ug-cart-form" class="ug-main-cart-items__form">
+        <div class="ug-main-cart-items__list">
+          {% for item in cart.items %}
+            <div class="ug-main-cart-items__row" data-ug-cart-item key="{{ item.key }}">
+              <div class="ug-main-cart-items__media">
+                {% if item.image %}
+                  <img src="{{ item.image | image_url: width: 120 }}" alt="{{ item.image.alt | escape }}" width="120" height="120" loading="lazy">
+                {% endif %}
+              </div>
+              <div class="ug-main-cart-items__details">
+                <a href="{{ item.url }}" class="ug-main-cart-items__name">{{ item.product.title }}</a>
+                {% unless item.variant.title == 'Default Title' %}<span class="ug-main-cart-items__variant">{{ item.variant.title }}</span>{% endunless %}
+                <div class="ug-main-cart-items__quantity">
+                  <label for="updates-{{ item.key }}" class="visually-hidden">{{ 'sections.cart.quantity' | t }}</label>
+                  <input type="number" name="updates[]" id="updates-{{ item.key }}" value="{{ item.quantity }}" min="0" data-ug-cart-quantity>
+                </div>
+              </div>
+              <div class="ug-main-cart-items__price">
+                {{ item.final_line_price | money }}
+              </div>
+              <div class="ug-main-cart-items__remove">
+                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" data-ug-cart-remove aria-label="{{ 'sections.cart.remove' | t }}">{% render 'ug-icon-remove' %}</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <button type="submit" name="update" class="ug-btn ug-btn--secondary">{{ 'sections.cart.update' | t | default: 'Update cart' }}</button>
+      </form>
+    {% else %}
+      <p class="ug-main-cart-items__empty">{{ 'sections.cart.empty' | t | default: 'Your cart is empty.' }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="ug-btn ug-btn--primary">{{ 'sections.cart.continue_shopping' | t | default: 'Continue shopping' }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart items",
+  "tag": "section",
+  "class": "ug-section-main-cart-items",
+  "settings": [],
+  "presets": [{ "name": "Cart items" }]
+}
+{% endschema %}

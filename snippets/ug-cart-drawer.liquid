@@ -1,0 +1,42 @@
+<div id="ug-cart-drawer" class="ug-cart-drawer" aria-hidden="true">
+  <div class="ug-cart-drawer__overlay" data-close-drawer aria-label="{{ 'accessibility.close' | t }}"></div>
+  <div class="ug-cart-drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}">
+    <div class="ug-cart-drawer__header">
+      <h2 class="ug-cart-drawer__title">{{ 'sections.cart.title' | t }}</h2>
+      <button type="button" class="ug-cart-drawer__close" data-close-drawer aria-label="{{ 'accessibility.close' | t }}">{% render 'ug-icon-close' %}</button>
+    </div>
+    <div class="ug-cart-drawer__content">
+      {% if cart.item_count > 0 %}
+        <form action="{{ routes.cart_url }}" method="post" class="ug-cart-drawer__form">
+          <ul class="ug-cart-drawer__items">
+            {% for item in cart.items %}
+              <li class="ug-cart-drawer__item">
+                <div class="ug-cart-drawer__item-image">
+                  <img src="{{ item.image | image_url: width: 120 }}" alt="{{ item.title | escape }}" width="120" height="120" loading="lazy">
+                </div>
+                <div class="ug-cart-drawer__item-details">
+                  <a href="{{ item.url }}" class="ug-cart-drawer__item-title">{{ item.product.title }}</a>
+                  {% unless item.variant.title == 'Default Title' %}<p class="ug-cart-drawer__item-variant">{{ item.variant.title }}</p>{% endunless %}
+                  <div class="ug-cart-drawer__item-quantity">
+                    <label for="drawer-qty-{{ item.key }}" class="visually-hidden">Quantity</label>
+                    <input type="number" name="updates[]" id="drawer-qty-{{ item.key }}" value="{{ item.quantity }}" min="0" data-key="{{ item.key }}" aria-label="Quantity">
+                  </div>
+                  <p class="ug-cart-drawer__item-price">{{ item.final_line_price | money }}</p>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+          <div class="ug-cart-drawer__footer">
+            <p class="ug-cart-drawer__total">{{ 'sections.cart.subtotal' | t }} {{ cart.total_price | money }}</p>
+            <button type="submit" name="update" class="ug-btn ug-btn--secondary">{{ 'sections.cart.update' | t }}</button>
+            <a href="{{ routes.cart_url }}" class="ug-btn ug-btn--primary">{{ 'sections.cart.view_cart' | t }}</a>
+            <a href="/checkout" class="ug-btn ug-btn--primary">{{ 'sections.cart.checkout' | t }}</a>
+          </div>
+        </form>
+      {% else %}
+        <p class="ug-cart-drawer__empty">{{ 'sections.cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="ug-btn ug-btn--primary">{{ 'sections.cart.continue_shopping' | t }}</a>
+      {% endif %}
+    </div>
+  </div>
+</div>

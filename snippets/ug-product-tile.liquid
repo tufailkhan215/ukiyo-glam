@@ -1,0 +1,18 @@
+{% comment %} Product tile – compact product block (product-tile equivalent) {% endcomment %}
+{% if product != blank %}
+  <div class="ug-product-tile">
+    <a href="{{ product.url }}" class="ug-product-tile__link">
+      <span class="ug-product-tile__media">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="300" loading="lazy">
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'ug-product-tile__placeholder' }}
+        {% endif %}
+      </span>
+      <span class="ug-product-tile__info">
+        <span class="ug-product-tile__title">{{ product.title }}</span>
+        <span class="ug-product-tile__price">{% render 'ug-price', product: product %}</span>
+      </span>
+    </a>
+  </div>
+{% endif %}

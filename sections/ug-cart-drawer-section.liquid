@@ -1,0 +1,14 @@
+{% comment %} Cart drawer as section – for theme app block placement (mirror source cart-drawer) {% endcomment %}
+{% if settings.cart_type == 'drawer' %}
+  {% render 'ug-cart-drawer' %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "tag": "div",
+  "class": "ug-section-cart-drawer",
+  "settings": [],
+  "presets": [{ "name": "Cart drawer" }]
+}
+{% endschema %}

@@ -1,0 +1,18 @@
+{% comment %}
+  Accepts: product, media (optional single media), lazy_load (default: true)
+{% endcomment %}
+{% if media %}
+  {% if media.media_type == 'image' %}
+    <img src="{{ media | image_url: width: 800 }}" alt="{{ media.alt | escape }}" width="800" loading="{{ lazy_load | default: true | json }}" class="ug-product-media__img">
+  {% elsif media.media_type == 'video' or media.media_type == 'external_video' %}
+    {{ media | media_tag: image_size: '800x', autoplay: true, loop: true, controls: true, class: 'ug-product-media__video' }}
+  {% endif %}
+{% elsif product.featured_media %}
+  {% if product.featured_media.media_type == 'image' %}
+    <img src="{{ product.featured_media | image_url: width: 800 }}" alt="{{ product.featured_media.alt | escape }}" width="800" loading="lazy" class="ug-product-media__img">
+  {% else %}
+    {{ product.featured_media | media_tag: image_size: '800x', class: 'ug-product-media__video' }}
+  {% endif %}
+{% else %}
+  {{ 'product-1' | placeholder_svg_tag: 'ug-product-media__placeholder' }}
+{% endif %}

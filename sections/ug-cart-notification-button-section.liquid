@@ -1,0 +1,15 @@
+{% comment %} Cart notification trigger – section for cart notification button (mirror cart-notification-button) {% endcomment %}
+<div class="ug-cart-notification-button-section">
+  <button type="button" class="ug-btn ug-btn--primary" data-ug-cart-notification-trigger aria-label="{{ 'sections.cart.view_cart' | t }}">{{ section.settings.label | default: 'View cart' }}</button>
+</div>
+
+{% schema %}
+{
+  "name": "Cart notification button",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Button label", "default": "View cart" }
+  ],
+  "presets": [{ "name": "Cart notification button" }]
+}
+{% endschema %}

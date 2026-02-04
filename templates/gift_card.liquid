@@ -1,0 +1,33 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'gift_cards.issued.title' | t }}</title>
+  {{ 'ug-base.css' | asset_url | stylesheet_tag }}
+  <style>
+    .ug-gift-card { max-width: 500px; margin: 2rem auto; padding: 2rem; text-align: center; }
+    .ug-gift-card__code { font-size: 1.5rem; font-weight: 700; padding: 1rem; border: 2px dashed #ccc; margin: 1rem 0; }
+    .ug-gift-card__amount { font-size: 1.25rem; margin-bottom: 1rem; }
+    .ug-gift-card__qr { margin: 1rem 0; }
+    .ug-gift-card__link { display: inline-block; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="ug-gift-card">
+    <h1>{{ 'gift_cards.issued.title' | t }}</h1>
+    <p class="ug-gift-card__amount">{{ gift_card.balance | money }}</p>
+    <p class="ug-gift-card__code">{{ gift_card.code | format_code }}</p>
+    {% if gift_card.enabled %}
+      <a href="{{ gift_card.url }}" class="ug-btn ug-btn--primary ug-gift-card__link">{{ 'gift_cards.issued.redeem' | t }}</a>
+    {% endif %}
+    {% if gift_card.expires_on %}
+      <p>{{ 'gift_cards.issued.expires' | t }} {{ gift_card.expires_on | date: format: 'date' }}</p>
+    {% endif %}
+    {% if gift_card.qr_code %}
+      <div class="ug-gift-card__qr">{{ gift_card | qr_code_image }}</div>
+    {% endif %}
+  </div>
+</body>
+</html>

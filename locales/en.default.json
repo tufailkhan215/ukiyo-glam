@@ -1,0 +1,203 @@
+{
+  "general": {
+    "share": "Share",
+    "breadcrumb": { "home": "Home" },
+    "search": {
+      "title": "Search",
+      "placeholder": "Search our store",
+      "submit": "Search",
+      "no_results": "No results found"
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you requested does not exist.",
+      "link": "Continue shopping"
+    },
+    "password_page": {
+      "title": "Coming soon",
+      "message": "We're busy preparing our store. Enter your email to be notified when we launch.",
+      "admin_link_html": "Are you the store owner? <a href=\"/admin\">Log in here</a>",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_submit": "Enter"
+    }
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content",
+    "close": "Close",
+    "refresh_page": "Choosing a selection results in a full page refresh."
+  },
+  "newsletter": {
+    "label": "Email address",
+    "button_label": "Subscribe",
+    "success": "Thanks for subscribing"
+  },
+  "products": {
+    "facets": {
+      "sort_by_label": "Sort by",
+      "filter_by_label": "Filter by",
+      "clear_all": "Clear all",
+      "clear_filter": "Clear filter",
+      "apply": "Apply"
+    },
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "quantity": { "label": "Quantity" },
+      "from": "From",
+      "loading": "Loading...",
+      "notify_when_available": "Notify when available",
+      "recommendations": "You may also like"
+    }
+  },
+  "sections": {
+    "cart": {
+      "title": "Cart",
+      "subtotal": "Subtotal",
+      "empty": "Your cart is empty",
+      "update": "Update",
+      "view_cart": "View cart",
+      "checkout": "Checkout",
+      "continue_shopping": "Continue shopping",
+      "cart_error": "There was an error updating the cart.",
+      "item_added": "Item added to cart",
+      "cart_quantity_error_html": "You can only add {{ quantity }} of this item to the cart."
+    },
+    "footer": {
+      "powered_by": "Powered by"
+    },
+    "collection_list": {
+      "title": "Collections",
+      "empty": "No products in this collection"
+    }
+  },
+  "collections": {
+    "general": { "view_all": "View all" }
+  },
+  "blogs": {
+    "article": {
+      "back_to_blog": "Back to {{ title }}",
+      "author": "By {{ author }}",
+      "comment_count": "{{ count }} comment",
+      "comment_count_other": "{{ count }} comments",
+      "read_more": "Read more"
+    },
+    "blog": {
+      "title": "Blog"
+    }
+  },
+  "customer": {
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "forgot_password": "Forgot your password?",
+      "sign_in": "Sign in",
+      "cancel": "Cancel",
+      "guest_title": "Continue as guest",
+      "guest_continue": "Continue"
+    },
+    "register": {
+      "title": "Create account",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Create",
+      "cancel": "Cancel"
+    },
+    "account": {
+      "title": "Account",
+      "details": "Account details",
+      "view_addresses": "View addresses",
+      "return": "Return to account details",
+      "logout": "Log out"
+    },
+    "orders": {
+      "title": "Order history",
+      "order_number": "Order",
+      "date": "Date",
+      "payment_status": "Payment status",
+      "fulfillment_status": "Fulfillment status",
+      "total": "Total",
+      "none": "You haven't placed any orders yet.",
+      "view_order": "View order"
+    },
+    "addresses": {
+      "title": "Addresses",
+      "default": "Default",
+      "add_new": "Add a new address",
+      "edit_address": "Edit address",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "company": "Company",
+      "address1": "Address 1",
+      "address2": "Address 2",
+      "city": "City",
+      "country": "Country",
+      "province": "Province",
+      "zip": "Postal/ZIP code",
+      "phone": "Phone",
+      "set_default": "Set as default address",
+      "add": "Add address",
+      "update": "Update address",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "delete_confirm": "Are you sure you wish to delete this address?"
+    },
+    "activate_account": {
+      "title": "Activate account",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "submit": "Activate account",
+      "cancel": "Decline invitation"
+    },
+    "reset_password": {
+      "title": "Reset account password",
+      "subtext": "Enter a new password for your account.",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "submit": "Reset password"
+    },
+    "contact": {
+      "form": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "message": "Message",
+        "submit": "Send",
+        "success": "Thanks for your message. We'll get back to you soon."
+      }
+    },
+    "recover_password": {
+      "title": "Reset your password",
+      "subtext": "We will send you an email to reset your password.",
+      "email": "Email",
+      "submit": "Submit",
+      "cancel": "Cancel"
+    }
+  },
+  "gift_cards": {
+    "recipient": {
+      "send_as_gift": "Send as gift",
+      "email": "Recipient email",
+      "name": "Recipient name",
+      "message": "Message (optional)"
+    },
+    "issued": {
+      "title": "Gift card",
+      "redeem": "Redeem",
+      "expires": "Expires"
+    }
+  },
+  "compare": { "empty": "Add products to compare from the product page." },
+  "wishlist": { "empty": "Add products to your wishlist from the product or collection pages." },
+  "localization": {
+    "country_label": "Country/region",
+    "update_country": "Update country",
+    "language_label": "Language",
+    "update_language": "Update language"
+  }
+}

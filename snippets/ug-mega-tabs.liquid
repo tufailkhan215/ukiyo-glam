@@ -1,0 +1,36 @@
+{% comment %} Megamenu tabs block – tab style horizontal/vertical, tab heading + link_list + optional banner {% endcomment %}
+<div class="ug-mega-tabs ug-mega-tabs--{{ tab_style | default: 'horizontal' }}" data-ug-mega-tabs>
+  <div class="ug-mega-tabs__headers">
+    {% for i in (1..5) %}
+      {% assign heading_key = 'tab_heading_' | append: i %}
+      {% if block.settings[heading_key] != blank %}
+        <button type="button" class="ug-mega-tabs__tab{% if forloop.first %} ug-mega-tabs__tab--active{% endif %}" data-ug-mega-tab="{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ block.settings[heading_key] }}</button>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="ug-mega-tabs__panels">
+    {% for i in (1..5) %}
+      {% assign heading_key = 'tab_heading_' | append: i %}
+      {% assign menu_key = 'tab_menu_' | append: i %}
+      {% assign img_key = 'tab_image_' | append: i %}
+      {% if block.settings[heading_key] != blank %}
+        <div class="ug-mega-tabs__panel{% if forloop.first %} ug-mega-tabs__panel--active{% endif %}" data-ug-mega-panel="{{ forloop.index }}" role="tabpanel">
+          <div class="ug-mega-tabs__content">
+            {% if block.settings[menu_key] != blank %}
+              <ul class="ug-mega-tabs__links">
+                {% for link in block.settings[menu_key].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if block.settings[img_key] != blank %}
+              <div class="ug-mega-tabs__banner">
+                <img src="{{ block.settings[img_key] | image_url: width: 400 }}" alt="" width="400" loading="lazy">
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

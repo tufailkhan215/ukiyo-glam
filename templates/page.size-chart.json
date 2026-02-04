@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "ug-main-page",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

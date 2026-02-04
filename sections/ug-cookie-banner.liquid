@@ -1,0 +1,21 @@
+{% if section.settings.show_cookie_banner %}
+<div id="ug-cookie-banner" class="ug-cookie-banner" role="dialog" aria-label="Cookie notice" hidden>
+  <div class="page-width">
+    <div class="ug-cookie-banner__inner">
+      <p class="ug-cookie-banner__text">{{ section.settings.text }}</p>
+      <button type="button" class="ug-btn ug-btn--primary ug-cookie-banner__accept" data-accept-cookies>{{ section.settings.button_text }}</button>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Cookie banner",
+  "settings": [
+    { "type": "checkbox", "id": "show_cookie_banner", "default": true, "label": "Show cookie banner" },
+    { "type": "textarea", "id": "text", "label": "Message", "default": "We use cookies to improve your experience. By continuing you agree to our use of cookies." },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "Accept" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,5 @@
+{% comment %} Icon + text block (icon_text equivalent) {% endcomment %}
+<span class="ug-icon-text">
+  {% if icon != blank %}{{ icon }}{% endif %}
+  {% if text != blank %}<span class="ug-icon-text__label">{{ text }}</span>{% endif %}
+</span>

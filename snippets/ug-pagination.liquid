@@ -1,0 +1,25 @@
+{% if paginate.pages > 1 %}
+  <nav class="ug-pagination" aria-label="Pagination">
+    <ul class="ug-pagination__list">
+      {% if paginate.previous %}
+        <li><a href="{{ paginate.previous.url }}" class="ug-pagination__prev">{% render 'ug-icon-left-arrow' %}</a></li>
+      {% endif %}
+      {% for part in paginate.parts %}
+        <li>
+          {% if part.is_link %}
+            <a href="{{ part.url }}" class="ug-pagination__link">{{ part.title }}</a>
+          {% else %}
+            {% if part.title == paginate.current_page %}
+              <span class="ug-pagination__current" aria-current="page">{{ part.title }}</span>
+            {% else %}
+              <span class="ug-pagination__ellipsis">{{ part.title }}</span>
+            {% endif %}
+          {% endif %}
+        </li>
+      {% endfor %}
+      {% if paginate.next %}
+        <li><a href="{{ paginate.next.url }}" class="ug-pagination__next">{% render 'ug-icon-right-arrow' %}</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

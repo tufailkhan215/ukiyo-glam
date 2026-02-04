@@ -1,0 +1,8 @@
+{% layout 'theme' %}
+<div class="page-width ug-compare">
+  <h1 class="ug-compare__title">{{ page.title | default: 'Compare' }}</h1>
+  <div class="ug-compare__content rte">
+    {{ page.content }}
+  </div>
+  <p class="ug-compare__empty">{{ 'compare.empty' | t }}</p>
+</div>

@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "contact": {
+      "type": "ug-contact-form",
+      "settings": {
+        "heading": "Contact us"
+      }
+    }
+  },
+  "order": ["contact"]
+}

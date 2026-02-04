@@ -1,0 +1,18 @@
+{% comment %} Featured article card – larger/prominent for homepage {% endcomment %}
+<article class="ug-article-card ug-article-card--featured">
+  <a href="{{ article.url }}" class="ug-article-card__link">
+    <div class="ug-article-card__media">
+      {% if article.image %}
+        <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | default: article.title | escape }}" width="800" loading="lazy">
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'ug-article-card__placeholder' }}
+      {% endif %}
+    </div>
+    <div class="ug-article-card__content">
+      <time class="ug-article-card__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>
+      <h3 class="ug-article-card__title">{{ article.title }}</h3>
+      {% if article.excerpt != blank %}<p class="ug-article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 150 }}</p>{% endif %}
+      <span class="ug-article-card__read-more">{{ 'blogs.article.read_more' | t | default: 'Read more' }}</span>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,5 @@
+{% comment %} Wishlist button – toggle product in wishlist {% endcomment %}
+<button type="button" class="ug-wishlist-button" data-ug-wishlist data-product-id="{{ product.id | default: product_id }}" aria-label="{{ 'products.wishlist.add' | t | default: 'Add to wishlist' }}">
+  {% render 'ug-icon-heart' %}
+  <span class="ug-wishlist-button__label">{{ 'products.wishlist.add' | t | default: 'Wishlist' }}</span>
+</button>

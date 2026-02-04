@@ -1,0 +1,30 @@
+{% comment %} Cart page – footer with totals and checkout (mirror source main-cart-footer) {% endcomment %}
+<section class="ug-main-cart-footer">
+  <div class="page-width">
+    {% if cart.item_count > 0 %}
+      <div class="ug-main-cart-footer__inner">
+        <div class="ug-main-cart-footer__totals">
+          <div class="ug-main-cart-footer__row">
+            <span>{{ 'sections.cart.subtotal' | t | default: 'Subtotal' }}</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          <p class="ug-main-cart-footer__note">{{ 'sections.cart.shipping_at_checkout' | t | default: 'Shipping calculated at checkout.' }}</p>
+        </div>
+        <div class="ug-main-cart-footer__actions">
+          <a href="{{ routes.cart_url }}" class="ug-btn ug-btn--secondary">{{ 'sections.cart.view_cart' | t | default: 'View cart' }}</a>
+          <a href="/checkout" class="ug-btn ug-btn--primary">{{ 'sections.cart.checkout' | t | default: 'Checkout' }}</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart footer",
+  "tag": "section",
+  "class": "ug-section-main-cart-footer",
+  "settings": [],
+  "presets": [{ "name": "Cart footer" }]
+}
+{% endschema %}

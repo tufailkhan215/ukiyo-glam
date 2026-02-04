@@ -1,0 +1,15 @@
+{% comment %} Outputs padding/margin for section. Use: {% render 'ug-section-style', section: section %} {% endcomment %}
+{% if section.settings.padding_top != nil or section.settings.padding_bottom != nil %}
+{% style %}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+{% endif %}

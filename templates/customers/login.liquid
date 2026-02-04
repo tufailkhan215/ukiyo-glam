@@ -1,0 +1,25 @@
+{% layout 'theme' %}
+<div class="ug-customer page-width">
+  <div class="ug-customer__inner">
+    <h1 class="ug-customer__title">{{ 'customer.login.title' | t }}</h1>
+    {% form 'customer_login', class: 'ug-customer__form' %}
+      {{ form.errors | default_errors }}
+      <div class="ug-customer__field">
+        <label for="CustomerEmail">{{ 'customer.login.email' | t }}</label>
+        <input type="email" name="customer[email]" id="CustomerEmail" autocomplete="email" required>
+      </div>
+      <div class="ug-customer__field">
+        <label for="CustomerPassword">{{ 'customer.login.password' | t }}</label>
+        <input type="password" name="customer[password]" id="CustomerPassword" autocomplete="current-password" required>
+      </div>
+      <a href="{{ routes.account_recover_url }}" class="ug-customer__link">{{ 'customer.login.forgot_password' | t }}</a>
+      <button type="submit" class="ug-btn ug-btn--primary">{{ 'customer.login.sign_in' | t }}</button>
+    {% endform %}
+    {% if shop.customer_accounts_optional %}
+      <p class="ug-customer__divider">{{ 'customer.login.guest_title' | t }}</p>
+      {% form 'guest_login', class: 'ug-customer__form' %}
+        <button type="submit" class="ug-btn ug-btn--secondary">{{ 'customer.login.guest_continue' | t }}</button>
+      {% endform %}
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,8 @@
+{% if section.settings.message != blank %}
+<div class="ug-announcement color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <p class="ug-announcement__text">{{ section.settings.message }}</p>
+    {% if section.settings.link != blank %}<a href="{{ section.settings.link }}" class="ug-announcement__link">{{ section.settings.link_text | default: 'Learn more' }}</a>{% endif %}
+  </div>
+</div>
+{% endif %}

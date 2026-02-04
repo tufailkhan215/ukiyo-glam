@@ -1,0 +1,8 @@
+{% comment %} Gift wrapping option for cart/checkout {% endcomment %}
+<div class="ug-gift-wrapping">
+  <label class="ug-gift-wrapping__label">
+    <input type="checkbox" name="attributes[Gift wrapping]" value="Yes" form="{{ form_id | default: 'cart-form' }}" class="ug-gift-wrapping__input">
+    <span>{{ 'cart.gift_wrapping' | t | default: 'Add gift wrapping' }}</span>
+  </label>
+  {% if message != blank %}<p class="ug-gift-wrapping__note">{{ message }}</p>{% endif %}
+</div>

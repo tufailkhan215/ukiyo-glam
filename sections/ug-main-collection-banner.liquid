@@ -1,0 +1,20 @@
+<section class="ug-collection-banner color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <h1 class="ug-collection-banner__title">{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <div class="ug-collection-banner__description rte">{{ collection.description }}</div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection banner",
+  "settings": [
+    { "type": "select", "id": "color_scheme", "options": [
+      { "value": "background-1", "label": "Background 1" },
+      { "value": "background-2", "label": "Background 2" }
+    ], "default": "background-1", "label": "Color scheme" }
+  ]
+}
+{% endschema %}

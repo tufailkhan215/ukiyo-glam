@@ -1,0 +1,26 @@
+{
+  "current": {
+    "color_btn_text": "#ffffff",
+    "color_btn_bg": "#53483f",
+    "color_accent_1": "#cd865c",
+    "color_accent_2": "#53483f",
+    "color_accent_3": "#8b7355",
+    "color_text": "#53483f",
+    "color_bg_1": "#f6f5f0",
+    "color_bg_2": "#ffffff",
+    "color_bg_3": "#eeeeeb",
+    "color_overlay": "#000000",
+    "overlay_opacity": 40,
+    "font_heading": "cormorant_n4",
+    "font_body": "poppins_n4",
+    "font_additional": "poppins_n4",
+    "heading_scale": 100,
+    "body_scale": 100,
+    "page_width": 1200,
+    "page_full_width_spacing": false,
+    "section_spacing": 48,
+    "grid_spacing": 20,
+    "cart_type": "drawer",
+    "footer_style": "default"
+  }
+}

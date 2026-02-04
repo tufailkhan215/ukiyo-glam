@@ -1,0 +1,46 @@
+<section class="ug-masonry section-{{ section.id }}-padding">
+  <div class="page-width ug-masonry__grid">
+    {% for block in section.blocks %}
+      {% if block.type == 'banner' %}
+        <div class="ug-masonry__item ug-masonry__item--{{ block.settings.size }}" {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.link | default: '#' }}" class="ug-masonry__link">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.heading | escape }}" width="600" loading="lazy">
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'ug-masonry__placeholder' }}
+            {% endif %}
+            <div class="ug-masonry__content">
+              {% if block.settings.heading != blank %}<h3 class="ug-masonry__title">{{ block.settings.heading }}</h3>{% endif %}
+              {% if block.settings.button_label != blank %}<span class="ug-btn ug-btn--secondary ug-masonry__btn">{{ block.settings.button_label }}</span>{% endif %}
+            </div>
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Masonry banner",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "default": 36, "unit": "px", "label": "Padding top" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "default": 36, "unit": "px", "label": "Padding bottom" }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "text", "id": "button_label", "label": "Button label" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "select", "id": "size", "options": [{"value": "small", "label": "Small"}, {"value": "medium", "label": "Medium"}, {"value": "large", "label": "Large"}], "default": "medium", "label": "Block size" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Masonry banner" }]
+}
+{% endschema %}

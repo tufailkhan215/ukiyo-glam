@@ -1,0 +1,22 @@
+<article class="ug-card-product ug-card-product--overlay">
+  <a href="{{ product.url }}" class="ug-card-product__link">
+    <div class="ug-card-product__media">
+      {% if product.featured_image %}
+        <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="600" loading="lazy">
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'ug-card-product__placeholder' }}
+      {% endif %}
+      <div class="ug-card-product__actions">
+        <button type="button" class="ug-card-product__quick-view" data-quick-view="{{ product.handle }}" aria-label="Quick view">{% render 'ug-icon-eye' %}</button>
+        <form action="{{ routes.cart_add_url }}" method="post">
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" name="add" class="ug-card-product__add-btn" {% unless product.available %}disabled{% endunless %}>{{ 'products.product.add_to_cart' | t }}</button>
+        </form>
+      </div>
+    </div>
+    <div class="ug-card-product__info">
+      <h3 class="ug-card-product__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+      <div class="ug-card-product__price">{% render 'ug-price', product: product %}</div>
+    </div>
+  </a>
+</article>

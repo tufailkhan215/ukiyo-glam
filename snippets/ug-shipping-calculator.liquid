@@ -1,0 +1,13 @@
+{% comment %} Shipping calculator – country/zip and estimate {% endcomment %}
+<div class="ug-shipping-calculator" data-ug-shipping-calculator>
+  <h3 class="ug-shipping-calculator__title">{{ 'cart.shipping_calculator.title' | t | default: 'Estimate shipping' }}</h3>
+  <form class="ug-shipping-calculator__form">
+    <select name="country" class="ug-shipping-calculator__country" required>
+      <option value="">{{ 'cart.shipping_calculator.country' | t }}</option>
+      {{ country_option_tags }}
+    </select>
+    <input type="text" name="zip" placeholder="{{ 'cart.shipping_calculator.zip' | t | default: 'Zip / Postcode' }}" class="ug-shipping-calculator__zip">
+    <button type="submit" class="ug-btn ug-btn--secondary">{{ 'cart.shipping_calculator.submit' | t | default: 'Calculate' }}</button>
+  </form>
+  <div class="ug-shipping-calculator__result" data-ug-shipping-result hidden></div>
+</div>

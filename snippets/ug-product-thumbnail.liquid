@@ -1,0 +1,10 @@
+{% comment %}
+  Accepts: media, selected (boolean), index
+{% endcomment %}
+<button type="button" class="ug-product-thumb{% if selected %} ug-product-thumb--selected{% endif %}" data-index="{{ index }}" aria-label="View image {{ index | plus: 1 }}">
+  {% if media.media_type == 'image' %}
+    <img src="{{ media | image_url: width: 120 }}" alt="{{ media.alt | escape }}" width="120" height="120" loading="lazy">
+  {% else %}
+    {{ media.preview_image | image_url: width: 120 | image_tag: loading: 'lazy', width: 120, height: 120 }}
+  {% endif %}
+</button>

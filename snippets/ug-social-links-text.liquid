@@ -1,0 +1,12 @@
+{% comment %} Social links as text list (social-links__text) {% endcomment %}
+<div class="ug-social-links-text">
+  {% if heading != blank %}<span class="ug-social-links-text__label">{{ heading }}</span>{% endif %}
+  <ul class="ug-social-links-text__list">
+    {% if settings.social_facebook_link != blank %}<li><a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener">Facebook</a></li>{% endif %}
+    {% if settings.social_instagram_link != blank %}<li><a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener">Instagram</a></li>{% endif %}
+    {% if settings.social_twitter_link != blank %}<li><a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener">Twitter</a></li>{% endif %}
+    {% if settings.social_pinterest_link != blank %}<li><a href="{{ settings.social_pinterest_link }}" target="_blank" rel="noopener">Pinterest</a></li>{% endif %}
+    {% if settings.social_youtube_link != blank %}<li><a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener">YouTube</a></li>{% endif %}
+    {% if settings.social_tiktok_link != blank %}<li><a href="{{ settings.social_tiktok_link }}" target="_blank" rel="noopener">TikTok</a></li>{% endif %}
+  </ul>
+</div>

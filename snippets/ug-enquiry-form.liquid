@@ -1,0 +1,15 @@
+{% comment %} Enquiry form – modal or inline contact for product enquiry {% endcomment %}
+<div class="ug-enquiry-form" id="ug-enquiry-form" aria-hidden="true" hidden>
+  <div class="ug-enquiry-form__inner">
+    <button type="button" class="ug-enquiry-form__close" aria-label="{{ 'accessibility.close' | t }}" data-ug-enquiry-close>{% render 'ug-icon-close' %}</button>
+    <h3 class="ug-enquiry-form__title">{{ 'products.enquiry.title' | t | default: 'Send enquiry' }}</h3>
+    {% form 'contact', class: 'ug-enquiry-form__form' %}
+      <input type="hidden" name="contact[product]" value="{{ product.title | default: '' }}">
+      <input type="text" name="contact[name]" placeholder="{{ 'contact.form.name' | t }}" required>
+      <input type="email" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" required>
+      <input type="text" name="contact[phone]" placeholder="{{ 'contact.form.phone' | t }}">
+      <textarea name="contact[body]" placeholder="{{ 'contact.form.message' | t }}" rows="4"></textarea>
+      <button type="submit" class="ug-btn ug-btn--primary">{{ 'contact.form.send' | t }}</button>
+    {% endform %}
+  </div>
+</div>

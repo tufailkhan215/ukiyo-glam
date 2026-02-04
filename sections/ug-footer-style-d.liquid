@@ -1,0 +1,58 @@
+{% comment %} Footer style D – same structure, different CSS class {% endcomment %}
+<footer class="ug-footer ug-footer--style-d color-{{ section.settings.color_scheme }}" role="contentinfo">
+  <div class="page-width">
+    <div class="ug-footer__grid">
+      {% for block in section.blocks %}
+        <div class="ug-footer__block" {{ block.shopify_attributes }}>
+          {% case block.type %}
+            {% when 'link_list' %}
+              {% if block.settings.heading != blank %}<h3 class="ug-footer__heading">{{ block.settings.heading }}</h3>{% endif %}
+              {% if block.settings.menu != blank %}
+                <ul class="ug-footer__links">
+                  {% for link in block.settings.menu.links %}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}
+                </ul>
+              {% endif %}
+            {% when 'text' %}
+              {% if block.settings.heading != blank %}<h3 class="ug-footer__heading">{{ block.settings.heading }}</h3>{% endif %}
+              <div class="ug-footer__text rte">{{ block.settings.text }}</div>
+            {% when 'newsletter' %}
+              {% if block.settings.heading != blank %}<h3 class="ug-footer__heading">{{ block.settings.heading }}</h3>{% endif %}
+              {% form 'customer', class: 'ug-footer__newsletter' %}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <input type="email" name="contact[email]" placeholder="{{ 'newsletter.label' | t }}" required>
+                <button type="submit">{{ 'newsletter.button_label' | t }}</button>
+              {% endform %}
+          {% endcase %}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="ug-footer__bottom">
+      <p class="ug-footer__copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}.</p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer (Style D)",
+  "blocks": [
+    { "type": "link_list", "name": "Menu", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading" },
+      { "type": "link_list", "id": "menu", "label": "Menu" }
+    ]},
+    { "type": "text", "name": "Text", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading" },
+      { "type": "richtext", "id": "text", "label": "Text" }
+    ]},
+    { "type": "newsletter", "name": "Newsletter", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading" }
+    ]}
+  ],
+  "settings": [
+    { "type": "select", "id": "color_scheme", "options": [
+      { "value": "background-1", "label": "Background 1" },
+      { "value": "background-2", "label": "Background 2" }
+    ], "default": "background-2", "label": "Color scheme" }
+  ]
+}
+{% endschema %}

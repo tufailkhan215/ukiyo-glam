@@ -1,0 +1,12 @@
+{% comment %} Renders gift card recipient form for cart/checkout. Use in cart or product form. {% endcomment %}
+<div class="ug-gift-recipient" data-gift-recipient>
+  <label class="ug-gift-recipient__check">
+    <input type="checkbox" name="properties[__gift_recipient]" value="1" data-gift-recipient-toggle>
+    {{ 'gift_cards.recipient.send_as_gift' | t }}
+  </label>
+  <div class="ug-gift-recipient__fields" data-gift-recipient-fields hidden>
+    <input type="email" name="properties[Recipient email]" placeholder="{{ 'gift_cards.recipient.email' | t }}" data-gift-recipient-email>
+    <input type="text" name="properties[Recipient name]" placeholder="{{ 'gift_cards.recipient.name' | t }}" data-gift-recipient-name>
+    <textarea name="properties[Message]" placeholder="{{ 'gift_cards.recipient.message' | t }}" rows="2" data-gift-recipient-message></textarea>
+  </div>
+</div>

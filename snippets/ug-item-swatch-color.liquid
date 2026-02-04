@@ -1,0 +1,6 @@
+{% comment %} Color swatch – circle/box with color {% endcomment %}
+{% assign color_value = value | downcase | replace: ' ', '-' %}
+{% assign color_file = color_value | append: '.png' | file_img_url: 'small' %}
+<button type="button" class="ug-item-swatch__item ug-item-swatch__item--color" data-swatch-value="{{ value | escape }}" aria-label="{{ value }}" title="{{ value }}" style="--ug-swatch-color: {{ color_value }};">
+  <span class="ug-item-swatch__color" style="background-color: {{ color_value }}; {% if value == 'White' or value == 'white' %}border: 1px solid #ddd;{% endif %}"></span>
+</button>

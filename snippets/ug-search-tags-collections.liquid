@@ -1,0 +1,23 @@
+{% comment %} Search page – tags and collections links {% endcomment %}
+<div class="ug-search-tags-collections">
+  {% if search.performed and search.results_count > 0 %}
+    {% if collection.current_tags.size > 0 %}
+      <div class="ug-search-tags-collections__tags">
+        <span class="ug-search-tags-collections__label">{{ 'search.tags' | t | default: 'Tags' }}:</span>
+        {% for tag in collection.current_tags %}
+          <a href="{{ collection.url }}/{{ tag | handle }}" class="ug-search-tags-collections__tag">{{ tag }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
+  {% if section.settings.show_collections and collections.size > 0 %}
+    <div class="ug-search-tags-collections__collections">
+      <span class="ug-search-tags-collections__label">{{ 'search.collections' | t | default: 'Collections' }}:</span>
+      <ul class="ug-search-tags-collections__list">
+        {% for col in collections limit: 8 %}
+          <li><a href="{{ col.url }}">{{ col.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</div>

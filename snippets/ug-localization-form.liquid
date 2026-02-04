@@ -1,0 +1,23 @@
+{% comment %} Localization form snippet – country/language (replaces foxify-localization-form) {% endcomment %}
+<div class="ug-localization-form">
+  {% form 'localization', id: 'ug-localization-form', class: 'ug-localization-form__form' %}
+    {% if localization.available_countries.size > 1 %}
+      <div class="ug-localization-form__item">
+        <label for="ug-country-{{ form_id | default: 'header' }}" class="visually-hidden">{{ 'localization.country_label' | t }}</label>
+        <select id="ug-country-{{ form_id | default: 'header' }}" name="country_code" class="ug-localization-form__select" data-ug-country-select>
+          {{ country_option_tags }}
+        </select>
+      </div>
+    {% endif %}
+    {% if localization.available_languages.size > 1 %}
+      <div class="ug-localization-form__item">
+        <label for="ug-locale-{{ form_id | default: 'header' }}" class="visually-hidden">{{ 'localization.language_label' | t }}</label>
+        <select id="ug-locale-{{ form_id | default: 'header' }}" name="locale_code" class="ug-localization-form__select" data-ug-locale-select>
+          {% for language in localization.available_languages %}
+            <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>{{ language.endonym_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    {% endif %}
+  {% endform %}
+</div>

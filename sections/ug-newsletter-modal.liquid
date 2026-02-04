@@ -1,0 +1,21 @@
+<div id="ug-newsletter-modal" class="ug-newsletter-modal" aria-hidden="true" hidden>
+  <div class="ug-newsletter-modal__overlay" data-close-newsletter></div>
+  <div class="ug-newsletter-modal__content">
+    <button type="button" class="ug-newsletter-modal__close" data-close-newsletter aria-label="Close">{% render 'ug-icon-close' %}</button>
+    <h2 class="ug-newsletter-modal__title">{{ section.settings.heading }}</h2>
+    {% form 'customer', id: 'NewsletterModalForm' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="email" name="contact[email]" placeholder="{{ 'newsletter.label' | t }}" required>
+      <button type="submit">{{ 'newsletter.button_label' | t }}</button>
+    {% endform %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter modal",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Subscribe for updates" }
+  ]
+}
+{% endschema %}

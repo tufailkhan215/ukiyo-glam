@@ -1,0 +1,29 @@
+{% comment %}
+  Alternate product template (e.g. for quick-view or custom layout).
+  Use JSON template product.json for the main product page; this .liquid variant
+  can be assigned in Theme customizer for specific products if you need Liquid-only logic.
+{% endcomment %}
+{% layout none %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ product.title }}</title>
+  {{ content_for_header }}
+  {{ 'ug-base.css' | asset_url | stylesheet_tag }}
+</head>
+<body class="ug-body">
+  {% section 'ug-main-product' %}
+  {% if recommendations.performed and recommendations.products_count > 0 %}
+    <div class="page-width">
+      <h2>{{ 'products.product.recommendations' | t }}</h2>
+      <ul class="ug-featured-collection__grid">
+        {% for product in recommendations.products limit: 4 %}
+          <li>{% render 'ug-card-product', product: product %}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</body>
+</html>

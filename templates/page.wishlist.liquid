@@ -1,0 +1,8 @@
+{% layout 'theme' %}
+<div class="page-width ug-wishlist">
+  <h1 class="ug-wishlist__title">{{ page.title | default: 'Wishlist' }}</h1>
+  <div class="ug-wishlist__content rte">
+    {{ page.content }}
+  </div>
+  <p class="ug-wishlist__empty">{{ 'wishlist.empty' | t }}</p>
+</div>

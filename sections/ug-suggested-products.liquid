@@ -1,0 +1,43 @@
+{% comment %} Suggested products – often shown on product/cart, mirror source suggested-products {% endcomment %}
+<section class="ug-suggested-products section-{{ section.id }}-padding" aria-label="{{ section.settings.heading | default: 'You may also like' }}">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="ug-suggested-products__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    <div class="ug-suggested-products__grid" data-ug-suggested-products>
+      {% if section.settings.collection != blank %}
+        {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
+          <div class="ug-suggested-products__item">
+            {% render 'ug-card-product', product: product, show_vendor: section.settings.show_vendor %}
+          </div>
+        {% endfor %}
+      {% elsif section.settings.collection_handle != blank and collections[section.settings.collection_handle] != blank %}
+        {% for product in collections[section.settings.collection_handle].products limit: section.settings.products_to_show %}
+          <div class="ug-suggested-products__item">
+            {% render 'ug-card-product', product: product, show_vendor: section.settings.show_vendor %}
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+</style>
+
+{% schema %}
+{
+  "name": "Suggested products",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "You may also like" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "collection_handle", "label": "Collection handle (fallback)" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 8, "step": 1, "default": 4, "label": "Products to show" },
+    { "type": "checkbox", "id": "show_vendor", "default": false, "label": "Show vendor" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "default": 36, "unit": "px", "label": "Padding top" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "default": 36, "unit": "px", "label": "Padding bottom" }
+  ],
+  "presets": [{ "name": "Suggested products" }]
+}
+{% endschema %}

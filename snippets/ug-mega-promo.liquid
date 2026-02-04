@@ -1,0 +1,19 @@
+{% comment %} Megamenu promo block. Accepts: block, columns (2-4) {% endcomment %}
+<div class="ug-mega-promo ug-mega-promo--{{ columns | default: 3 }}-col">
+  {% for i in (1..4) %}
+    {% assign img_key = 'image_' | append: i %}
+    {% assign img = block.settings[img_key] %}
+    {% assign heading_key = 'heading_' | append: i %}
+    {% assign btn_key = 'button_label_' | append: i %}
+    {% assign link_key = 'link_' | append: i %}
+    {% if img != blank or block.settings[heading_key] != blank %}
+      <div class="ug-mega-promo__item">
+        <a href="{{ block.settings[link_key] | default: '#' }}">
+          {% if img != blank %}<img src="{{ img | image_url: width: 300 }}" alt="{{ block.settings[heading_key] | escape }}" width="300" loading="lazy">{% endif %}
+          {% if block.settings[heading_key] != blank %}<span class="ug-mega-promo__title">{{ block.settings[heading_key] }}</span>{% endif %}
+          {% if block.settings[btn_key] != blank %}<span class="ug-mega-promo__btn ug-btn ug-btn--secondary">{{ block.settings[btn_key] }}</span>{% endif %}
+        </a>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

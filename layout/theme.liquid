@@ -1,0 +1,104 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <title>{{ page_title }}{% if current_page != 1 %} – Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}</title>
+  {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+  {% render 'ug-meta-tags' %}
+  {{ content_for_header }}
+  {{ settings.font_heading | font_face: font_display: 'swap' }}
+  {{ settings.font_body | font_face: font_display: 'swap' }}
+  {{ settings.font_additional | font_face: font_display: 'swap' }}
+  {% style %}
+    :root {
+      --ug-color-btn-text: {{ settings.color_btn_text.red }}, {{ settings.color_btn_text.green }}, {{ settings.color_btn_text.blue }};
+      --ug-color-btn-bg: {{ settings.color_btn_bg.red }}, {{ settings.color_btn_bg.green }}, {{ settings.color_btn_bg.blue }};
+      --ug-color-accent-1: {{ settings.color_accent_1.red }}, {{ settings.color_accent_1.green }}, {{ settings.color_accent_1.blue }};
+      --ug-color-accent-2: {{ settings.color_accent_2.red }}, {{ settings.color_accent_2.green }}, {{ settings.color_accent_2.blue }};
+      --ug-color-accent-3: {{ settings.color_accent_3.red }}, {{ settings.color_accent_3.green }}, {{ settings.color_accent_3.blue }};
+      --ug-color-text: {{ settings.color_text.red }}, {{ settings.color_text.green }}, {{ settings.color_text.blue }};
+      --ug-color-bg-1: {{ settings.color_bg_1.red }}, {{ settings.color_bg_1.green }}, {{ settings.color_bg_1.blue }};
+      --ug-color-bg-2: {{ settings.color_bg_2.red }}, {{ settings.color_bg_2.green }}, {{ settings.color_bg_2.blue }};
+      --ug-color-bg-3: {{ settings.color_bg_3.red }}, {{ settings.color_bg_3.green }}, {{ settings.color_bg_3.blue }};
+      --ug-color-overlay: {{ settings.color_overlay.red }}, {{ settings.color_overlay.green }}, {{ settings.color_overlay.blue }};
+      --ug-overlay-opacity: {{ settings.overlay_opacity | divided_by: 100.0 }};
+      --ug-font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+      --ug-font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+      --ug-font-additional: {{ settings.font_additional.family }}, {{ settings.font_additional.fallback_families }};
+      --ug-heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+      --ug-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+      --ug-page-width: {{ settings.page_width }}px;
+      --ug-section-spacing: {{ settings.section_spacing }}px;
+      --ug-grid-spacing: {{ settings.grid_spacing }}px;
+    }
+  {% endstyle %}
+  {{ 'ug-base.css' | asset_url | stylesheet_tag }}
+  {{ 'ug-animations.css' | asset_url | stylesheet_tag }}
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+</head>
+<body id="{{ page_title | handle }}" class="ug-body gradient">
+  <a class="ug-skip-link" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
+  <div class="ug-mobile-overlay" aria-hidden="true"></div>
+  {% if settings.cart_type == 'drawer' %}{% render 'ug-cart-drawer' %}{% endif %}
+  {% section 'ug-top-bar' %}
+  {% section 'ug-header' %}
+  {% render 'ug-breadcrumb' %}
+  <main id="MainContent" class="ug-main" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+  <div id="ug-video-modal" class="ug-video-modal" hidden aria-hidden="true"></div>
+  {% render 'ug-quick-view-modal' %}
+  {% if settings.footer_style == 'default' %}
+    {% section 'ug-footer' %}
+  {% elsif settings.footer_style == 'style_a' %}
+    {% section 'ug-footer-style-a' %}
+  {% elsif settings.footer_style == 'style_b' %}
+    {% section 'ug-footer-style-b' %}
+  {% elsif settings.footer_style == 'style_c' %}
+    {% section 'ug-footer-style-c' %}
+  {% elsif settings.footer_style == 'style_d' %}
+    {% section 'ug-footer-style-d' %}
+  {% else %}
+    {% section 'ug-footer' %}
+  {% endif %}
+  <ul hidden>
+    <li id="a11y-refresh-message">{{ 'accessibility.refresh_page' | t }}</li>
+  </ul>
+  <script>
+    window.ugTheme = {
+      routes: {
+        cartAdd: {{ routes.cart_add_url | json }},
+        cartChange: {{ routes.cart_change_url | json }},
+        cartUpdate: {{ routes.cart_update_url | json }},
+        cart: {{ routes.cart_url | json }},
+        predictiveSearch: {{ routes.predictive_search_url | json }}
+      },
+      cartType: {{ settings.cart_type | json }},
+      moneyFormat: {{ shop.money_format | json }}
+    };
+    window.ugStrings = {
+      cartError: {{ 'sections.cart.cart_error' | t | json }},
+      addToCart: {{ 'products.product.add_to_cart' | t | json }},
+      soldOut: {{ 'products.product.sold_out' | t | json }},
+      unavailable: {{ 'products.product.unavailable' | t | json }}
+    };
+  </script>
+  <script src="{{ 'ug-theme.js' | asset_url }}" defer></script>
+  <script src="{{ 'ug-sections.js' | asset_url }}" defer></script>
+  {% if settings.cart_type == 'drawer' %}
+  <script src="{{ 'ug-cart-drawer.js' | asset_url }}" defer></script>
+  {% endif %}
+  <script src="{{ 'ug-wishlist.js' | asset_url }}" defer></script>
+  <script src="{{ 'ug-compare.js' | asset_url }}" defer></script>
+  <script src="{{ 'ug-product-form.js' | asset_url }}" defer></script>
+  {% section 'ug-cookie-banner' %}
+  {% render 'ug-scroll-to-top' %}
+  {% section 'ug-newsletter-modal' %}
+  {% render 'ug-compare-modal' %}
+  {% render 'ug-search-overlay' %}
+  {% section 'ug-predictive-search' %}
+  <script src="{{ 'ug-predictive-search.js' | asset_url }}" defer></script>
+</body>
+</html>

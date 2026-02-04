@@ -1,0 +1,20 @@
+{% comment %} Collection page sidebar – filters, link lists {% endcomment %}
+<aside class="ug-main-collection-sidebar" role="complementary">
+  {% if section != blank %}
+    {% for block in section.blocks %}
+      {% if block.type == 'filter' and block.settings.title != blank %}
+        <div class="ug-main-collection-sidebar__block" {{ block.shopify_attributes }}>
+          <h3 class="ug-main-collection-sidebar__title">{{ block.settings.title }}</h3>
+          {% render 'ug-facets', results: collection, filter_type: block.settings.filter_type %}
+        </div>
+      {% elsif block.type == 'menu' and block.settings.menu != blank %}
+        <div class="ug-main-collection-sidebar__block" {{ block.shopify_attributes }}>
+          <h3 class="ug-main-collection-sidebar__title">{{ block.settings.title | default: block.settings.menu.title }}</h3>
+          <ul class="ug-main-collection-sidebar__links">
+            {% for link in block.settings.menu.links %}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</aside>

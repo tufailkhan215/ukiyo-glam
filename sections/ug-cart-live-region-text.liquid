@@ -1,0 +1,16 @@
+{% comment %} A11y live region for cart updates – mirror source cart-live-region-text {% endcomment %}
+<div class="ug-cart-live-region ug-visually-hidden" aria-live="polite" aria-atomic="true" role="status">
+  {% if template.name == 'cart' and cart.item_count > 0 %}
+    <span data-ug-cart-live-text>{{ 'sections.cart.item_count' | t: count: cart.item_count }}</span>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Cart live region",
+  "tag": "div",
+  "class": "ug-section-cart-live-region",
+  "settings": [],
+  "presets": [{ "name": "Cart live region" }]
+}
+{% endschema %}

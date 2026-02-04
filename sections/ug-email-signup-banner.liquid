@@ -1,0 +1,26 @@
+<section class="ug-email-signup-banner section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
+  <div class="page-width ug-email-signup-banner__inner">
+    {% if section.settings.heading != blank %}<h2 class="ug-email-signup-banner__heading">{{ section.settings.heading }}</h2>{% endif %}
+    {% if section.settings.text != blank %}<p class="ug-email-signup-banner__text">{{ section.settings.text }}</p>{% endif %}
+    {% form 'customer', class: 'ug-email-signup-banner__form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="email" name="contact[email]" placeholder="{{ 'newsletter.label' | t }}" required class="ug-email-signup-banner__input">
+      <button type="submit" class="ug-btn ug-btn--primary">{{ section.settings.button_label | default: 'newsletter.button_label' | t }}</button>
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Email signup banner",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "select", "id": "color_scheme", "options": [{"value": "background-1", "label": "Background 1"}, {"value": "accent", "label": "Accent"}], "default": "accent", "label": "Color scheme" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 60, "step": 4, "default": 24, "unit": "px", "label": "Padding top" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 60, "step": 4, "default": 24, "unit": "px", "label": "Padding bottom" }
+  ],
+  "presets": [{ "name": "Email signup banner" }]
+}
+{% endschema %}

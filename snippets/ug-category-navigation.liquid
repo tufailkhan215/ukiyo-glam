@@ -1,0 +1,12 @@
+{% comment %} Category navigation – horizontal list of collection links (for header) {% endcomment %}
+{% if menu != blank %}
+  <nav class="ug-category-nav" aria-label="{{ 'general.accessibility.menu' | t | default: 'Category menu' }}">
+    <ul class="ug-category-nav__list">
+      {% for link in menu.links %}
+        <li class="ug-category-nav__item">
+          <a href="{{ link.url }}" class="ug-category-nav__link">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}

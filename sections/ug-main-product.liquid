@@ -1,0 +1,54 @@
+<section class="ug-main-product page-width">
+  <div class="ug-main-product__grid">
+    <div class="ug-main-product__media">
+      {% for media in product.media limit: 5 %}
+        <div class="ug-main-product__media-item">
+          {% if media.media_type == 'image' %}
+            <img src="{{ media | image_url: width: 800 }}" alt="{{ media.alt | escape }}" width="800" loading="lazy">
+          {% endif %}
+        </div>
+      {% endfor %}
+      {% if product.media.size == 0 %}
+        {{ 'product-1' | placeholder_svg_tag: 'ug-main-product__placeholder' }}
+      {% endif %}
+    </div>
+    <div class="ug-main-product__info">
+      <h1 class="ug-main-product__title">{{ product.title }}</h1>
+      <div class="ug-main-product__price">{% render 'ug-price', product: product %}</div>
+      {% if product.description != blank %}
+        <div class="ug-main-product__description rte">{{ product.description }}</div>
+      {% endif %}
+      {% form 'product', product, id: 'ug-product-form' %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% unless product.has_only_default_variant %}
+          <div class="ug-main-product__variants">
+            {% for option in product.options_with_values %}
+              <div class="ug-main-product__option">
+                <label for="Option-{{ option.name }}">{{ option.name }}</label>
+                <select id="Option-{{ option.name }}" name="options[{{ option.name | escape }}]">
+                  {% for value in option.values %}
+                    <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            {% endfor %}
+          </div>
+        {% endunless %}
+        <div class="ug-main-product__quantity">
+          <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity.label' | t }}</label>
+          <input type="number" id="Quantity-{{ section.id }}" name="quantity" value="1" min="1" max="99">
+        </div>
+        <button type="submit" name="add" class="ug-btn ug-btn--primary ug-main-product__add" {% unless product.available %}disabled{% endunless %}>
+          {% if product.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}
+        </button>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}

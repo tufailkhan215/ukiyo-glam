@@ -1,0 +1,12 @@
+{% comment %}
+  Renders a section heading with optional subheading and alignment.
+  Accepts: heading, subheading, alignment (left|center|right)
+{% endcomment %}
+<div class="ug-section-heading ug-section-heading--{{ alignment | default: 'center' }}">
+  {% if subheading != blank %}
+    <p class="ug-section-heading__sub">{{ subheading }}</p>
+  {% endif %}
+  {% if heading != blank %}
+    <h2 class="ug-section-heading__title">{{ heading }}</h2>
+  {% endif %}
+</div>

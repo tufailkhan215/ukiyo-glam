@@ -1,0 +1,9 @@
+{% comment %} Header top row content – announcement + currency/language (header-top equivalent) {% endcomment %}
+<div class="ug-header-top">
+  {% if show_announcement != false %}
+    {% render 'ug-announcement-bar' %}
+  {% endif %}
+  {% if show_localization != false %}
+    {% render 'ug-localization-form', form_id: 'header-top' %}
+  {% endif %}
+</div>

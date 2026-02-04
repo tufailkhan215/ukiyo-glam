@@ -1,0 +1,17 @@
+{% comment %} Compact product card for cart drawer (card-product-for-drawer equivalent) {% endcomment %}
+<div class="ug-card-product ug-card-product--drawer">
+  <a href="{{ product.url }}" class="ug-card-product__link ug-card-product__link--flex">
+    <span class="ug-card-product__media ug-card-product__media--thumb">
+      {% if product.featured_image %}
+        <img src="{{ product.featured_image | image_url: width: 120 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="120" height="120" loading="lazy">
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'ug-card-product__placeholder' }}
+      {% endif %}
+    </span>
+    <span class="ug-card-product__info">
+      <span class="ug-card-product__title">{{ product.title }}</span>
+      <span class="ug-card-product__price">{% render 'ug-price', product: product %}</span>
+    </span>
+    <span class="ug-card-product__arrow">{% render 'ug-icon-right-arrow' %}</span>
+  </a>
+</div>

@@ -1,0 +1,184 @@
+<header class="ug-header color-{{ section.settings.color_scheme }}" role="banner">
+  <div class="page-width">
+    <div class="ug-header__inner">
+      <div class="ug-header__mobile-toggle" aria-label="Menu" data-open-menu>
+        {% render 'ug-icon-menu' %}
+      </div>
+      <a href="{{ routes.root_url }}" class="ug-header__logo">
+        {% if section.settings.logo != blank %}
+          <img src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" alt="{{ shop.name }}" width="{{ section.settings.logo_width }}" loading="eager">
+        {% else %}
+          <span class="ug-header__logo-text">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+      <nav class="ug-header__nav" aria-label="Main">
+        {% if section.settings.menu != blank %}
+          <ul class="ug-header__nav-list">
+            {% for link in linklists[section.settings.menu].links %}
+              {% assign has_mega = false %}
+              {% for block in section.blocks %}
+                {% if block.settings.menu_link_handle == link.handle %}
+                  {% assign has_mega = true %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+              <li class="ug-header__nav-item{% if has_mega %} ug-header__nav-item--mega{% endif %}">
+                <a href="{{ link.url }}" class="ug-header__nav-link">{{ link.title }}</a>
+                {% if link.links != blank or has_mega %}
+                  <div class="ug-header__subnav">
+                    {% if link.links != blank %}
+                      <ul class="ug-header__subnav-links">
+                        {% for child in link.links %}
+                          <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                    {% for block in section.blocks %}
+                      {% if block.settings.menu_link_handle == link.handle %}
+                        <div class="ug-header__mega" {{ block.shopify_attributes }}>
+                          {% case block.type %}
+                            {% when 'mega_promo' %}
+                              {% render 'ug-mega-promo', block: block, columns: block.settings.columns %}
+                            {% when 'mega_banner' %}
+                              <div class="ug-mega-banner">
+                                {% if block.settings.image_1 != blank %}
+                                  <a href="{{ block.settings.link_1 | default: '#' }}"><img src="{{ block.settings.image_1 | image_url: width: 400 }}" alt="" width="400" loading="lazy"></a>
+                                {% endif %}
+                                {% if block.settings.image_2 != blank %}
+                                  <a href="{{ block.settings.link_2 | default: '#' }}"><img src="{{ block.settings.image_2 | image_url: width: 400 }}" alt="" width="400" loading="lazy"></a>
+                                {% endif %}
+                              </div>
+                            {% when 'mega_brands' %}
+                              {% render 'ug-mega-brands', block: block %}
+                            {% when 'mega_products' %}
+                              {% render 'ug-mega-products', block: block %}
+                          {% endcase %}
+                        </div>
+                        {% break %}
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </nav>
+      <div class="ug-header__icons">
+        {% if section.settings.show_search %}
+          <button type="button" class="ug-header__icon" aria-label="{{ 'general.search.title' | t }}" data-open-search>{% render 'ug-icon-search' %}</button>
+        {% endif %}
+        {% if shop.customer_accounts_enabled and section.settings.show_account %}
+          <a href="{{ routes.account_url }}" class="ug-header__icon" aria-label="Account">{% render 'ug-icon-account' %}</a>
+        {% endif %}
+        <a href="{{ routes.cart_url }}" class="ug-header__icon ug-header__cart" aria-label="{{ 'sections.cart.title' | t }}" {% if settings.cart_type == 'drawer' %}data-open-cart-drawer{% endif %}>
+          {% render 'ug-icon-cart' %}
+          <span class="ug-header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="ug-header__mobile-drawer" id="ug-mobile-menu" aria-hidden="true">
+    <div class="ug-header__mobile-drawer-overlay" data-close-menu></div>
+    <div class="ug-header__mobile-drawer-panel">
+      <button type="button" class="ug-header__mobile-close" data-close-menu aria-label="Close">{% render 'ug-icon-close' %}</button>
+      {% if section.settings.menu != blank %}
+        <ul class="ug-header__mobile-nav">
+          {% for link in linklists[section.settings.menu].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "range", "id": "logo_width", "min": 50, "max": 250, "step": 10, "default": 120, "unit": "px", "label": "Logo width" },
+    { "type": "link_list", "id": "menu", "default": "main-menu", "label": "Menu" },
+    { "type": "checkbox", "id": "show_search", "default": true, "label": "Show search" },
+    { "type": "checkbox", "id": "show_account", "default": true, "label": "Show account" },
+    { "type": "select", "id": "color_scheme", "options": [
+      { "value": "background-1", "label": "Background 1" },
+      { "value": "background-2", "label": "Background 2" },
+      { "value": "accent", "label": "Accent" }
+    ], "default": "background-1", "label": "Color scheme" }
+  ],
+  "blocks": [
+    {
+      "type": "mega_promo",
+      "name": "Mega promo",
+      "settings": [
+        { "type": "text", "id": "menu_link_handle", "label": "Menu item handle (match link handle)" },
+        { "type": "select", "id": "columns", "options": [{"value": "2", "label": "2"}, {"value": "3", "label": "3"}, {"value": "4", "label": "4"}], "default": "3", "label": "Columns" },
+        { "type": "header", "content": "Promo 1" },
+        { "type": "image_picker", "id": "image_1", "label": "Image" },
+        { "type": "text", "id": "heading_1", "label": "Heading" },
+        { "type": "text", "id": "button_label_1", "label": "Button" },
+        { "type": "url", "id": "link_1", "label": "Link" },
+        { "type": "header", "content": "Promo 2" },
+        { "type": "image_picker", "id": "image_2", "label": "Image" },
+        { "type": "text", "id": "heading_2", "label": "Heading" },
+        { "type": "text", "id": "button_label_2", "label": "Button" },
+        { "type": "url", "id": "link_2", "label": "Link" },
+        { "type": "header", "content": "Promo 3" },
+        { "type": "image_picker", "id": "image_3", "label": "Image" },
+        { "type": "text", "id": "heading_3", "label": "Heading" },
+        { "type": "text", "id": "button_label_3", "label": "Button" },
+        { "type": "url", "id": "link_3", "label": "Link" },
+        { "type": "header", "content": "Promo 4" },
+        { "type": "image_picker", "id": "image_4", "label": "Image" },
+        { "type": "text", "id": "heading_4", "label": "Heading" },
+        { "type": "text", "id": "button_label_4", "label": "Button" },
+        { "type": "url", "id": "link_4", "label": "Link" }
+      ]
+    },
+    {
+      "type": "mega_banner",
+      "name": "Mega banner",
+      "settings": [
+        { "type": "text", "id": "menu_link_handle", "label": "Menu item handle" },
+        { "type": "image_picker", "id": "image_1", "label": "Banner 1" },
+        { "type": "url", "id": "link_1", "label": "Link 1" },
+        { "type": "image_picker", "id": "image_2", "label": "Banner 2" },
+        { "type": "url", "id": "link_2", "label": "Link 2" }
+      ]
+    },
+    {
+      "type": "mega_brands",
+      "name": "Mega brands",
+      "settings": [
+        { "type": "text", "id": "menu_link_handle", "label": "Menu item handle" },
+        { "type": "image_picker", "id": "image_1", "label": "Brand 1" },
+        { "type": "text", "id": "title_1", "label": "Title 1" },
+        { "type": "url", "id": "link_1", "label": "Link 1" },
+        { "type": "image_picker", "id": "image_2", "label": "Brand 2" },
+        { "type": "text", "id": "title_2", "label": "Title 2" },
+        { "type": "url", "id": "link_2", "label": "Link 2" },
+        { "type": "image_picker", "id": "image_3", "label": "Brand 3" },
+        { "type": "text", "id": "title_3", "label": "Title 3" },
+        { "type": "url", "id": "link_3", "label": "Link 3" },
+        { "type": "image_picker", "id": "image_4", "label": "Brand 4" },
+        { "type": "text", "id": "title_4", "label": "Title 4" },
+        { "type": "url", "id": "link_4", "label": "Link 4" }
+      ]
+    },
+    {
+      "type": "mega_products",
+      "name": "Mega products",
+      "settings": [
+        { "type": "text", "id": "menu_link_handle", "label": "Menu item handle" },
+        { "type": "product", "id": "product_1", "label": "Product 1" },
+        { "type": "product", "id": "product_2", "label": "Product 2" },
+        { "type": "product", "id": "product_3", "label": "Product 3" },
+        { "type": "product", "id": "product_4", "label": "Product 4" }
+      ]
+    }
+  ]
+}
+{% endschema %}

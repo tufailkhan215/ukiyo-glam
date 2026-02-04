@@ -1,0 +1,64 @@
+{% comment %}
+  Native facets: filtering and sort. Accepts: results (collection or search), enable_filtering, enable_sorting, filter_type (vertical|horizontal|drawer)
+{% endcomment %}
+{%- liquid
+  assign sort_by = results.sort_by | default: results.default_sort_by
+  assign results_url = results.url | default: routes.all_products_collection_url
+  if results.terms
+    assign results_url = routes.search_url | append: '?q=' | append: results.terms | escape | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+  endif
+-%}
+<div class="ug-facets{% if filter_type == 'drawer' %} ug-facets--drawer{% endif %}">
+  {% if enable_sorting %}
+    <div class="ug-facets__sort">
+      <label for="SortBy-{{ section.id }}">{{ 'products.facets.sort_by_label' | t }}</label>
+      <select id="SortBy-{{ section.id }}" class="ug-facets__sort-select" data-sort-select>
+        {% for option in results.sort_options %}
+          <option value="{{ option.value }}"{% if option.value == sort_by %} selected{% endif %}>{{ option.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  {% endif %}
+  {% if enable_filtering and results.filters != empty %}
+    <form id="ug-facets-form-{{ section.id }}" class="ug-facets__form">
+      {% if results.terms %}<input type="hidden" name="q" value="{{ results.terms | escape }}">{% endif %}
+      <input type="hidden" name="options[prefix]" value="last">
+      <div class="ug-facets__active">
+        <a href="{{ results_url }}" class="ug-facets__clear">{{ 'products.facets.clear_all' | t }}</a>
+        {% for filter in results.filters %}
+          {% for value in filter.active_values %}
+            <a href="{{ value.url_to_remove }}" class="ug-facets__tag">{{ filter.label }}: {{ value.label }}{% render 'ug-icon-close-small' %}</a>
+          {% endfor %}
+          {% if filter.type == 'price_range' and filter.min_value.value != nil or filter.max_value.value != nil %}
+            <a href="{{ filter.url_to_remove }}" class="ug-facets__tag">Price{% render 'ug-icon-close-small' %}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="ug-facets__list">
+        {% for filter in results.filters %}
+          <details class="ug-facets__filter" open>
+            <summary>{{ filter.label }}</summary>
+            <div class="ug-facets__values">
+              {% case filter.type %}
+                {% when 'boolean' or 'list' %}
+                  {% for value in filter.values %}
+                    <label class="ug-facets__value">
+                      <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}"{% if value.active %} checked{% endif %} onchange="this.form.submit()">
+                      <span>{{ value.label }} ({{ value.count }})</span>
+                    </label>
+                  {% endfor %}
+                {% when 'price_range' %}
+                  <div class="ug-facets__price">
+                    <input type="number" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | default: filter.range_min }}" min="0" placeholder="Min" step="1">
+                    <span>–</span>
+                    <input type="number" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | default: filter.range_max }}" min="0" placeholder="Max" step="1">
+                    <button type="submit" class="ug-btn ug-btn--secondary">{{ 'products.facets.apply' | t }}</button>
+                  </div>
+              {% endcase %}
+            </div>
+          </details>
+        {% endfor %}
+      </div>
+    </form>
+  {% endif %}
+</div>

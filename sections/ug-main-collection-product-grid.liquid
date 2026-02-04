@@ -1,0 +1,25 @@
+<section class="ug-collection-grid page-width">
+  {% if collection.products.size > 0 %}
+    <ul class="ug-collection-grid__list">
+      {% for product in collection.products %}
+        <li class="ug-collection-grid__item">
+          {% render 'ug-card-product', product: product %}
+        </li>
+      {% endfor %}
+    </ul>
+    {% if paginate.pages > 1 %}
+      <nav class="ug-pagination" aria-label="Pagination">
+        {{ paginate | default_pagination }}
+      </nav>
+    {% endif %}
+  {% else %}
+    <p>{{ 'sections.collection_list.empty' | t }}</p>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Collection product grid",
+  "settings": []
+}
+{% endschema %}

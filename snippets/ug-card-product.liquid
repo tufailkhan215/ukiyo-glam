@@ -1,0 +1,23 @@
+<article class="ug-card-product">
+  <a href="{{ product.url }}" class="ug-card-product__link">
+    <div class="ug-card-product__media">
+      {% if product.featured_image %}
+        <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="600" loading="lazy">
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'ug-card-product__placeholder' }}
+      {% endif %}
+    </div>
+    <div class="ug-card-product__info">
+      <h3 class="ug-card-product__title">{{ product.title }}</h3>
+      <div class="ug-card-product__price">
+        {% render 'ug-price', product: product %}
+      </div>
+    </div>
+  </a>
+  <form action="{{ routes.cart_add_url }}" method="post" class="ug-card-product__form">
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <button type="submit" name="add" class="ug-btn ug-btn--primary ug-card-product__add" {% unless product.available %}disabled{% endunless %}>
+      {% if product.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}
+    </button>
+  </form>
+</article>

@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "ug-main-blog",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

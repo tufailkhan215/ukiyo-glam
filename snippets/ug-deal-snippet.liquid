@@ -1,0 +1,8 @@
+{% comment %} Deal snippet – countdown or deal badge {% endcomment %}
+<div class="ug-deal-snippet" data-ug-deal>
+  {% if end_time != blank %}
+    <span class="ug-deal-snippet__ends">{{ 'products.deal.ends' | t | default: 'Ends' }}</span>
+    <span class="ug-deal-snippet__countdown" data-ug-deal-end="{{ end_time }}">-- : -- : --</span>
+  {% endif %}
+  {% if label != blank %}<span class="ug-deal-snippet__label">{{ label }}</span>{% endif %}
+</div>

@@ -1,0 +1,6 @@
+{% comment %} Email signup banner background image – mobile {% endcomment %}
+{% if image != blank %}
+  <div class="ug-email-signup-banner-bg ug-email-signup-banner-bg--mobile" aria-hidden="true">
+    <img src="{{ image | image_url: width: 800 }}" alt="" width="800" loading="lazy">
+  </div>
+{% endif %}

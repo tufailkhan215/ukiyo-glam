@@ -1,0 +1,77 @@
+{% layout 'theme' %}
+<div class="ug-customer page-width">
+  <p><a href="{{ routes.account_url }}" class="ug-customer__link">{{ 'customer.account.return' | t }}</a></p>
+  <h1 class="ug-customer__title">{{ 'customer.addresses.title' | t }}</h1>
+  {% for address in customer.addresses %}
+    <div class="ug-customer__address-card">
+      {{ address | format_address }}
+      {% if address == customer.default_address %}<span class="ug-customer__default-badge">{{ 'customer.addresses.default' | t }}</span>{% endif %}
+      <div class="ug-customer__address-actions">
+        <button type="button" class="ug-btn ug-btn--secondary ug-address-edit" data-address-id="{{ address.id }}">{{ 'customer.addresses.edit' | t }}</button>
+        <form method="post" action="{{ address.url }}" onsubmit="return confirm('{{ 'customer.addresses.delete_confirm' | t }}');" style="display:inline;">
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit" class="ug-btn ug-btn--secondary">{{ 'customer.addresses.delete' | t }}</button>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+  <button type="button" class="ug-btn ug-btn--primary ug-address-add">{{ 'customer.addresses.add_new' | t }}</button>
+
+  {% form 'customer_address', customer.new_address, class: 'ug-customer__form ug-customer__form--hidden', id: 'form-new-address' %}
+    <h2>{{ 'customer.addresses.add_new' | t }}</h2>
+    <div class="ug-customer__field">
+      <label for="AddressFirstNameNew">{{ 'customer.addresses.first_name' | t }}</label>
+      <input type="text" name="address[first_name]" id="AddressFirstNameNew" value="{{ form.first_name }}">
+    </div>
+    <div class="ug-customer__field">
+      <label for="AddressLastNameNew">{{ 'customer.addresses.last_name' | t }}</label>
+      <input type="text" name="address[last_name]" id="AddressLastNameNew" value="{{ form.last_name }}">
+    </div>
+    <div class="ug-customer__field">
+      <label for="AddressCompanyNew">{{ 'customer.addresses.company' | t }}</label>
+      <input type="text" name="address[company]" id="AddressCompanyNew" value="{{ form.company }}">
+    </div>
+    <div class="ug-customer__field">
+      <label for="AddressAddress1New">{{ 'customer.addresses.address1' | t }}</label>
+      <input type="text" name="address[address1]" id="AddressAddress1New" value="{{ form.address1 }}">
+    </div>
+    <div class="ug-customer__field">
+      <label for="AddressAddress2New">{{ 'customer.addresses.address2' | t }}</label>
+      <input type="text" name="address[address2]" id="AddressAddress2New" value="{{ form.address2 }}">
+    </div>
+    <div class="ug-customer__field">
+      <label for="AddressCityNew">{{ 'customer.addresses.city' | t }}</label>
+      <input type="text" name="address[city]" id="AddressCityNew" value="{{ form.city }}">
+    </div>
+    <div class="ug-customer__field">
+      <label for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
+      <select name="address[country]" id="AddressCountryNew" data-default="{{ form.country }}">{{ country_option_tags }}</select>
+    </div>
+    <div class="ug-customer__field" id="AddressProvinceContainerNew" style="display:none;">
+      <label for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
+      <select name="address[province]" id="AddressProvinceNew" data-default="{{ form.province }}"></select>
+    </div>
+    <div class="ug-customer__field">
+      <label for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
+      <input type="text" name="address[zip]" id="AddressZipNew" value="{{ form.zip }}">
+    </div>
+    <div class="ug-customer__field">
+      <label for="AddressPhoneNew">{{ 'customer.addresses.phone' | t }}</label>
+      <input type="tel" name="address[phone]" id="AddressPhoneNew" value="{{ form.phone }}">
+    </div>
+    <div class="ug-customer__field">
+      <label><input type="checkbox" name="address[default]" value="1">{{ 'customer.addresses.set_default' | t }}</label>
+    </div>
+    <button type="submit" class="ug-btn ug-btn--primary">{{ 'customer.addresses.add' | t }}</button>
+    <button type="button" class="ug-btn ug-btn--secondary ug-address-cancel">{{ 'customer.addresses.cancel' | t }}</button>
+  {% endform %}
+</div>
+
+<script>
+  document.querySelector('.ug-address-add').addEventListener('click', function() {
+    document.getElementById('form-new-address').classList.remove('ug-customer__form--hidden');
+  });
+  document.querySelector('.ug-address-cancel').addEventListener('click', function() {
+    document.getElementById('form-new-address').classList.add('ug-customer__form--hidden');
+  });
+</script>

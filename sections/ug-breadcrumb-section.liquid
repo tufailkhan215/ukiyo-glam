@@ -1,0 +1,16 @@
+{% comment %} Breadcrumb as section – for placement in templates {% endcomment %}
+<div class="ug-breadcrumb-section">
+  <div class="page-width">
+    {% render 'ug-breadcrumb' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Breadcrumb",
+  "tag": "div",
+  "class": "ug-section-breadcrumb",
+  "settings": [],
+  "presets": [{ "name": "Breadcrumb" }]
+}
+{% endschema %}

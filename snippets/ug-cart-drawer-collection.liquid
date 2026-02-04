@@ -1,0 +1,13 @@
+{% comment %} Collection row inside cart drawer – e.g. “You may also like” products from a collection {% endcomment %}
+{% if collection != blank and collection.products.size > 0 %}
+  <div class="ug-cart-drawer-collection">
+    {% if heading != blank %}<h3 class="ug-cart-drawer-collection__heading">{{ heading }}</h3>{% endif %}
+    <div class="ug-cart-drawer-collection__grid">
+      {% for product in collection.products limit: limit | default: 4 %}
+        <div class="ug-cart-drawer-collection__item">
+          {% render 'ug-card-product', product: product %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

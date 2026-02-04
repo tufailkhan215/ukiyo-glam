@@ -1,0 +1,25 @@
+<article class="ug-main-article page-width">
+  <header class="ug-main-article__header">
+    <h1 class="ug-main-article__title">{{ article.title }}</h1>
+    <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>
+    {% if article.author != blank %}<span class="ug-main-article__author">{{ article.author }}</span>{% endif %}
+  </header>
+  {% if article.image %}
+    <div class="ug-main-article__image">
+      <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.image.alt | escape }}" width="1200" loading="eager">
+    </div>
+  {% endif %}
+  <div class="ug-main-article__content rte">
+    {{ article.content }}
+  </div>
+  <footer class="ug-main-article__footer">
+    <a href="{{ blog.url }}" class="ug-btn ug-btn--secondary">{{ 'blogs.article.back_to_blog' | t: title: blog.title }}</a>
+  </footer>
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

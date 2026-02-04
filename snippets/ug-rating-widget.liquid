@@ -1,0 +1,8 @@
+{% comment %} Star rating widget (dt-sc-rating-widget equivalent) {% endcomment %}
+<div class="ug-rating-widget" data-ug-rating aria-label="{{ 'products.rating.label' | t | default: 'Rating' }}">
+  {% assign rating = rating | default: 0 | times: 1 %}
+  {% for i in (1..5) %}
+    <span class="ug-rating-widget__star{% if i <= rating %} ug-rating-widget__star--filled{% endif %}" aria-hidden="true">{% render 'ug-icon-star' %}</span>
+  {% endfor %}
+  {% if count != blank %}<span class="ug-rating-widget__count">({{ count }})</span>{% endif %}
+</div>

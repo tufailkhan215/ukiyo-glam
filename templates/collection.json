@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "banner": {
+      "type": "ug-main-collection-banner",
+      "settings": {}
+    },
+    "main": {
+      "type": "ug-main-collection-product-grid",
+      "settings": {}
+    }
+  },
+  "order": ["banner", "main"]
+}

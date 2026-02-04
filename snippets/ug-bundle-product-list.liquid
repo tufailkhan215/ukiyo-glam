@@ -1,0 +1,11 @@
+{% comment %} Bundle product list – product bundle items (dT_product_bundle / dT_bundle-product-list) {% endcomment %}
+<div class="ug-bundle-product-list">
+  {% if heading != blank %}<h3 class="ug-bundle-product-list__heading">{{ heading }}</h3>{% endif %}
+  <ul class="ug-bundle-product-list__items">
+    {% for product in products limit: limit | default: 6 %}
+      <li class="ug-bundle-product-list__item">
+        {% render 'ug-card-product', product: product %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>

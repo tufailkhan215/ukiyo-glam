@@ -1,0 +1,24 @@
+/* Ukiyo-Glam theme – keyframes and animation utilities */
+
+@keyframes ug-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes ug-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ug-fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ug-slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.ug-animate-fade-in { animation: ug-fadeIn 0.5s ease forwards; }
+.ug-animate-fade-in-up { animation: ug-fadeInUp 0.6s ease forwards; }

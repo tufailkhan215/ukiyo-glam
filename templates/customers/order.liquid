@@ -1,0 +1,54 @@
+{% layout 'theme' %}
+<div class="ug-customer page-width">
+  <p><a href="{{ routes.account_url }}" class="ug-customer__link">{{ 'customer.account.return' | t }}</a></p>
+  <h1 class="ug-customer__title">{{ 'customer.orders.view_order' | t }} — {{ order.name }}</h1>
+  <p>{{ order.created_at | date: format: 'date' }}</p>
+  {% if order.cancelled %}
+    <p><strong>{{ order.cancelled_at | date: format: 'date' }} — {{ order.cancel_reason_label }}</strong></p>
+  {% endif %}
+  <table class="ug-customer__orders">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>SKU</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for line_item in order.line_items %}
+        <tr>
+          <td>
+            {{ line_item.title }}
+            {% if line_item.fulfillment %}
+              <div class="ug-customer__fulfillment">
+                Fulfilled {{ line_item.fulfillment.created_at | date: format: 'date' }}
+              </div>
+            {% endif %}
+          </td>
+          <td>{{ line_item.sku }}</td>
+          <td>{{ line_item.quantity }}</td>
+          <td>{{ line_item.final_line_price | money }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="ug-customer__order-totals">
+    <p>Subtotal: {{ order.line_items_subtotal_price | money }}</p>
+    {% for discount in order.discounts %}
+      <p>Discount ({{ discount.code }}): -{{ discount.savings | money }}</p>
+    {% endfor %}
+    {% for shipping_method in order.shipping_methods %}
+      <p>Shipping: {{ shipping_method.price | money }}</p>
+    {% endfor %}
+    <p><strong>Total: {{ order.total_price | money }}</strong></p>
+  </div>
+  <h2>Shipping address</h2>
+  <address class="ug-customer__address">
+    {{ order.shipping_address | format_address }}
+  </address>
+  <h2>Billing address</h2>
+  <address class="ug-customer__address">
+    {{ order.billing_address | format_address }}
+  </address>
+</div>

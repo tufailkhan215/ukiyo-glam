@@ -1,0 +1,12 @@
+{% comment %} Placeholder for product card when loading or empty slot {% endcomment %}
+<article class="ug-card-product ug-card-product--placeholder" aria-hidden="true">
+  <div class="ug-card-product__link">
+    <div class="ug-card-product__media">
+      {{ 'product-1' | placeholder_svg_tag: 'ug-card-product__placeholder' }}
+    </div>
+    <div class="ug-card-product__info">
+      <span class="ug-card-product__title">{{ 'products.product.title' | t | default: 'Product' }}</span>
+      <span class="ug-card-product__price">{{ 'products.product.price' | t | default: '—' }}</span>
+    </div>
+  </div>
+</article>

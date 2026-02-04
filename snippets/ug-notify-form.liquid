@@ -1,0 +1,8 @@
+{% comment %} Notify when product is back in stock. Use on product page. Accepts: product {% endcomment %}
+{% form 'contact', id: 'ug-notify-form' %}
+  <input type="hidden" name="contact[body]" value="Notify me when {{ product.title | escape }} is back in stock. Variant: {{ product.selected_or_first_available_variant.title | escape }}">
+  <input type="hidden" name="contact[tags]" value="notify,{{ product.handle }}">
+  <label for="ug-notify-email" class="visually-hidden">{{ 'customer.register.email' | t }}</label>
+  <input type="email" id="ug-notify-email" name="contact[email]" placeholder="{{ 'customer.register.email' | t }}" required class="ug-notify-form__input">
+  <button type="submit" class="ug-btn ug-btn--secondary">{{ 'products.product.notify_when_available' | t }}</button>
+{% endform %}

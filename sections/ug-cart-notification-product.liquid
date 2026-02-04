@@ -1,0 +1,28 @@
+{% comment %} Cart notification with product – mirror source cart-notification-product {% endcomment %}
+<div id="ug-cart-notification-product" class="ug-cart-notification-product" aria-hidden="true" hidden>
+  <div class="ug-cart-notification-product__inner">
+    <div class="ug-cart-notification-product__content">
+      <p class="ug-cart-notification-product__title">{{ 'sections.cart.added_to_cart' | t | default: 'Added to cart' }}</p>
+      <div class="ug-cart-notification-product__item" data-ug-cart-notification-item>
+        {% comment %} Filled by JS when product is added {% endcomment %}
+      </div>
+      <div class="ug-cart-notification-product__actions">
+        <a href="{{ routes.cart_url }}" class="ug-btn ug-btn--secondary">{{ 'sections.cart.view_cart' | t | default: 'View cart' }}</a>
+        <a href="/checkout" class="ug-btn ug-btn--primary">{{ 'sections.cart.checkout' | t | default: 'Checkout' }}</a>
+      </div>
+    </div>
+    <button type="button" class="ug-cart-notification-product__close" aria-label="{{ 'accessibility.close' | t }}" data-ug-cart-notification-close>{% render 'ug-icon-close' %}</button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart notification (product)",
+  "tag": "div",
+  "class": "ug-section-cart-notification-product",
+  "settings": [
+    { "type": "checkbox", "id": "show_image", "default": true, "label": "Show product image" }
+  ],
+  "presets": [{ "name": "Cart notification product" }]
+}
+{% endschema %}

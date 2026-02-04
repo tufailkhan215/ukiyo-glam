@@ -1,0 +1,22 @@
+{% comment %} Standalone announcement bar section {% endcomment %}
+<div class="ug-announcement-bar-section" style="background: rgb(var(--ug-color-btn-bg)); color: rgb(var(--ug-color-btn-text));">
+  <div class="page-width ug-announcement-bar-section__inner">
+    {% if section.settings.message != blank %}
+      <p class="ug-announcement-bar-section__text">
+        {% if section.settings.link != blank %}<a href="{{ section.settings.link }}" class="ug-announcement-bar-section__link">{{ section.settings.message }}</a>{% else %}{{ section.settings.message }}{% endif %}
+      </p>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "message", "label": "Message" },
+    { "type": "url", "id": "link", "label": "Link" }
+  ],
+  "presets": [{ "name": "Announcement bar" }]
+}
+{% endschema %}

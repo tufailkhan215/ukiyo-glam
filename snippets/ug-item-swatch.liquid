@@ -1,0 +1,13 @@
+{% comment %} Variant swatch wrapper – option name + swatch list {% endcomment %}
+<div class="ug-item-swatch" data-ug-swatch="{{ option.name | handle }}">
+  <span class="ug-item-swatch__label">{{ option.name }}:</span>
+  <div class="ug-item-swatch__list" role="list">
+    {% for value in option.values %}
+      {% if option.name == 'Color' or option.name == 'Colour' %}
+        {% render 'ug-item-swatch-color', value: value, option: option, product: product %}
+      {% else %}
+        {% render 'ug-item-swatch-size', value: value, option: option, product: product %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,14 @@
+{% comment %} Frequently bought together – product set {% endcomment %}
+<div class="ug-frequently-bought-together">
+  {% if heading != blank %}<h3 class="ug-frequently-bought-together__heading">{{ heading }}</h3>{% endif %}
+  <div class="ug-frequently-bought-together__grid">
+    {% for product in products limit: 4 %}
+      <div class="ug-frequently-bought-together__item">
+        {% render 'ug-card-product', product: product %}
+      </div>
+    {% endfor %}
+  </div>
+  <div class="ug-frequently-bought-together__actions">
+    <button type="button" class="ug-btn ug-btn--primary" data-ug-fbt-add>{{ 'products.fbt.add_all' | t | default: 'Add all to cart' }}</button>
+  </div>
+</div>

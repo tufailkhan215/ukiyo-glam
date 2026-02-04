@@ -1,0 +1,13 @@
+{% comment %} Compare products modal {% endcomment %}
+<div id="ug-compare-modal" class="ug-compare-modal" aria-hidden="true" hidden role="dialog" aria-labelledby="ug-compare-modal-title">
+  <div class="ug-compare-modal__overlay" data-ug-compare-close></div>
+  <div class="ug-compare-modal__inner">
+    <div class="ug-compare-modal__header">
+      <h2 id="ug-compare-modal-title" class="ug-compare-modal__title">{{ 'products.compare.title' | t | default: 'Compare products' }}</h2>
+      <button type="button" class="ug-compare-modal__close" aria-label="{{ 'accessibility.close' | t }}" data-ug-compare-close>{% render 'ug-icon-close' %}</button>
+    </div>
+    <div class="ug-compare-modal__body" data-ug-compare-body>
+      <p class="ug-compare-modal__empty">{{ 'products.compare.empty' | t | default: 'Add products to compare.' }}</p>
+    </div>
+  </div>
+</div>

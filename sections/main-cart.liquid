@@ -1,0 +1,33 @@
+<section class="ug-cart-page page-width">
+  <h1>{{ 'sections.cart.title' | t }}</h1>
+  {% if cart.item_count > 0 %}
+    <form action="{{ routes.cart_url }}" method="post">
+      <ul class="ug-cart-page__items">
+        {% for item in cart.items %}
+          <li class="ug-cart-page__item">
+            <img src="{{ item.image | image_url: width: 120 }}" alt="{{ item.title | escape }}" width="120">
+            <div>
+              <a href="{{ item.url }}">{{ item.product.title }}</a>
+              {% unless item.variant.title == 'Default Title' %}<p>{{ item.variant.title }}</p>{% endunless %}
+              <input type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+              <span>{{ item.final_line_price | money }}</span>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+      <p><strong>{{ 'sections.cart.subtotal' | t }} {{ cart.total_price | money }}</strong></p>
+      <button type="submit" name="update">{{ 'sections.cart.update' | t }}</button>
+      <a href="/checkout" class="ug-btn ug-btn--primary">{{ 'sections.cart.checkout' | t }}</a>
+    </form>
+  {% else %}
+    <p>{{ 'sections.cart.empty' | t }}</p>
+    <a href="{{ routes.all_products_collection_url }}">{{ 'sections.cart.continue_shopping' | t }}</a>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

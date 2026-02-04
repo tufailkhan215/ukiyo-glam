@@ -1,0 +1,19 @@
+{% comment %} Product page sidebar – complementary content next to main product {% endcomment %}
+<aside class="ug-main-product-sidebar" role="complementary">
+  {% if block != blank %}
+    {% for b in block %}
+      {% case b.type %}
+        {% when 'text' %}
+          <div class="ug-main-product-sidebar__block ug-main-product-sidebar__block--text" {{ b.shopify_attributes }}>
+            {% if b.settings.heading != blank %}<h3 class="ug-main-product-sidebar__heading">{{ b.settings.heading }}</h3>{% endif %}
+            <div class="ug-main-product-sidebar__text rte">{{ b.settings.text }}</div>
+          </div>
+        {% when 'trust_badge' %}
+          <div class="ug-main-product-sidebar__block ug-main-product-sidebar__block--trust" {{ b.shopify_attributes }}>
+            {% if b.settings.image != blank %}<img src="{{ b.settings.image | image_url: width: 200 }}" alt="{{ b.settings.heading | escape }}" width="200">{% endif %}
+            {% if b.settings.heading != blank %}<p class="ug-main-product-sidebar__label">{{ b.settings.heading }}</p>{% endif %}
+          </div>
+      {% endcase %}
+    {% endfor %}
+  {% endif %}
+</aside>

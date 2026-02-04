@@ -1,0 +1,21 @@
+<section class="ug-custom-liquid section-{{ section.id }}-padding">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}<h2 class="ug-custom-liquid__heading">{{ section.settings.heading }}</h2>{% endif %}
+    <div class="ug-custom-liquid__content">
+      {{ section.settings.liquid }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom Liquid",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "liquid", "id": "liquid", "label": "Liquid code" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "default": 36, "unit": "px", "label": "Padding top" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "default": 36, "unit": "px", "label": "Padding bottom" }
+  ],
+  "presets": [{ "name": "Custom Liquid" }]
+}
+{% endschema %}

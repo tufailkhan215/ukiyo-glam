@@ -1,0 +1,6 @@
+{% comment %} Email signup banner background image – desktop {% endcomment %}
+{% if image != blank %}
+  <div class="ug-email-signup-banner-bg ug-email-signup-banner-bg--desktop" aria-hidden="true">
+    <img src="{{ image | image_url: width: 1600 }}" alt="" width="1600" loading="lazy">
+  </div>
+{% endif %}

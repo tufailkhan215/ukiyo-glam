@@ -1,0 +1,16 @@
+<nav class="ug-breadcrumb page-width" aria-label="Breadcrumb">
+  <ol class="ug-breadcrumb__list">
+    <li class="ug-breadcrumb__item"><a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a></li>
+    {% if template.name == 'product' %}
+      {% if collection %}<li class="ug-breadcrumb__item"><a href="{{ collection.url }}">{{ collection.title }}</a></li>{% endif %}
+      <li class="ug-breadcrumb__item" aria-current="page">{{ product.title }}</li>
+    {% elsif template.name == 'collection' %}
+      <li class="ug-breadcrumb__item" aria-current="page">{{ collection.title }}</li>
+    {% elsif template.name == 'article' %}
+      <li class="ug-breadcrumb__item"><a href="{{ blog.url }}">{{ blog.title }}</a></li>
+      <li class="ug-breadcrumb__item" aria-current="page">{{ article.title }}</li>
+    {% elsif template.name == 'page' %}
+      <li class="ug-breadcrumb__item" aria-current="page">{{ page.title }}</li>
+    {% endif %}
+  </ol>
+</nav>

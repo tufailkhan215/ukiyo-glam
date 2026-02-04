@@ -1,0 +1,7 @@
+{% comment %} Social proof – e.g. “X sold in last 24 hours” {% endcomment %}
+<div class="ug-social-proof-sales" data-ug-social-proof>
+  {% if text != blank %}<p class="ug-social-proof-sales__text">{{ text }}</p>{% endif %}
+  {% if min != blank and max != blank %}
+    <p class="ug-social-proof-sales__count" data-ug-social-proof-min="{{ min }}" data-ug-social-proof-max="{{ max }}">{{ 'products.social_proof.sold' | t | default: 'Recently sold' }}</p>
+  {% endif %}
+</div>

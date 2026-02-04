@@ -1,0 +1,9 @@
+{% comment %}
+  Accepts: url (default: canonical_url), title (default: page_title), description (optional)
+{% endcomment %}
+<div class="ug-share">
+  <span class="ug-share__label">{{ 'general.share' | t }}</span>
+  <a href="https://www.facebook.com/sharer/sharer.php?u={{ url | default: canonical_url | url_param_escape }}" target="_blank" rel="noopener" class="ug-share__link" aria-label="Share on Facebook">{% render 'ug-icon-facebook' %}</a>
+  <a href="https://twitter.com/intent/tweet?url={{ url | default: canonical_url | url_param_escape }}&text={{ title | default: page_title | url_param_escape }}" target="_blank" rel="noopener" class="ug-share__link" aria-label="Share on Twitter">{% render 'ug-icon-twitter' %}</a>
+  <a href="https://pinterest.com/pin/create/button/?url={{ url | default: canonical_url | url_param_escape }}&description={{ description | default: title | default: page_title | url_param_escape }}" target="_blank" rel="noopener" class="ug-share__link" aria-label="Share on Pinterest">{% render 'ug-icon-pinterest' %}</a>
+</div>

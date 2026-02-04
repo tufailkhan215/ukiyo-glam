@@ -1,0 +1,16 @@
+{% comment %} Collection card variant 2 – alternate layout (e.g. overlay title, different aspect) {% endcomment %}
+<a href="{{ collection.url }}" class="ug-card-collection ug-card-collection--variant2">
+  <div class="ug-card-collection__media">
+    {% if collection.image %}
+      <img src="{{ collection.image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" width="600" loading="lazy">
+    {% else %}
+      {{ 'collection-1' | placeholder_svg_tag: 'ug-card-collection__placeholder' }}
+    {% endif %}
+    <span class="ug-card-collection__overlay"></span>
+  </div>
+  <div class="ug-card-collection__content">
+    <h3 class="ug-card-collection__title">{{ collection.title }}</h3>
+    {% if collection.description != blank %}<p class="ug-card-collection__desc">{{ collection.description | strip_html | truncate: 60 }}</p>{% endif %}
+    <span class="ug-card-collection__cta">{{ 'collections.view' | t | default: 'View' }}</span>
+  </div>
+</a>

@@ -1,0 +1,10 @@
+<div id="ug-cart-notification" class="ug-cart-notification" aria-hidden="true" role="status">
+  <div class="ug-cart-notification__inner">
+    <div class="ug-cart-notification__media"></div>
+    <div class="ug-cart-notification__text">
+      <p class="ug-cart-notification__title">{{ 'sections.cart.item_added' | t }}</p>
+      <a href="{{ routes.cart_url }}" class="ug-btn ug-btn--primary">{{ 'sections.cart.view_cart' | t }}</a>
+    </div>
+    <button type="button" class="ug-cart-notification__close" data-close-notification aria-label="{{ 'accessibility.close' | t }}">{% render 'ug-icon-close' %}</button>
+  </div>
+</div>

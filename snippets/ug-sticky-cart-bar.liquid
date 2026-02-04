@@ -1,0 +1,12 @@
+{% comment %} Sticky add to cart bar – shown on product page when scrolled {% endcomment %}
+<div id="ug-sticky-cart-bar" class="ug-sticky-cart-bar" aria-hidden="true" hidden data-ug-sticky-cart-bar>
+  <div class="page-width ug-sticky-cart-bar__inner">
+    <div class="ug-sticky-cart-bar__product">
+      <span class="ug-sticky-cart-bar__title" data-ug-sticky-title></span>
+      <span class="ug-sticky-cart-bar__price" data-ug-sticky-price></span>
+    </div>
+    <div class="ug-sticky-cart-bar__actions">
+      <button type="submit" form="ug-product-form" class="ug-btn ug-btn--primary">{{ 'products.product.add_to_cart' | t }}</button>
+    </div>
+  </div>
+</div>

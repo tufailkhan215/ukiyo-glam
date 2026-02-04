@@ -1,0 +1,18 @@
+{% comment %} Video modal container section – for theme app block placement {% endcomment %}
+<div id="ug-video-modal-section" class="ug-video-modal-section" aria-hidden="true" hidden>
+  <div class="ug-video-modal-section__overlay" data-ug-video-modal-close></div>
+  <div class="ug-video-modal-section__inner">
+    <button type="button" class="ug-video-modal-section__close" aria-label="{{ 'accessibility.close' | t }}" data-ug-video-modal-close>{% render 'ug-icon-close' %}</button>
+    <div class="ug-video-modal-section__player" data-ug-video-player></div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Video modal",
+  "tag": "div",
+  "class": "ug-section-video-modal",
+  "settings": [],
+  "presets": [{ "name": "Video modal" }]
+}
+{% endschema %}

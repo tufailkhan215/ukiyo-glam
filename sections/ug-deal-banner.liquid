@@ -1,0 +1,32 @@
+<section class="ug-deal-banner section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
+  <div class="page-width ug-deal-banner__inner">
+    {% if section.settings.heading != blank %}<h2 class="ug-deal-banner__heading">{{ section.settings.heading }}</h2>{% endif %}
+    {% if section.settings.end_date != blank %}
+      <div class="ug-deal-banner__countdown" data-countdown data-end-date="{{ section.settings.end_date | date: '%Y-%m-%dT%H:%M:%S' }}">
+        <span class="ug-deal-banner__days" data-days>0</span>d
+        <span class="ug-deal-banner__hours" data-hours>0</span>h
+        <span class="ug-deal-banner__mins" data-mins>0</span>m
+        <span class="ug-deal-banner__secs" data-secs>0</span>s
+      </div>
+    {% endif %}
+    {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+      <a href="{{ section.settings.button_link }}" class="ug-btn ug-btn--primary">{{ section.settings.button_label }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Deal banner",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "text", "id": "end_date", "label": "End date YYYY-MM-DD" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "select", "id": "color_scheme", "options": [{"value": "background-1", "label": "Background 1"}, {"value": "accent", "label": "Accent"}], "default": "accent", "label": "Color scheme" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 60, "step": 4, "default": 16, "unit": "px", "label": "Padding top" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 60, "step": 4, "default": 16, "unit": "px", "label": "Padding bottom" }
+  ],
+  "presets": [{ "name": "Deal banner" }]
+}
+{% endschema %}

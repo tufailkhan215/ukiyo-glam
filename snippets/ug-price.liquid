@@ -1,0 +1,8 @@
+{% if product.price_varies and product.compare_at_price_varies == false %}
+  <span class="ug-price ug-price--from">{{ 'products.product.from' | t }} {{ product.price_min | money }}</span>
+{% elsif product.compare_at_price_min > product.price_min %}
+  <span class="ug-price ug-price--sale">{{ product.price_min | money }}</span>
+  <span class="ug-price ug-price--compare">{{ product.compare_at_price_min | money }}</span>
+{% else %}
+  <span class="ug-price">{{ product.price_min | money }}</span>
+{% endif %}

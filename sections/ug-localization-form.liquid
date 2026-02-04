@@ -1,0 +1,35 @@
+{% comment %} Localization – country/language selector (replaces foxify-localization-form) {% endcomment %}
+<div class="ug-localization-form">
+  {% form 'localization', id: 'ug-localization-form', class: 'ug-localization-form__form' %}
+    {% if section.settings.show_country_selector and localization.available_countries.size > 1 %}
+      <div class="ug-localization-form__item">
+        <label for="ug-country-{{ section.id }}" class="visually-hidden">{{ 'localization.country_label' | t }}</label>
+        <select id="ug-country-{{ section.id }}" name="country_code" class="ug-localization-form__select" data-ug-country-select>
+          {{ country_option_tags }}
+        </select>
+      </div>
+    {% endif %}
+    {% if section.settings.show_locale_selector and localization.available_languages.size > 1 %}
+      <div class="ug-localization-form__item">
+        <label for="ug-locale-{{ section.id }}" class="visually-hidden">{{ 'localization.language_label' | t }}</label>
+        <select id="ug-locale-{{ section.id }}" name="locale_code" class="ug-localization-form__select" data-ug-locale-select>
+          {% for language in localization.available_languages %}
+            <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>{{ language.endonym_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    {% endif %}
+  {% endform %}
+</div>
+
+{% schema %}
+{
+  "name": "Localization",
+  "tag": "div",
+  "settings": [
+    { "type": "checkbox", "id": "show_country_selector", "default": true, "label": "Show country selector" },
+    { "type": "checkbox", "id": "show_locale_selector", "default": false, "label": "Show language selector" }
+  ],
+  "presets": [{ "name": "Localization" }]
+}
+{% endschema %}

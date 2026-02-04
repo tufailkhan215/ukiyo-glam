@@ -1,0 +1,17 @@
+{% comment %} Rendered when search is open; content is fetched via JS from predictive_search_url {% endcomment %}
+<div id="ug-predictive-search" class="ug-predictive-search" aria-hidden="true">
+  <div class="ug-predictive-search__overlay" data-close-search></div>
+  <div class="ug-predictive-search__panel">
+    <form action="{{ routes.search_url }}" method="get" class="ug-predictive-search__form" role="search">
+      <label for="ug-search-input" class="visually-hidden">{{ 'general.search.placeholder' | t }}</label>
+      <input type="search" id="ug-search-input" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" autocomplete="off" data-predictive-search-input>
+      <button type="submit" class="ug-btn ug-btn--primary">{{ 'general.search.submit' | t }}</button>
+    </form>
+    <div class="ug-predictive-search__results" data-predictive-search-results></div>
+    <button type="button" class="ug-predictive-search__close" data-close-search aria-label="{{ 'accessibility.close' | t }}">{% render 'ug-icon-close' %}</button>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Predictive search", "settings": [] }
+{% endschema %}

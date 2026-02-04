@@ -1,0 +1,9 @@
+{% comment %}
+  Accepts: product, variant (optional), input_name (default: quantity), min (default: 1), max (default: 99), value (default: 1)
+{% endcomment %}
+<div class="ug-quantity" data-quantity>
+  <label for="Quantity-{{ id | default: 'form' }}" class="visually-hidden">{{ 'products.product.quantity.label' | t }}</label>
+  <button type="button" class="ug-quantity__btn" data-minus aria-label="Decrease">{% render 'ug-icon-minus' %}</button>
+  <input type="number" name="{{ input_name | default: 'quantity' }}" id="Quantity-{{ id | default: 'form' }}" value="{{ value | default: 1 }}" min="{{ min | default: 1 }}" max="{{ max | default: 99 }}" class="ug-quantity__input" aria-label="{{ 'products.product.quantity.label' | t }}">
+  <button type="button" class="ug-quantity__btn" data-plus aria-label="Increase">{% render 'ug-icon-plus' %}</button>
+</div>
