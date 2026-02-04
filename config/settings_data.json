@@ -56,11 +56,12 @@
           "mega_promo_mXUagH": {
             "type": "mega_promo",
             "settings": {
-              "menu_link_handle": "",
+              "menu_link_handle": "catalog",
               "columns": "3",
-              "heading_1": "",
-              "button_label_1": "",
-              "link_1": "",
+              "image_1": "shopify://shop_images/AdobeStock_449020288_2x_6f4b8aaa-2cef-4608-82da-b2523103fc92.webp",
+              "heading_1": "Heading",
+              "button_label_1": "Button",
+              "link_1": "#",
               "heading_2": "",
               "button_label_2": "",
               "link_2": "",
