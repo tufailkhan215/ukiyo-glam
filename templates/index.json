@@ -140,6 +140,42 @@
     },
     "ug-product-tab": {
       "type": "ug-product-tab",
+      "blocks": {
+        "tab_edjUbQ": {
+          "type": "tab",
+          "settings": {
+            "title": "Tab title",
+            "collection": ""
+          }
+        },
+        "tab_pKcxtb": {
+          "type": "tab",
+          "settings": {
+            "title": "Tab title",
+            "collection": ""
+          }
+        },
+        "tab_dYdihx": {
+          "type": "tab",
+          "settings": {
+            "title": "Tab title",
+            "collection": ""
+          }
+        },
+        "tab_dAEj8G": {
+          "type": "tab",
+          "settings": {
+            "title": "Tab title",
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_edjUbQ",
+        "tab_pKcxtb",
+        "tab_dYdihx",
+        "tab_dAEj8G"
+      ],
       "settings": {
         "heading": "",
         "products_to_show": 8,
