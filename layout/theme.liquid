@@ -80,7 +80,9 @@
         predictiveSearch: {{ routes.predictive_search_url | json }}
       },
       cartType: {{ settings.cart_type | json }},
-      moneyFormat: {{ shop.money_format | json }}
+      moneyFormat: {{ shop.money_format | json }},
+      enablePredictiveSearch: {{ settings.enable_predictive_search | json }},
+      searchPopupType: {{ settings.search_popup_type | json }}
     };
     window.ugStrings = {
       cartError: {{ 'sections.cart.cart_error' | t | json }},
@@ -98,11 +100,13 @@
   <script src="{{ 'ug-compare.js' | asset_url }}" defer></script>
   <script src="{{ 'ug-product-form.js' | asset_url }}" defer></script>
   {% section 'ug-cookie-banner' %}
-  {% render 'ug-scroll-to-top' %}
+  {% if settings.enable_scroll_to_top %}{% render 'ug-scroll-to-top' %}{% endif %}
   {% section 'ug-newsletter-modal' %}
   {% render 'ug-compare-modal' %}
   {% render 'ug-search-overlay' %}
+  {% if settings.enable_predictive_search %}
   {% section 'ug-predictive-search' %}
   <script src="{{ 'ug-predictive-search.js' | asset_url }}" defer></script>
+  {% endif %}
 </body>
 </html>

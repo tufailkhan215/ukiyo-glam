@@ -19,6 +19,10 @@
   }
   function closeSearch() {
     if (container) {
+      if (document.activeElement && container.contains(document.activeElement)) {
+        document.body.setAttribute('tabindex', '-1');
+        document.body.focus({ focusVisible: false });
+      }
       container.setAttribute('aria-hidden', 'true');
       container.setAttribute('hidden', '');
       document.body.style.overflow = '';

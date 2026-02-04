@@ -11,6 +11,15 @@
   var openMenuBtns = document.querySelectorAll('[data-open-menu]');
   var closeMenuBtns = document.querySelectorAll('[data-close-menu]');
 
+  /** Move focus out of a container before hiding it (avoids aria-hidden on focused descendant). */
+  function moveFocusOutOf(container) {
+    if (!container || !document.activeElement) return;
+    if (container.contains(document.activeElement)) {
+      body.setAttribute('tabindex', '-1');
+      body.focus({ focusVisible: false });
+    }
+  }
+
   function openMenu() {
     if (menuDrawer) {
       menuDrawer.setAttribute('aria-hidden', 'false');
@@ -53,6 +62,7 @@
     }
     var compareModal = document.getElementById('ug-compare-modal');
     if (compareModal && compareModal.getAttribute('aria-hidden') === 'false') {
+      moveFocusOutOf(compareModal);
       compareModal.setAttribute('aria-hidden', 'true');
       compareModal.setAttribute('hidden', '');
       document.body.style.overflow = '';
@@ -60,6 +70,7 @@
     }
     var searchOverlay = document.getElementById('ug-search-overlay');
     if (searchOverlay && searchOverlay.getAttribute('aria-hidden') === 'false') {
+      moveFocusOutOf(searchOverlay);
       searchOverlay.setAttribute('aria-hidden', 'true');
       searchOverlay.setAttribute('hidden', '');
       document.body.style.overflow = '';
@@ -67,8 +78,17 @@
     }
     var newsletterModal = document.getElementById('ug-newsletter-modal');
     if (newsletterModal && newsletterModal.getAttribute('aria-hidden') === 'false') {
+      moveFocusOutOf(newsletterModal);
       newsletterModal.setAttribute('aria-hidden', 'true');
       newsletterModal.setAttribute('hidden', '');
+      document.body.style.overflow = '';
+      return;
+    }
+    var quickView = document.getElementById('ug-quick-view');
+    if (quickView && quickView.getAttribute('aria-hidden') === 'false') {
+      moveFocusOutOf(quickView);
+      quickView.setAttribute('aria-hidden', 'true');
+      quickView.setAttribute('hidden', '');
       document.body.style.overflow = '';
     }
   });
@@ -87,6 +107,7 @@
   if (compareModal) {
     document.querySelectorAll('[data-ug-compare-close]').forEach(function (btn) {
       btn.addEventListener('click', function () {
+        moveFocusOutOf(compareModal);
         compareModal.setAttribute('aria-hidden', 'true');
         compareModal.setAttribute('hidden', '');
         document.body.style.overflow = '';
@@ -101,14 +122,30 @@
     });
   }
 
-  // Search overlay: close on close button
+  // Search overlay: open when [data-open-search] and predictive disabled or search_popup_type is overlay; close on close/overlay
   var searchOverlay = document.getElementById('ug-search-overlay');
   if (searchOverlay) {
     document.querySelectorAll('[data-ug-search-close]').forEach(function (btn) {
       btn.addEventListener('click', function () {
+        moveFocusOutOf(searchOverlay);
         searchOverlay.setAttribute('aria-hidden', 'true');
         searchOverlay.setAttribute('hidden', '');
         document.body.style.overflow = '';
+      });
+    });
+    document.querySelectorAll('[data-open-search]').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        var theme = window.ugTheme || {};
+        var useOverlay = !theme.enablePredictiveSearch || theme.searchPopupType === 'overlay';
+        if (useOverlay) {
+          e.preventDefault();
+          e.stopPropagation();
+          searchOverlay.removeAttribute('hidden');
+          searchOverlay.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+          var input = searchOverlay.querySelector('.ug-search-overlay__input');
+          if (input) setTimeout(function () { input.focus(); }, 50);
+        }
       });
     });
   }
@@ -117,6 +154,7 @@
   var newsletterModal = document.getElementById('ug-newsletter-modal');
   if (newsletterModal) {
     var closeNewsletter = function () {
+      moveFocusOutOf(newsletterModal);
       newsletterModal.setAttribute('aria-hidden', 'true');
       newsletterModal.setAttribute('hidden', '');
       document.body.style.overflow = '';

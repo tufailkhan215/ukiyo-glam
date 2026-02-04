@@ -153,7 +153,9 @@
       e.preventDefault();
       var handle = btn.getAttribute('data-quick-view');
       if (!handle || !qvModal || !qvContent) return;
+      qvModal.removeAttribute('hidden');
       qvModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
       qvContent.innerHTML = '<p>Loading...</p>';
       var url = '/products/' + handle;
       fetch(url)
@@ -173,11 +175,24 @@
         });
     });
   });
+  function closeQuickView() {
+    if (qvModal) {
+      if (document.activeElement && qvModal.contains(document.activeElement)) {
+        document.body.setAttribute('tabindex', '-1');
+        document.body.focus({ focusVisible: false });
+      }
+      qvModal.setAttribute('aria-hidden', 'true');
+      qvModal.setAttribute('hidden', '');
+      document.body.style.overflow = '';
+    }
+  }
   document.querySelectorAll('[data-close-quick-view]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      if (qvModal) qvModal.setAttribute('aria-hidden', 'true');
-    });
+    btn.addEventListener('click', closeQuickView);
   });
+  if (qvModal) {
+    var qvOverlay = qvModal.querySelector('.ug-quick-view__overlay');
+    if (qvOverlay) qvOverlay.addEventListener('click', closeQuickView);
+  }
 
   /* Video popup */
   var videoPopupModal = document.getElementById('ug-video-popup-modal');

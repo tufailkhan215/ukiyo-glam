@@ -6,6 +6,7 @@
   <div class="ug-newsletter-modal__content">
     <button type="button" class="ug-newsletter-modal__close" data-close-newsletter aria-label="{{ 'accessibility.close' | t }}">{% render 'ug-icon-close' %}</button>
     <h2 class="ug-newsletter-modal__title">{{ section.settings.heading }}</h2>
+    {% if section.settings.subtext != blank %}<p class="ug-newsletter-modal__subtext">{{ section.settings.subtext }}</p>{% endif %}
     {% form 'customer', id: 'NewsletterModalForm' %}
       <input type="hidden" name="contact[tags]" value="newsletter">
       <input type="email" name="contact[email]" placeholder="{{ 'newsletter.label' | t }}" required>
@@ -21,7 +22,8 @@
     { "type": "checkbox", "id": "enable", "label": "Enable newsletter popup", "default": true },
     { "type": "range", "id": "delay_seconds", "min": 0, "max": 30, "step": 1, "default": 5, "unit": "s", "label": "Show after (seconds)" },
     { "type": "checkbox", "id": "show_once_per_session", "label": "Show once per session", "default": true },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Subscribe for updates" }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Subscribe for updates" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext / description" }
   ]
 }
 {% endschema %}

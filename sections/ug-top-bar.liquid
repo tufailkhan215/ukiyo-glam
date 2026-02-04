@@ -1,6 +1,7 @@
-{% render 'ug-announcement-bar', section: section %}
+{% if section.settings.disable_top_bar == false %}
+<div class="ug-top-bar-announcement{% if section.settings.disable_top_bar_mobile %} ug-top-bar--hide-mobile{% endif %}">{% render 'ug-announcement-bar', section: section %}</div>
 {% if section.settings.show_currency_selector or section.settings.show_locale_selector %}
-<section class="ug-top-bar color-{{ section.settings.color_scheme }}" aria-label="Top bar">
+<section class="ug-top-bar color-{{ section.settings.color_scheme }} ug-top-bar--{{ section.settings.top_bar_alignment }}{% if section.settings.disable_top_bar_mobile %} ug-top-bar--hide-mobile{% endif %}" aria-label="Top bar">
   <div class="page-width">
     <div class="ug-top-bar__inner">
       {% if section.settings.show_currency_selector and localization.available_countries.size > 1 %}
@@ -33,11 +34,19 @@
   </div>
 </section>
 {% endif %}
+{% endif %}
 
 {% schema %}
 {
   "name": "Top bar",
   "settings": [
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "disable_top_bar", "default": false, "label": "Disable top bar" },
+    { "type": "checkbox", "id": "disable_top_bar_mobile", "default": false, "label": "Hide top bar on mobile" },
+    { "type": "select", "id": "top_bar_alignment", "options": [
+      { "value": "default", "label": "Default" },
+      { "value": "center", "label": "Center" }
+    ], "default": "default", "label": "Top bar alignment" },
     { "type": "header", "content": "Announcement" },
     { "type": "text", "id": "message", "label": "Announcement message", "default": "Free shipping on orders over $50" },
     { "type": "url", "id": "link", "label": "Link" },

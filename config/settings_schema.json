@@ -69,5 +69,15 @@
     "settings": [
       { "type": "select", "id": "footer_style", "options": [{"value": "default", "label": "Default"}, {"value": "style_a", "label": "Style A"}, {"value": "style_b", "label": "Style B"}, {"value": "style_c", "label": "Style C"}, {"value": "style_d", "label": "Style D"}], "default": "default", "label": "Footer style" }
     ]
+  },
+  {
+    "name": "Popups & modals",
+    "settings": [
+      { "type": "header", "content": "Search" },
+      { "type": "checkbox", "id": "enable_predictive_search", "default": true, "label": "Enable predictive search popup" },
+      { "type": "select", "id": "search_popup_type", "options": [{"value": "predictive", "label": "Predictive search"}, {"value": "overlay", "label": "Search overlay (full page)"}], "default": "predictive", "label": "Search icon opens" },
+      { "type": "header", "content": "Other" },
+      { "type": "checkbox", "id": "enable_scroll_to_top", "default": true, "label": "Show scroll to top button" }
+    ]
   }
 ]
