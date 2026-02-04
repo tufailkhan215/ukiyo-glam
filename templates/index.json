@@ -150,29 +150,29 @@
         "tab_edjUbQ": {
           "type": "tab",
           "settings": {
-            "title": "Tab title",
+            "title": "Tab title 0",
             "collection": "frontpage"
           }
         },
         "tab_pKcxtb": {
           "type": "tab",
           "settings": {
-            "title": "Tab title",
-            "collection": "frontpage"
+            "title": "Tab title 1",
+            "collection": "collection-1"
           }
         },
         "tab_dYdihx": {
           "type": "tab",
           "settings": {
-            "title": "Tab title",
-            "collection": "frontpage"
+            "title": "Tab title 2",
+            "collection": "collection-2"
           }
         },
         "tab_dAEj8G": {
           "type": "tab",
           "settings": {
             "title": "Tab title",
-            "collection": "frontpage"
+            "collection": "collection-3"
           }
         }
       },
