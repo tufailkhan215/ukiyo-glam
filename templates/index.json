@@ -9,6 +9,56 @@
  */
 {
   "sections": {
+    "ug_slider_with_promo_image_NAQNJD": {
+      "type": "ug-slider-with-promo-image",
+      "blocks": {
+        "slide_Jk8md4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Multi-2x-1_1.webp",
+            "heading": "",
+            "button_label": "",
+            "link": ""
+          }
+        },
+        "slide_9QBirA": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/grid-banner-1.webp",
+            "heading": "",
+            "button_label": "",
+            "link": ""
+          }
+        },
+        "promo_FbyTdb": {
+          "type": "promo",
+          "settings": {
+            "image": "shopify://shop_images/blog-1.webp",
+            "heading": "",
+            "link": ""
+          }
+        },
+        "promo_Lzbex4": {
+          "type": "promo",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_449020288_2x_6f4b8aaa-2cef-4608-82da-b2523103fc92.webp",
+            "heading": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_Jk8md4",
+        "slide_9QBirA",
+        "promo_FbyTdb",
+        "promo_Lzbex4"
+      ],
+      "name": "Slider with promo",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "ug-hero": {
       "type": "ug-hero",
       "blocks": {
@@ -51,7 +101,6 @@
         "slide_mPm7xH",
         "slide-1"
       ],
-      "disabled": true,
       "settings": {
         "fallback_heading": "Welcome to our store",
         "fallback_button": "Shop now",
@@ -387,6 +436,7 @@
     }
   },
   "order": [
+    "ug_slider_with_promo_image_NAQNJD",
     "ug-hero",
     "ug-collection-list",
     "ug-featured-collection",
