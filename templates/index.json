@@ -1,79 +1,198 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "ug-hero": {
       "type": "ug-hero",
       "blocks": {
+        "slide_pJqwdE": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Multi-2x-3.webp",
+            "heading": "Heading",
+            "subheading": "Subheading",
+            "text": "Text",
+            "button_label": "Button label",
+            "link": "#"
+          }
+        },
+        "slide_mPm7xH": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Multi-2x-2.webp",
+            "heading": "Heading",
+            "subheading": "Subheading",
+            "text": "Text",
+            "button_label": "Button label",
+            "link": "#"
+          }
+        },
         "slide-1": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Multi-2x-1_1.webp",
             "heading": "Welcome",
             "subheading": "Jewelry & accessories",
+            "text": "",
             "button_label": "Shop now",
             "link": "shopify://collections/all"
           }
         }
       },
-      "block_order": ["slide-1"],
-      "settings": {}
+      "block_order": [
+        "slide_pJqwdE",
+        "slide_mPm7xH",
+        "slide-1"
+      ],
+      "settings": {
+        "fallback_heading": "Welcome to our store",
+        "fallback_button": "Shop now",
+        "color_scheme": "background-1"
+      }
     },
     "ug-collection-list": {
       "type": "ug-collection-list",
       "settings": {
         "heading": "Shop by collection",
+        "subheading": "",
+        "heading_alignment": "center",
+        "collection_list": [],
         "collections_to_show": 4,
-        "columns": 4
+        "columns": 4,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "ug-featured-collection": {
       "type": "ug-featured-collection",
       "settings": {
         "title": "Featured collection",
+        "collection": "",
         "products_to_show": 8,
-        "show_view_all": true
+        "show_view_all": true,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "ug-grid-banner": {
       "type": "ug-grid-banner",
       "blocks": {
-        "banner-1": { "type": "banner", "settings": {} },
-        "banner-2": { "type": "banner", "settings": {} },
-        "banner-3": { "type": "banner", "settings": {} }
+        "banner-1": {
+          "type": "banner",
+          "settings": {
+            "heading": "",
+            "description": "",
+            "button_label": "",
+            "link": "",
+            "content_position": "bottom-left",
+            "show_overlay": true,
+            "overlay_opacity": 40
+          }
+        },
+        "banner-2": {
+          "type": "banner",
+          "settings": {
+            "heading": "",
+            "description": "",
+            "button_label": "",
+            "link": "",
+            "content_position": "bottom-left",
+            "show_overlay": true,
+            "overlay_opacity": 40
+          }
+        },
+        "banner-3": {
+          "type": "banner",
+          "settings": {
+            "heading": "",
+            "description": "",
+            "button_label": "",
+            "link": "",
+            "content_position": "bottom-left",
+            "show_overlay": true,
+            "overlay_opacity": 40
+          }
+        }
       },
-      "block_order": ["banner-1", "banner-2", "banner-3"],
+      "block_order": [
+        "banner-1",
+        "banner-2",
+        "banner-3"
+      ],
       "settings": {
         "heading": "Promo",
-        "columns": "3"
+        "subheading": "",
+        "heading_alignment": "center",
+        "columns": "3",
+        "grid_gap": 16,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "ug-product-tab": {
       "type": "ug-product-tab",
-      "settings": {}
+      "settings": {
+        "heading": "",
+        "products_to_show": 8,
+        "show_view_all": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "ug-multicolumn": {
       "type": "ug-multicolumn",
-      "blocks": {},
-      "block_order": [],
-      "settings": { "heading": "Why shop with us" }
+      "settings": {
+        "heading": "Why shop with us",
+        "subheading": "",
+        "heading_alignment": "center",
+        "columns": 3,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "ug-testimonials": {
       "type": "ug-testimonials",
-      "blocks": {},
-      "block_order": [],
-      "settings": { "heading": "What our customers say" }
+      "settings": {
+        "heading": "What our customers say",
+        "subheading": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "ug-featured-blog": {
       "type": "ug-featured-blog",
-      "settings": { "heading": "From the blog", "posts_to_show": 3 }
+      "settings": {
+        "heading": "From the blog",
+        "subheading": "",
+        "blog": "",
+        "posts_to_show": 3,
+        "show_view_all": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "ug-instagram-gallery": {
       "type": "ug-instagram-gallery",
-      "settings": { "heading": "Follow us" }
+      "settings": {
+        "heading": "Follow us",
+        "columns": 4,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "ug-newsletter": {
       "type": "ug-newsletter",
       "settings": {
         "heading": "Subscribe",
-        "button_label": "Subscribe"
+        "button_label": "Subscribe",
+        "color_scheme": "background-2"
       }
     }
   },
