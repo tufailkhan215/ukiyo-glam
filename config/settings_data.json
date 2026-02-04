@@ -31,8 +31,9 @@
     "grid_spacing": 20,
     "cart_type": "drawer",
     "footer_style": "default",
-    "enable_predictive_search": false,
+    "enable_predictive_search": true,
     "search_popup_type": "overlay",
+    "enable_scroll_to_top": true,
     "sections": {
       "ug-top-bar": {
         "type": "ug-top-bar",
