@@ -122,7 +122,7 @@
       "ug-cookie-banner": {
         "type": "ug-cookie-banner",
         "settings": {
-          "show_cookie_banner": true,
+          "show_cookie_banner": false,
           "position": "bottom",
           "text": "We use cookies to improve your experience. By continuing you agree to our use of cookies.",
           "privacy_link": "",
@@ -133,7 +133,7 @@
       "ug-newsletter-modal": {
         "type": "ug-newsletter-modal",
         "settings": {
-          "enable": true,
+          "enable": false,
           "delay_seconds": 5,
           "show_once_per_session": true,
           "heading": "Subscribe for updates",
