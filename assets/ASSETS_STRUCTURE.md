@@ -17,6 +17,7 @@ The **source 221 files** typically include: 40–80+ CSS files (one per componen
 
 - **ug-base.css** – Reset, variables, layout, header, footer, cart, product card, all section styles, modals, facets, customer, animations (consolidated).
 - **ug-animations.css** – Keyframes and animation utility classes (optional split).
+- **ug-fonts.css.liquid** – Self-hosted @font-face (Cormorant, Poppins). Enable “Use theme asset fonts” in Theme settings > Typography and add **cormorant.woff2**, **cormorant.woff**, **poppins.woff2**, **poppins.woff** to the Assets folder.
 - **ug-theme.js** – Global behaviour (skip link, mobile menu, cart opener, scroll-to-top, etc.).
 - **ug-cart-drawer.js** – Cart drawer open/close and AJAX add-to-cart.
 - **ug-sections.js** – Section-specific behaviour (slideshow, product tabs, countdown, video popup, etc.).

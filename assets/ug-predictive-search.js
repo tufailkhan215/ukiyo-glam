@@ -11,12 +11,18 @@
 
   function openSearch() {
     if (container) {
+      container.removeAttribute('hidden');
       container.setAttribute('aria-hidden', 'false');
-      if (input) input.focus();
+      document.body.style.overflow = 'hidden';
+      if (input) setTimeout(function () { input.focus(); }, 50);
     }
   }
   function closeSearch() {
-    if (container) container.setAttribute('aria-hidden', 'true');
+    if (container) {
+      container.setAttribute('aria-hidden', 'true');
+      container.setAttribute('hidden', '');
+      document.body.style.overflow = '';
+    }
   }
 
   openSearchBtns.forEach(function (btn) {
@@ -32,6 +38,9 @@
     var overlay = container.querySelector('.ug-predictive-search__overlay');
     if (overlay) overlay.addEventListener('click', closeSearch);
   }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && container && container.getAttribute('aria-hidden') === 'false') closeSearch();
+  });
 
   if (!input || !resultsEl) return;
 

@@ -8,9 +8,13 @@
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
   {% render 'ug-meta-tags' %}
   {{ content_for_header }}
+  {% if settings.use_asset_fonts %}
+  {{ 'ug-fonts.css.liquid' | asset_url | stylesheet_tag }}
+  {% else %}
   {{ settings.font_heading | font_face: font_display: 'swap' }}
   {{ settings.font_body | font_face: font_display: 'swap' }}
   {{ settings.font_additional | font_face: font_display: 'swap' }}
+  {% endif %}
   {% style %}
     :root {
       --ug-color-btn-text: {{ settings.color_btn_text.red }}, {{ settings.color_btn_text.green }}, {{ settings.color_btn_text.blue }};

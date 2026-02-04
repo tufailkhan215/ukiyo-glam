@@ -30,6 +30,7 @@
   {
     "name": "Typography",
     "settings": [
+      { "type": "checkbox", "id": "use_asset_fonts", "default": false, "label": "Use theme asset fonts (add cormorant.woff2, poppins.woff2 to Assets)" },
       { "type": "font_picker", "id": "font_heading", "default": "cormorant_n4", "label": "Heading font" },
       { "type": "font_picker", "id": "font_body", "default": "poppins_n4", "label": "Body font" },
       { "type": "font_picker", "id": "font_additional", "default": "poppins_n4", "label": "Additional font" },

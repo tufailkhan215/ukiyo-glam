@@ -204,8 +204,8 @@ img { max-width: 100%; height: auto; display: block; }
 .ug-scroll-top[hidden] { display: none !important; }
 
 /* Newsletter modal */
-.ug-newsletter-modal { position: fixed; inset: 0; z-index: 9997; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-.ug-newsletter-modal[aria-hidden="false"] { pointer-events: auto; }
+.ug-newsletter-modal { position: fixed; inset: 0; z-index: 9997; display: flex; align-items: center; justify-content: center; pointer-events: none; visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s; }
+.ug-newsletter-modal[aria-hidden="false"] { pointer-events: auto; visibility: visible; opacity: 1; }
 .ug-newsletter-modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
 .ug-newsletter-modal__content { position: relative; background: #fff; padding: 2rem; max-width: 400px; width: 90%; }
 .ug-newsletter-modal__close { position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.5rem; border: 0; background: none; cursor: pointer; }
@@ -478,8 +478,8 @@ img { max-width: 100%; height: auto; display: block; }
 .ug-reveal.ug-reveal--visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease; }
 
 /* Predictive search */
-.ug-predictive-search { position: fixed; inset: 0; z-index: 9996; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding: 2rem; }
-.ug-predictive-search[aria-hidden="false"] { pointer-events: auto; }
+.ug-predictive-search { position: fixed; inset: 0; z-index: 9996; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding: 2rem; visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s; }
+.ug-predictive-search[aria-hidden="false"] { pointer-events: auto; visibility: visible; opacity: 1; }
 .ug-predictive-search__overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
 .ug-predictive-search__panel { position: relative; background: #fff; width: 100%; max-width: 600px; max-height: 80vh; overflow: auto; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
 .ug-predictive-search__form { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
@@ -699,16 +699,16 @@ img { max-width: 100%; height: auto; display: block; }
 .ug-bundle-product-list__heading { margin: 0 0 1rem; }
 
 /* Compare modal */
-.ug-compare-modal { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1rem; pointer-events: none; }
-.ug-compare-modal[aria-hidden="false"] { pointer-events: auto; }
+.ug-compare-modal { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1rem; pointer-events: none; visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s; }
+.ug-compare-modal[aria-hidden="false"] { pointer-events: auto; visibility: visible; opacity: 1; }
 .ug-compare-modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
 .ug-compare-modal__inner { position: relative; max-width: 600px; width: 100%; max-height: 90vh; overflow: auto; background: rgb(var(--ug-color-bg-2)); padding: 1.5rem; }
 .ug-compare-modal__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
 .ug-compare-modal__close { padding: 0.5rem; border: 0; background: none; cursor: pointer; }
 
 /* Search overlay */
-.ug-search-overlay { position: fixed; inset: 0; z-index: 9997; background: rgb(var(--ug-color-bg-2)); display: flex; align-items: flex-start; justify-content: center; padding: 4rem 1rem 1rem; pointer-events: none; }
-.ug-search-overlay[aria-hidden="false"] { pointer-events: auto; }
+.ug-search-overlay { position: fixed; inset: 0; z-index: 9997; background: rgb(var(--ug-color-bg-2)); display: flex; align-items: flex-start; justify-content: center; padding: 4rem 1rem 1rem; pointer-events: none; visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s; }
+.ug-search-overlay[aria-hidden="false"] { pointer-events: auto; visibility: visible; opacity: 1; }
 .ug-search-overlay__inner { width: 100%; max-width: 600px; }
 .ug-search-overlay__close { position: absolute; top: 1rem; right: 1rem; padding: 0.5rem; border: 0; background: none; cursor: pointer; }
 .ug-search-overlay__form { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
