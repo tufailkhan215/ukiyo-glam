@@ -52,6 +52,30 @@
       },
       "ug-header": {
         "type": "ug-header",
+        "blocks": {
+          "mega_promo_mXUagH": {
+            "type": "mega_promo",
+            "settings": {
+              "menu_link_handle": "",
+              "columns": "3",
+              "heading_1": "",
+              "button_label_1": "",
+              "link_1": "",
+              "heading_2": "",
+              "button_label_2": "",
+              "link_2": "",
+              "heading_3": "",
+              "button_label_3": "",
+              "link_3": "",
+              "heading_4": "",
+              "button_label_4": "",
+              "link_4": ""
+            }
+          }
+        },
+        "block_order": [
+          "mega_promo_mXUagH"
+        ],
         "settings": {
           "logo": "shopify://shop_images/logo_1.png",
           "logo_width": 120,
