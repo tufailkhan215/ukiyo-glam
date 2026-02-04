@@ -270,8 +270,8 @@
       "type": "ug-featured-blog",
       "settings": {
         "heading": "From the blog",
-        "subheading": "",
-        "blog": "",
+        "subheading": "Subheading",
+        "blog": "news",
         "posts_to_show": 3,
         "show_view_all": true,
         "padding_top": 36,
@@ -280,6 +280,46 @@
     },
     "ug-instagram-gallery": {
       "type": "ug-instagram-gallery",
+      "blocks": {
+        "image_RYjrWm": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/12.webp",
+            "alt": "",
+            "link": ""
+          }
+        },
+        "image_C8Lzzy": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/collection-crown.webp",
+            "alt": "",
+            "link": ""
+          }
+        },
+        "image_MjUadT": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/grid-banner-top.webp",
+            "alt": "",
+            "link": ""
+          }
+        },
+        "image_aGLKfr": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/collection-necklace_b8dd172a-ed81-4fa9-b8da-8b89105aea08.webp",
+            "alt": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_RYjrWm",
+        "image_C8Lzzy",
+        "image_MjUadT",
+        "image_aGLKfr"
+      ],
       "settings": {
         "heading": "Follow us",
         "columns": 4,
