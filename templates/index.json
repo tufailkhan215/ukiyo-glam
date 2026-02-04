@@ -64,7 +64,10 @@
         "subheading": "Subheading",
         "heading_alignment": "center",
         "collection_list": [
-          "frontpage"
+          "collection-4",
+          "collection-3",
+          "collection-2",
+          "collection-1"
         ],
         "collections_to_show": 4,
         "columns": 4,
