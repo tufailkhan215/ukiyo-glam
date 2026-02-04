@@ -31,10 +31,15 @@
     "grid_spacing": 20,
     "cart_type": "drawer",
     "footer_style": "default",
+    "enable_predictive_search": false,
+    "search_popup_type": "overlay",
     "sections": {
       "ug-top-bar": {
         "type": "ug-top-bar",
         "settings": {
+          "disable_top_bar": false,
+          "disable_top_bar_mobile": false,
+          "top_bar_alignment": "default",
           "message": "Free shipping on orders over $50",
           "link": "",
           "link_text": "",
@@ -92,14 +97,21 @@
         "type": "ug-cookie-banner",
         "settings": {
           "show_cookie_banner": true,
+          "position": "bottom",
           "text": "We use cookies to improve your experience. By continuing you agree to our use of cookies.",
+          "privacy_link": "",
+          "privacy_link_text": "Privacy policy",
           "button_text": "Accept"
         }
       },
       "ug-newsletter-modal": {
         "type": "ug-newsletter-modal",
         "settings": {
-          "heading": "Subscribe for updates"
+          "enable": true,
+          "delay_seconds": 5,
+          "show_once_per_session": true,
+          "heading": "Subscribe for updates",
+          "subtext": ""
         }
       },
       "ug-predictive-search": {
