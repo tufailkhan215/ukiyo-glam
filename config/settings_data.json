@@ -52,6 +52,30 @@
       },
       "ug-header": {
         "type": "ug-header",
+        "blocks": {
+          "mega_promo_mXUagH": {
+            "type": "mega_promo",
+            "settings": {
+              "menu_link_handle": "",
+              "columns": "3",
+              "heading_1": "",
+              "button_label_1": "",
+              "link_1": "",
+              "heading_2": "",
+              "button_label_2": "",
+              "link_2": "",
+              "heading_3": "",
+              "button_label_3": "",
+              "link_3": "",
+              "heading_4": "",
+              "button_label_4": "",
+              "link_4": ""
+            }
+          }
+        },
+        "block_order": [
+          "mega_promo_mXUagH"
+        ],
         "settings": {
           "logo": "shopify://shop_images/logo_1.png",
           "logo_width": 120,
@@ -98,7 +122,7 @@
       "ug-cookie-banner": {
         "type": "ug-cookie-banner",
         "settings": {
-          "show_cookie_banner": true,
+          "show_cookie_banner": false,
           "position": "bottom",
           "text": "We use cookies to improve your experience. By continuing you agree to our use of cookies.",
           "privacy_link": "",
@@ -109,7 +133,7 @@
       "ug-newsletter-modal": {
         "type": "ug-newsletter-modal",
         "settings": {
-          "enable": true,
+          "enable": false,
           "delay_seconds": 5,
           "show_once_per_session": true,
           "heading": "Subscribe for updates",
