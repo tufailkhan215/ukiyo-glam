@@ -50,7 +50,13 @@
   {
     "name": "Cart",
     "settings": [
-      { "type": "select", "id": "cart_type", "options": [{"value": "drawer", "label": "Drawer"}, {"value": "page", "label": "Page"}], "default": "drawer", "label": "Cart type" }
+      { "type": "select", "id": "cart_type", "options": [{"value": "drawer", "label": "Drawer"}, {"value": "page", "label": "Page"}, {"value": "notification", "label": "Notification (toast)"}], "default": "drawer", "label": "Cart type" }
+    ]
+  },
+  {
+    "name": "Favicon & branding",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "Will be used as browser tab icon" }
     ]
   },
   {

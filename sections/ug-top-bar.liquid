@@ -3,12 +3,26 @@
   <div class="page-width">
     <div class="ug-top-bar__inner">
       {% if section.settings.top_bar_layout == 'three_column' %}
-        <div class="ug-top-bar__left">{{ section.settings.text_left }}</div>
+        <div class="ug-top-bar__left">
+          {% if section.settings.header_mail != blank or section.settings.header_phone != blank %}
+            <ul class="ug-top-bar__contact" role="list">
+              {% if section.settings.header_mail != blank %}
+                <li><a href="mailto:{{ section.settings.header_mail }}" class="ug-top-bar__link ug-top-bar__link--contact">{% render 'ug-icon-mail' %}<span>{{ section.settings.header_mail }}</span></a></li>
+              {% endif %}
+              {% if section.settings.header_phone != blank %}
+                <li><a href="tel:{{ section.settings.header_phone }}" class="ug-top-bar__link ug-top-bar__link--contact">{% render 'ug-icon-phone' %}<span>{{ section.settings.header_phone }}</span></a></li>
+              {% endif %}
+            </ul>
+          {% endif %}
+          {% if section.settings.text_left != blank %}<span class="ug-top-bar__text-left">{{ section.settings.text_left }}</span>{% endif %}
+        </div>
         <div class="ug-top-bar__center">
           {% if section.settings.message != blank %}<p class="ug-top-bar__text">{% if section.settings.link != blank %}<a href="{{ section.settings.link }}" class="ug-top-bar__link">{{ section.settings.message }}</a>{% else %}{{ section.settings.message }}{% endif %}</p>{% endif %}
         </div>
         <div class="ug-top-bar__right">
-          {% if section.settings.text_right != blank %}{{ section.settings.text_right }}{% endif %}
+          {% if section.settings.address_text != blank %}<p class="ug-top-bar__address">{{ section.settings.address_text }}</p>{% endif %}
+          {% if section.settings.show_social %}<div class="ug-top-bar__social">{% render 'ug-social-icons', class: 'ug-top-bar__social-list' %}</div>{% endif %}
+          {% if section.settings.text_right != blank %}<span class="ug-top-bar__text-right">{{ section.settings.text_right }}</span>{% endif %}
           {% if section.settings.show_currency_selector and localization.available_countries.size > 1 %}
             {% form 'localization', id: 'TopBarCountryForm' %}
               <label for="TopBarCountry" class="visually-hidden">{{ 'localization.country_label' | t }}</label>
@@ -68,13 +82,17 @@
       { "value": "center", "label": "Center" }
     ], "default": "default", "label": "Top bar alignment" },
     { "type": "header", "content": "Left zone (three column only)" },
-    { "type": "text", "id": "text_left", "label": "Left text", "default": "" },
+    { "type": "text", "id": "header_mail", "label": "Email", "default": "" },
+    { "type": "text", "id": "header_phone", "label": "Phone", "default": "" },
+    { "type": "text", "id": "text_left", "label": "Left text (optional)", "default": "" },
     { "type": "header", "content": "Center (announcement)" },
     { "type": "text", "id": "message", "label": "Center / announcement message", "default": "Free shipping on orders over $50" },
     { "type": "url", "id": "link", "label": "Center link" },
     { "type": "text", "id": "link_text", "label": "Link text" },
     { "type": "header", "content": "Right zone (three column only)" },
-    { "type": "text", "id": "text_right", "label": "Right text", "default": "" },
+    { "type": "text", "id": "address_text", "label": "Address text", "default": "" },
+    { "type": "checkbox", "id": "show_social", "default": false, "label": "Show social icons" },
+    { "type": "text", "id": "text_right", "label": "Right text (optional)", "default": "" },
     { "type": "header", "content": "Localization" },
     { "type": "checkbox", "id": "show_currency_selector", "default": false, "label": "Show country/currency selector" },
     { "type": "checkbox", "id": "show_locale_selector", "default": false, "label": "Show language selector" },

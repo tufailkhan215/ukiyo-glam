@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="canonical" href="{{ canonical_url }}">
+  {% if settings.favicon != blank %}<link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">{% endif %}
   <title>{{ page_title }}{% if current_page != 1 %} – Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}</title>
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
   {% render 'ug-meta-tags' %}
@@ -38,6 +39,24 @@
       --ug-page-width: {{ settings.page_width }}px;
       --ug-section-spacing: {{ settings.section_spacing }}px;
       --ug-grid-spacing: {{ settings.grid_spacing }}px;
+      /* Source theme (Glamora) compatible variable names */
+      --color-base-text: {{ settings.color_text.red }}, {{ settings.color_text.green }}, {{ settings.color_text.blue }};
+      --color-base-background-1: {{ settings.color_bg_1.red }}, {{ settings.color_bg_1.green }}, {{ settings.color_bg_1.blue }};
+      --color-base-background-2: {{ settings.color_bg_2.red }}, {{ settings.color_bg_2.green }}, {{ settings.color_bg_2.blue }};
+      --color-base-background-3: {{ settings.color_bg_3.red }}, {{ settings.color_bg_3.green }}, {{ settings.color_bg_3.blue }};
+      --color-base-accent-1: {{ settings.color_accent_1.red }}, {{ settings.color_accent_1.green }}, {{ settings.color_accent_1.blue }};
+      --color-base-accent-2: {{ settings.color_accent_2.red }}, {{ settings.color_accent_2.green }}, {{ settings.color_accent_2.blue }};
+      --color-base-accent-3: {{ settings.color_accent_3.red }}, {{ settings.color_accent_3.green }}, {{ settings.color_accent_3.blue }};
+      --gradient-base-background-1: {{ settings.color_bg_1 }};
+      --gradient-base-background-2: {{ settings.color_bg_2 }};
+      --gradient-base-background-3: {{ settings.color_bg_3 }};
+      --gradient-base-accent-1: {{ settings.color_accent_1 }};
+      --gradient-base-accent-2: {{ settings.color_accent_2 }};
+      --gradient-base-accent-3: {{ settings.color_accent_3 }};
+      --page-width: {{ settings.page_width | divided_by: 10 }}rem;
+      --spacing-sections-desktop: {{ settings.section_spacing }}px;
+      --grid-desktop-horizontal-spacing: {{ settings.grid_spacing }}px;
+      --grid-desktop-vertical-spacing: {{ settings.grid_spacing }}px;
     }
   {% endstyle %}
   {{ 'ug-base.css' | asset_url | stylesheet_tag }}
@@ -101,6 +120,7 @@
   <script src="{{ 'ug-wishlist.js' | asset_url }}" defer></script>
   <script src="{{ 'ug-compare.js' | asset_url }}" defer></script>
   <script src="{{ 'ug-product-form.js' | asset_url }}" defer></script>
+  {% section 'ug-suggested-products' %}
   {% section 'ug-cookie-banner' %}
   {% if settings.enable_scroll_to_top %}{% render 'ug-scroll-to-top' %}{% endif %}
   {% section 'ug-newsletter-modal' %}

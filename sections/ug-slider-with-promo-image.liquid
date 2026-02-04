@@ -1,22 +1,47 @@
 {% comment %} Slider with side promo images – mirror source slider-with-promo-image {% endcomment %}
-<section class="ug-slider-with-promo section-{{ section.id }}-padding">
+{%- liquid
+  assign content_width = section.settings.content_width | default: '70/30' | split: '/'
+  assign left_pct = content_width[0] | default: 70
+  assign right_pct = content_width[1] | default: 30
+  assign gap = section.settings.grouped_column_gap | default: 30
+  assign has_section_promos = false
+  if section.settings.enable_additional_block_1 or section.settings.enable_additional_block_2
+    assign has_section_promos = true
+  endif
+  assign has_promo_blocks = false
+  for block in section.blocks
+    if block.type == 'promo'
+      assign has_promo_blocks = true
+      break
+    endif
+  endfor
+  assign show_side = section.settings.enable_promo_block and (has_section_promos or has_promo_blocks)
+-%}
+<section class="ug-slider-with-promo section-{{ section.id }}-padding {% if show_side %}ug-slider-with-promo--has-side{% endif %} {% if section.settings.reverse_column %}ug-slider-with-promo--reverse{% endif %}">
   <div class="page-width">
-    <div class="ug-slider-with-promo__grid">
+    <div class="ug-slider-with-promo__grid" {% if show_side %}style="--ug-slider-main: {{ left_pct }}%; --ug-slider-side: calc({{ right_pct }}% - {{ gap }}px); --ug-slider-gap: {{ gap }}px;"{% endif %}>
       <div class="ug-slider-with-promo__main" data-ug-slider-with-promo>
         <div class="ug-slider-with-promo__track">
           {% for block in section.blocks %}
             {% if block.type == 'slide' %}
               <div class="ug-slider-with-promo__slide" {{ block.shopify_attributes }}>
                 <div class="ug-slider-with-promo__media">
+                  {% if block.settings.mobile_image != blank %}
+                    <img class="ug-slider-with-promo__img ug-slider-with-promo__img--mobile" src="{{ block.settings.mobile_image | image_url: width: 600 }}" alt="{{ block.settings.heading | escape }}" width="600" loading="lazy">
+                  {% endif %}
                   {% if block.settings.image != blank %}
-                    <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.heading | escape }}" width="900" loading="{{ forloop.first | json }}">
+                    <img class="ug-slider-with-promo__img ug-slider-with-promo__img--desktop" srcset="{{ block.settings.image | image_url: width: 900 }} 900w, {{ block.settings.image | image_url: width: 1500 }} 1500w" sizes="100vw" src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.heading | escape }}" width="1200" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
                   {% else %}
                     {{ 'lifestyle-1' | placeholder_svg_tag: 'ug-slider-with-promo__placeholder' }}
                   {% endif %}
                 </div>
-                <div class="ug-slider-with-promo__content">
-                  {% if block.settings.heading != blank %}<h2 class="ug-slider-with-promo__heading">{{ block.settings.heading }}</h2>{% endif %}
-                  {% if block.settings.button_label != blank %}<a href="{{ block.settings.link | default: '#' }}" class="ug-btn ug-btn--primary">{{ block.settings.button_label }}</a>{% endif %}
+                <div class="ug-slider-with-promo__content ug-slider-with-promo__content--{{ block.settings.box_align }} ug-slider-with-promo__content--align-{{ block.settings.text_alignment }}">
+                  {% if block.settings.heading != blank %}<h2 class="ug-slider-with-promo__heading {{ block.settings.heading_size }}">{{ block.settings.heading }}</h2>{% endif %}
+                  {% if block.settings.subheading != blank %}<h4 class="ug-slider-with-promo__subheading">{{ block.settings.subheading }}</h4>{% endif %}
+                  {% if block.settings.heading_1 != blank %}<h2 class="ug-slider-with-promo__heading-1 {{ block.settings.heading_size }}">{{ block.settings.heading_1 }}</h2>{% endif %}
+                  {% if block.settings.subheading_1 != blank %}<h4 class="ug-slider-with-promo__subheading-1">{{ block.settings.subheading_1 }}</h4>{% endif %}
+                  {% if block.settings.text != blank %}<p class="ug-slider-with-promo__text">{{ block.settings.text }}</p>{% endif %}
+                  {% if block.settings.button_label != blank %}<a href="{{ block.settings.link | default: '#' }}" class="ug-btn {% if block.settings.button_style_secondary %}ug-btn--secondary{% else %}ug-btn--primary{% endif %}">{{ block.settings.button_label }}</a>{% endif %}
                 </div>
               </div>
             {% endif %}
@@ -27,49 +52,170 @@
           <button type="button" class="ug-slider-with-promo__next" data-ug-slider-next aria-label="Next">{% render 'ug-icon-right-arrow' %}</button>
         {% endif %}
       </div>
-      <div class="ug-slider-with-promo__side">
-        {% for block in section.blocks %}
-          {% if block.type == 'promo' %}
-            <a href="{{ block.settings.link | default: '#' }}" class="ug-slider-with-promo__promo" {{ block.shopify_attributes }}>
-              {% if block.settings.image != blank %}
-                <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.heading | escape }}" width="400" loading="lazy">
-              {% else %}
-                {{ 'image' | placeholder_svg_tag: 'ug-slider-with-promo__promo-placeholder' }}
-              {% endif %}
-              {% if block.settings.heading != blank %}<span class="ug-slider-with-promo__promo-title">{{ block.settings.heading }}</span>{% endif %}
-            </a>
+      {% if show_side and has_section_promos %}
+        <div class="ug-slider-with-promo__side ug-slider-with-promo__side--{{ section.settings.promo_block_style }}">
+          {% if section.settings.enable_additional_block_1 %}
+            <div class="ug-slider-with-promo__promo-block">
+              {% if section.settings.link_1 != blank %}<a href="{{ section.settings.link_1 }}">{% endif %}
+              <div class="ug-slider-with-promo__promo-media">
+                {% if section.settings.image_1 != blank %}
+                  <img src="{{ section.settings.image_1 | image_url: width: 650 }}" alt="{{ section.settings.title_1 | escape }}" width="650" loading="lazy">
+                {% else %}
+                  {{ 'collection-apparel-1' | placeholder_svg_tag: 'ug-slider-with-promo__placeholder' }}
+                {% endif %}
+              </div>
+              {% if section.settings.link_1 != blank %}</a>{% endif %}
+              <div class="ug-slider-with-promo__promo-content ug-slider-with-promo__promo-content--{{ section.settings.box_align_1 }} ug-slider-with-promo__promo-content--align-{{ section.settings.text_alignment_1 }}">
+                {% if section.settings.sub_title_1 != blank %}<h3 class="ug-slider-with-promo__promo-sub">{{ section.settings.sub_title_1 }}</h3>{% endif %}
+                {% if section.settings.title_1 != blank %}<h2 class="ug-slider-with-promo__promo-title {{ section.settings.heading_size_1 }}">{{ section.settings.title_1 }}</h2>{% endif %}
+                {% if section.settings.text_1 != blank %}<p>{{ section.settings.text_1 }}</p>{% endif %}
+                {% if section.settings.button_1 != blank %}<a href="{{ section.settings.link_1 | default: '#' }}" class="ug-btn ug-btn--primary">{{ section.settings.button_1 }}</a>{% endif %}
+              </div>
+            </div>
           {% endif %}
-        {% endfor %}
-      </div>
+          {% if section.settings.enable_additional_block_2 %}
+            <div class="ug-slider-with-promo__promo-block">
+              {% if section.settings.link_2 != blank %}<a href="{{ section.settings.link_2 }}">{% endif %}
+              <div class="ug-slider-with-promo__promo-media">
+                {% if section.settings.image_2 != blank %}
+                  <img src="{{ section.settings.image_2 | image_url: width: 650 }}" alt="{{ section.settings.title_2 | escape }}" width="650" loading="lazy">
+                {% else %}
+                  {{ 'collection-apparel-2' | placeholder_svg_tag: 'ug-slider-with-promo__placeholder' }}
+                {% endif %}
+              </div>
+              {% if section.settings.link_2 != blank %}</a>{% endif %}
+              <div class="ug-slider-with-promo__promo-content ug-slider-with-promo__promo-content--{{ section.settings.box_align_2 }} ug-slider-with-promo__promo-content--align-{{ section.settings.text_alignment_2 }}">
+                {% if section.settings.sub_title_2 != blank %}<h3 class="ug-slider-with-promo__promo-sub">{{ section.settings.sub_title_2 }}</h3>{% endif %}
+                {% if section.settings.title_2 != blank %}<h2 class="ug-slider-with-promo__promo-title {{ section.settings.heading_size_2 }}">{{ section.settings.title_2 }}</h2>{% endif %}
+                {% if section.settings.text_2 != blank %}<p>{{ section.settings.text_2 }}</p>{% endif %}
+                {% if section.settings.button_2 != blank %}<a href="{{ section.settings.link_2 | default: '#' }}" class="ug-btn ug-btn--primary">{{ section.settings.button_2 }}</a>{% endif %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% elsif show_side and has_promo_blocks %}
+        <div class="ug-slider-with-promo__side">
+          {% for block in section.blocks %}
+            {% if block.type == 'promo' %}
+              <a href="{{ block.settings.link | default: '#' }}" class="ug-slider-with-promo__promo" {{ block.shopify_attributes }}>
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.heading | escape }}" width="400" loading="lazy">
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'ug-slider-with-promo__promo-placeholder' }}
+                {% endif %}
+                {% if block.settings.heading != blank %}<span class="ug-slider-with-promo__promo-title">{{ block.settings.heading }}</span>{% endif %}
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </section>
 
 <style>
   .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  {% if show_side %}
+  .ug-slider-with-promo--has-side .ug-slider-with-promo__grid { display: flex; gap: var(--ug-slider-gap, 30px); flex-wrap: wrap; }
+  .ug-slider-with-promo--has-side .ug-slider-with-promo__main { width: var(--ug-slider-main, 70%); }
+  .ug-slider-with-promo--has-side .ug-slider-with-promo__side { width: var(--ug-slider-side); display: flex; flex-direction: column; gap: var(--ug-slider-gap, 30px); }
+  .ug-slider-with-promo--has-side.ug-slider-with-promo--reverse .ug-slider-with-promo__grid { flex-direction: row-reverse; }
+  .ug-slider-with-promo__side--overlay .ug-slider-with-promo__promo-block { position: relative; min-height: {{ section.settings.promo_height_desktop }}px; }
+  .ug-slider-with-promo__side--overlay .ug-slider-with-promo__promo-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1.5rem; }
+  .ug-slider-with-promo__side--overlay .ug-slider-with-promo__promo-content--top-left { justify-content: flex-start; align-items: flex-start; }
+  .ug-slider-with-promo__side--overlay .ug-slider-with-promo__promo-content--middle-center { justify-content: center; align-items: center; }
+  .ug-slider-with-promo__side--overlay .ug-slider-with-promo__promo-content--bottom-right { justify-content: flex-end; align-items: flex-end; }
+  @media (max-width: 992px) {
+    .ug-slider-with-promo--has-side .ug-slider-with-promo__main,
+    .ug-slider-with-promo--has-side .ug-slider-with-promo__side { width: 100%; }
+    .ug-slider-with-promo__side--overlay .ug-slider-with-promo__promo-block { min-height: {{ section.settings.promo_height_tab }}px; }
+  }
+  @media (max-width: 767px) {
+    .ug-slider-with-promo__side--overlay .ug-slider-with-promo__promo-block { min-height: {{ section.settings.promo_height_mobile }}px; }
+  }
+  {% endif %}
+  .ug-slider-with-promo__img--mobile { display: none; }
+  @media (max-width: 749px) {
+    .ug-slider-with-promo__img--desktop { display: none; }
+    .ug-slider-with-promo__img--mobile { display: block; }
+  }
 </style>
 
 {% schema %}
 {
   "name": "Slider with promo",
-  "max_blocks": 6,
+  "max_blocks": 8,
   "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "text", "id": "content_width", "label": "Main / side column ratio (e.g. 70/30)", "default": "70/30" },
+    { "type": "text", "id": "lap_content_width", "label": "Laptop ratio", "default": "65/35" },
+    { "type": "text", "id": "tab_content_width", "label": "Tablet ratio", "default": "50/50" },
+    { "type": "text", "id": "grouped_column_gap", "label": "Gap between columns (number only)", "default": "30" },
+    { "type": "checkbox", "id": "enable_promo_block", "label": "Enable side promo blocks", "default": true },
+    { "type": "checkbox", "id": "reverse_column", "label": "Reverse columns (promo left, slider right)", "default": false },
+    { "type": "select", "id": "promo_block_style", "label": "Promo block style", "options": [
+      { "value": "grid", "label": "Grid" },
+      { "value": "overlay", "label": "Overlay text on image" }
+    ], "default": "overlay" },
+    { "type": "range", "id": "promo_height_desktop", "min": 100, "max": 800, "step": 10, "default": 300, "unit": "px", "label": "Promo height (desktop)" },
+    { "type": "range", "id": "promo_height_tab", "min": 100, "max": 600, "step": 10, "default": 280, "unit": "px", "label": "Promo height (tablet)" },
+    { "type": "range", "id": "promo_height_mobile", "min": 100, "max": 500, "step": 10, "default": 240, "unit": "px", "label": "Promo height (mobile)" },
+    { "type": "header", "content": "Promo block 1" },
+    { "type": "checkbox", "id": "enable_additional_block_1", "label": "Enable promo block 1", "default": true },
+    { "type": "image_picker", "id": "image_1", "label": "Image" },
+    { "type": "text", "id": "sub_title_1", "label": "Subtitle" },
+    { "type": "text", "id": "title_1", "label": "Title", "default": "Heading" },
+    { "type": "select", "id": "heading_size_1", "options": [{ "value": "h2", "label": "Small" }, { "value": "h1", "label": "Medium" }, { "value": "h0", "label": "Large" }], "default": "h1", "label": "Heading size" },
+    { "type": "text", "id": "text_1", "label": "Description" },
+    { "type": "text", "id": "button_1", "label": "Button text" },
+    { "type": "url", "id": "link_1", "label": "Link" },
+    { "type": "select", "id": "box_align_1", "label": "Content position", "options": [
+      { "value": "top-left", "label": "Top left" }, { "value": "top-center", "label": "Top center" }, { "value": "top-right", "label": "Top right" },
+      { "value": "middle-left", "label": "Middle left" }, { "value": "middle-center", "label": "Middle center" }, { "value": "middle-right", "label": "Middle right" },
+      { "value": "bottom-left", "label": "Bottom left" }, { "value": "bottom-center", "label": "Bottom center" }, { "value": "bottom-right", "label": "Bottom right" }
+    ], "default": "middle-center" },
+    { "type": "select", "id": "text_alignment_1", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center", "label": "Text alignment" },
+    { "type": "header", "content": "Promo block 2" },
+    { "type": "checkbox", "id": "enable_additional_block_2", "label": "Enable promo block 2", "default": false },
+    { "type": "image_picker", "id": "image_2", "label": "Image" },
+    { "type": "text", "id": "sub_title_2", "label": "Subtitle" },
+    { "type": "text", "id": "title_2", "label": "Title" },
+    { "type": "select", "id": "heading_size_2", "options": [{ "value": "h2", "label": "Small" }, { "value": "h1", "label": "Medium" }, { "value": "h0", "label": "Large" }], "default": "h1", "label": "Heading size" },
+    { "type": "text", "id": "text_2", "label": "Description" },
+    { "type": "text", "id": "button_2", "label": "Button text" },
+    { "type": "url", "id": "link_2", "label": "Link" },
+    { "type": "select", "id": "box_align_2", "label": "Content position", "options": [
+      { "value": "top-left", "label": "Top left" }, { "value": "middle-center", "label": "Middle center" }, { "value": "bottom-right", "label": "Bottom right" }
+    ], "default": "middle-center" },
+    { "type": "select", "id": "text_alignment_2", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center", "label": "Text alignment" },
+    { "type": "header", "content": "Section padding" },
     { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "default": 36, "unit": "px", "label": "Padding top" },
     { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "default": 36, "unit": "px", "label": "Padding bottom" }
   ],
   "blocks": [
-    { "type": "slide", "name": "Slide", "settings": [
+    { "type": "slide", "name": "Slide", "limit": 5, "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
       { "type": "text", "id": "heading", "label": "Heading" },
+      { "type": "select", "id": "heading_size", "options": [{ "value": "h2", "label": "Small" }, { "value": "h1", "label": "Medium" }, { "value": "h0", "label": "Large" }], "default": "h1", "label": "Heading size" },
+      { "type": "text", "id": "subheading", "label": "Subheading" },
+      { "type": "text", "id": "heading_1", "label": "Second heading" },
+      { "type": "text", "id": "subheading_1", "label": "Second subheading" },
+      { "type": "textarea", "id": "text", "label": "Text" },
       { "type": "text", "id": "button_label", "label": "Button label" },
-      { "type": "url", "id": "link", "label": "Link" }
+      { "type": "url", "id": "link", "label": "Link" },
+      { "type": "checkbox", "id": "button_style_secondary", "label": "Secondary button style", "default": false },
+      { "type": "select", "id": "box_align", "label": "Content position", "options": [
+        { "value": "top-left", "label": "Top left" }, { "value": "top-center", "label": "Top center" }, { "value": "middle-left", "label": "Middle left" }, { "value": "middle-center", "label": "Middle center" }, { "value": "middle-right", "label": "Middle right" }, { "value": "bottom-left", "label": "Bottom left" }, { "value": "bottom-center", "label": "Bottom center" }
+      ], "default": "middle-left" },
+      { "type": "select", "id": "text_alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "left", "label": "Text alignment" }
     ]},
-    { "type": "promo", "name": "Promo image", "settings": [
+    { "type": "promo", "name": "Promo image (block)", "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
       { "type": "text", "id": "heading", "label": "Heading" },
       { "type": "url", "id": "link", "label": "Link" }
     ]}
   ],
-  "presets": [{ "name": "Slider with promo", "blocks": [{ "type": "slide" }, { "type": "promo" }, { "type": "promo" }] }]
+  "presets": [{ "name": "Slider with promo", "settings": { "enable_promo_block": true, "enable_additional_block_1": true }, "blocks": [{ "type": "slide" }, { "type": "promo" }, { "type": "promo" }] }]
 }
 {% endschema %}

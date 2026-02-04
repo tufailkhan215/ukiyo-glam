@@ -9,52 +9,61 @@
  */
 {
   "sections": {
-    "ug-hero": {
-      "type": "ug-hero",
+    "ug-slider-with-promo": {
+      "type": "ug-slider-with-promo-image",
       "blocks": {
-        "slide_pJqwdE": {
+        "slide_1": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Multi-2x-3.webp",
-            "heading": "Heading",
-            "subheading": "Subheading",
-            "text": "Text",
-            "button_label": "Button label",
-            "link": "#"
+            "heading": "Save Upto $150",
+            "heading_size": "h0",
+            "subheading": "Trendy Sleek Jewelry",
+            "heading_1": "10%",
+            "subheading_1": "Jewelry That Fits Any Taste",
+            "button_label": "Discover Now",
+            "box_align": "top-left",
+            "text_alignment": "left"
           }
         },
-        "slide_mPm7xH": {
+        "slide_2": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Multi-2x-2.webp",
-            "heading": "Heading",
-            "subheading": "Subheading",
-            "text": "Text",
-            "button_label": "Button label",
-            "link": "#"
-          }
-        },
-        "slide-1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Multi-2x-1_1.webp",
-            "heading": "Welcome",
-            "subheading": "Jewelry & accessories",
-            "text": "",
-            "button_label": "Shop now",
-            "link": "shopify://collections/all"
+            "heading": "Save Upto $200",
+            "heading_size": "h0",
+            "subheading": "Classy & Light Weight",
+            "heading_1": "5%",
+            "subheading_1": "Match's Significant Sentimental Value",
+            "button_label": "Discover Now",
+            "box_align": "top-left",
+            "text_alignment": "left"
           }
         }
       },
-      "block_order": [
-        "slide_pJqwdE",
-        "slide_mPm7xH",
-        "slide-1"
-      ],
+      "block_order": ["slide_1", "slide_2"],
       "settings": {
-        "fallback_heading": "Welcome to our store",
-        "fallback_button": "Shop now",
-        "color_scheme": "background-1"
+        "content_width": "57/43",
+        "grouped_column_gap": "20",
+        "enable_promo_block": true,
+        "promo_block_style": "overlay",
+        "promo_height_desktop": 270,
+        "promo_height_tab": 250,
+        "promo_height_mobile": 250,
+        "enable_additional_block_1": true,
+        "sub_title_1": "20% Offer",
+        "title_1": "Glorious Jewellery",
+        "heading_size_1": "h1",
+        "button_1": "Shop Now",
+        "box_align_1": "bottom-right",
+        "text_alignment_1": "right",
+        "enable_additional_block_2": true,
+        "sub_title_2": "12% Offer",
+        "title_2": "Pretty Wedding Ring",
+        "heading_size_2": "h1",
+        "button_2": "Shop Now",
+        "box_align_2": "bottom-left",
+        "text_alignment_2": "left",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "ug-collection-list": {
@@ -297,7 +306,7 @@
     }
   },
   "order": [
-    "ug-hero",
+    "ug-slider-with-promo",
     "ug-collection-list",
     "ug-featured-collection",
     "ug-grid-banner",
