@@ -33,7 +33,7 @@
     "cart_type": "drawer",
     "footer_style": "default",
     "enable_predictive_search": true,
-    "search_popup_type": "overlay",
+    "search_popup_type": "predictive",
     "enable_scroll_to_top": true,
     "sections": {
       "ug-top-bar": {
