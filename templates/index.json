@@ -51,6 +51,7 @@
         "slide_mPm7xH",
         "slide-1"
       ],
+      "disabled": true,
       "settings": {
         "fallback_heading": "Welcome to our store",
         "fallback_button": "Shop now",
@@ -337,6 +338,52 @@
         "button_label": "Subscribe",
         "color_scheme": "background-2"
       }
+    },
+    "ug_home_slider_width_tabs_nTAggq": {
+      "type": "ug-home-slider-width-tabs",
+      "blocks": {
+        "slide_VM6jNF": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Multi-2x-1_1.webp",
+            "heading": "",
+            "button_label": "",
+            "link": "",
+            "tab_label": ""
+          }
+        },
+        "slide_b8gEVk": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Multi-2x-3.webp",
+            "heading": "",
+            "button_label": "",
+            "link": "",
+            "tab_label": ""
+          }
+        },
+        "slide_wBd7pA": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Multi-2x-2.webp",
+            "heading": "",
+            "button_label": "",
+            "link": "",
+            "tab_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_VM6jNF",
+        "slide_b8gEVk",
+        "slide_wBd7pA"
+      ],
+      "name": "Home slider with tabs",
+      "settings": {
+        "show_tabs": true,
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -349,6 +396,7 @@
     "ug-testimonials",
     "ug-featured-blog",
     "ug-instagram-gallery",
-    "ug-newsletter"
+    "ug-newsletter",
+    "ug_home_slider_width_tabs_nTAggq"
   ]
 }
