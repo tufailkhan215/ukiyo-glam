@@ -4,7 +4,7 @@
     <button type="button" class="ug-search-overlay__close" aria-label="{{ 'accessibility.close' | t }}" data-ug-search-close>{% render 'ug-icon-close' %}</button>
     <form action="{{ routes.search_url }}" method="get" class="ug-search-overlay__form" role="search">
       <label for="ug-search-overlay-input" class="visually-hidden">{{ 'search.placeholder' | t }}</label>
-      <input type="search" id="ug-search-overlay-input" name="q" placeholder="{{ 'search.placeholder' | t }}" autocomplete="off" class="ug-search-overlay__input">
+      <input type="search" id="ug-search-overlay-input" name="q" placeholder="{% if settings.search_placeholder != blank %}{{ settings.search_placeholder }}{% else %}Search{% endif %}" autocomplete="off" class="ug-search-overlay__input">
       <input type="hidden" name="options[prefix]" value="last">
       <button type="submit" class="ug-btn ug-btn--primary">{{ 'search.submit' | t }}</button>
     </form>

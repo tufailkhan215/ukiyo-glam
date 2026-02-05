@@ -9,7 +9,19 @@
       "settings": {
         "heading": "You may also like"
       }
+    },
+    "recent-products": {
+      "type": "ug-recent-products",
+      "settings": {}
+    },
+    "multicolumn": {
+      "type": "ug-multicolumn",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "ug-newsletter",
+      "settings": {}
     }
   },
-  "order": ["main", "product-recommendations"]
+  "order": ["main", "product-recommendations", "recent-products", "multicolumn", "newsletter"]
 }

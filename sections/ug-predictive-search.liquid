@@ -4,7 +4,7 @@
   <div class="ug-predictive-search__panel">
     <form action="{{ routes.search_url }}" method="get" class="ug-predictive-search__form" role="search">
       <label for="ug-search-input" class="visually-hidden">{{ 'general.search.placeholder' | t }}</label>
-      <input type="search" id="ug-search-input" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" autocomplete="off" data-predictive-search-input>
+      <input type="search" id="ug-search-input" name="q" value="{{ search.terms | escape }}" placeholder="{% if settings.search_placeholder != blank %}{{ settings.search_placeholder }}{% else %}{{ 'general.search.placeholder' | t }}{% endif %}" autocomplete="off" data-predictive-search-input>
       <button type="submit" class="ug-btn ug-btn--primary">{{ 'general.search.submit' | t }}</button>
     </form>
     <div class="ug-predictive-search__results" data-predictive-search-results></div>

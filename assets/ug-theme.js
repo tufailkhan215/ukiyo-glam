@@ -5,6 +5,18 @@
   'use strict';
 
   var body = document.body;
+  var preloader = document.getElementById('ug-preloader');
+  if (preloader) {
+    function hidePreloader() {
+      preloader.setAttribute('aria-hidden', 'true');
+    }
+    if (document.readyState === 'complete') {
+      hidePreloader();
+    } else {
+      window.addEventListener('load', hidePreloader);
+    }
+  }
+
   var mobileOverlay = document.querySelector('.ug-mobile-overlay');
   var menuDrawer = document.getElementById('ug-mobile-menu');
   var scrollTopBtn = document.querySelector('.ug-scroll-top');
@@ -186,5 +198,52 @@
         })
         .catch(function () {});
     });
+  }
+
+  // Header category dropdown toggle
+  document.body.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-ug-header-category]');
+    var list = document.getElementById('ug-header-category-list');
+    if (btn) {
+      e.preventDefault();
+      if (!list) return;
+      var expanded = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', expanded);
+      if (expanded) {
+        list.removeAttribute('hidden');
+      } else {
+        list.setAttribute('hidden', '');
+      }
+      return;
+    }
+    if (list && !e.target.closest('.ug-header__category')) {
+      var catBtn = document.querySelector('[data-ug-header-category]');
+      if (catBtn && catBtn.getAttribute('aria-expanded') === 'true') {
+        catBtn.setAttribute('aria-expanded', 'false');
+        list.setAttribute('hidden', '');
+      }
+    }
+  });
+
+  // Footer accordion (mobile)
+  document.body.addEventListener('click', function (e) {
+    var heading = e.target.closest('[data-ug-footer-toggle]');
+    if (!heading) return;
+    e.preventDefault();
+    var expanded = heading.getAttribute('aria-expanded') !== 'true';
+    heading.setAttribute('aria-expanded', expanded);
+  });
+
+  // Section entrance (source-like scroll animations: add class ug-section-animate to section)
+  var sectionAnimate = document.querySelectorAll('.ug-section-animate');
+  if (sectionAnimate.length && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('ug-section-animate--visible');
+        }
+      });
+    }, { rootMargin: '0px 0px -50px 0px', threshold: 0 });
+    sectionAnimate.forEach(function (el) { io.observe(el); });
   }
 })();

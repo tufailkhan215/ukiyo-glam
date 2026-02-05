@@ -31,14 +31,18 @@
       --ug-color-bg-3: {{ settings.color_bg_3.red }}, {{ settings.color_bg_3.green }}, {{ settings.color_bg_3.blue }};
       --ug-color-overlay: {{ settings.color_overlay.red }}, {{ settings.color_overlay.green }}, {{ settings.color_overlay.blue }};
       --ug-overlay-opacity: {{ settings.overlay_opacity | divided_by: 100.0 }};
-      --ug-font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
-      --ug-font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
-      --ug-font-additional: {{ settings.font_additional.family }}, {{ settings.font_additional.fallback_families }};
+      --ug-font-heading: {% if settings.use_asset_fonts %}Italiana, serif{% else %}{{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }}{% endif %};
+      --ug-font-body: {% if settings.use_asset_fonts %}Poppins, sans-serif{% else %}{{ settings.font_body.family }}, {{ settings.font_body.fallback_families }}{% endif %};
+      --ug-font-additional: {% if settings.use_asset_fonts %}Poppins, sans-serif{% else %}{{ settings.font_additional.family }}, {{ settings.font_additional.fallback_families }}{% endif %};
       --ug-heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
       --ug-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
       --ug-page-width: {{ settings.page_width }}px;
       --ug-section-spacing: {{ settings.section_spacing }}px;
       --ug-grid-spacing: {{ settings.grid_spacing }}px;
+      /* Transitions (source-like: 0.3s linear, 0.5s ease, cubic-bezier for premium feel) */
+      --ug-duration-short: 0.3s;
+      --ug-duration-medium: 0.5s;
+      --ug-ease-smooth: cubic-bezier(0.165, 0.84, 0.44, 1);
       /* Source theme (Glamora) compatible variable names */
       --color-base-text: {{ settings.color_text.red }}, {{ settings.color_text.green }}, {{ settings.color_text.blue }};
       --color-base-background-1: {{ settings.color_bg_1.red }}, {{ settings.color_bg_1.green }}, {{ settings.color_bg_1.blue }};
@@ -67,9 +71,18 @@
   <a class="ug-skip-link" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
   <div class="ug-mobile-overlay" aria-hidden="true"></div>
   {% if settings.cart_type == 'drawer' %}{% render 'ug-cart-drawer' %}{% endif %}
+  {% if settings.enable_preloader %}
+  <div class="ug-preloader" id="ug-preloader" aria-hidden="false">
+    {% if settings.preloader_logo != blank %}
+      <img src="{{ settings.preloader_logo | image_url: width: 120 }}" alt="" width="120" height="{{ 120 | divided_by: settings.preloader_logo.aspect_ratio | round }}">
+    {% else %}
+      <span class="ug-preloader-spinner"></span>
+    {% endif %}
+  </div>
+{% endif %}
   {% section 'ug-top-bar' %}
   {% section 'ug-header' %}
-  {% render 'ug-breadcrumb' %}
+  {% if settings.show_breadcrumb %}{% render 'ug-breadcrumb' %}{% endif %}
   <main id="MainContent" class="ug-main" role="main" tabindex="-1">
     {{ content_for_layout }}
   </main>
@@ -123,7 +136,7 @@
   {% section 'ug-suggested-products' %}
   {% section 'ug-cookie-banner' %}
   {% if settings.enable_scroll_to_top %}{% render 'ug-scroll-to-top' %}{% endif %}
-  {% section 'ug-newsletter-modal' %}
+  {% if settings.enable_newsletter_modal %}{% section 'ug-newsletter-modal' %}{% endif %}
   {% render 'ug-compare-modal' %}
   {% render 'ug-search-overlay' %}
   {% if settings.enable_predictive_search %}

@@ -1,9 +1,17 @@
 {
   "sections": {
-    "main": {
-      "type": "main-cart",
+    "cart-items": {
+      "type": "ug-main-cart-items",
+      "settings": {}
+    },
+    "cart-footer": {
+      "type": "ug-main-cart-footer",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "ug-newsletter",
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": ["cart-items", "cart-footer", "newsletter"]
 }

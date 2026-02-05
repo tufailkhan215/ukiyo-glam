@@ -7,7 +7,15 @@
     "main": {
       "type": "ug-main-collection-product-grid",
       "settings": {}
+    },
+    "instagram-gallery": {
+      "type": "ug-instagram-gallery",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "ug-newsletter",
+      "settings": {}
     }
   },
-  "order": ["banner", "main"]
+  "order": ["banner", "main", "instagram-gallery", "newsletter"]
 }

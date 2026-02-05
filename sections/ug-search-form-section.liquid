@@ -2,7 +2,7 @@
 <div class="ug-search-form-section">
   <form action="{{ routes.search_url }}" method="get" class="ug-search-form-section__form" role="search">
     <label for="ug-search-input-{{ section.id }}" class="visually-hidden">{{ 'search.placeholder' | t }}</label>
-    <input type="search" id="ug-search-input-{{ section.id }}" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}" class="ug-search-form-section__input">
+    <input type="search" id="ug-search-input-{{ section.id }}" name="q" value="{{ search.terms | escape }}" placeholder="{% if settings.search_placeholder != blank %}{{ settings.search_placeholder }}{% else %}{{ 'search.placeholder' | t }}{% endif %}" class="ug-search-form-section__input">
     <input type="hidden" name="options[prefix]" value="last">
     <button type="submit" class="ug-btn ug-btn--primary">{{ 'search.submit' | t | default: 'Search' }}</button>
   </form>

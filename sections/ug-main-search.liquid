@@ -1,7 +1,7 @@
 <section class="ug-search page-width">
   <h1>{{ 'general.search.title' | t }}</h1>
   <form action="{{ routes.search_url }}" method="get" role="search">
-    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{% if settings.search_placeholder != blank %}{{ settings.search_placeholder }}{% else %}{{ 'general.search.placeholder' | t }}{% endif %}">
     <button type="submit">{{ 'general.search.submit' | t }}</button>
   </form>
   {% if search.performed %}

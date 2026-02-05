@@ -3,7 +3,11 @@
     "main": {
       "type": "ug-main-search",
       "settings": {}
+    },
+    "featured-collection": {
+      "type": "ug-featured-collection",
+      "settings": {}
     }
   },
-  "order": ["main"]
+  "order": ["main", "featured-collection"]
 }

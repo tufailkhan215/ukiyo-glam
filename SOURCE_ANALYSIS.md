@@ -51,7 +51,22 @@ Layout: source uses one row with flex-between (currency/language, contact, text,
 
 ---
 
-## Footer
+## Footer (footer.liquid → ug-footer.liquid)
+
+| Source | Ukiyo-Glam | Status |
+|--------|------------|--------|
+| Banner image (top) | image setting + .ug-footer__banner | Done |
+| Blocks: link_list (heading, menu, alignment, list_style) | link_list + alignment, list_style | Done |
+| Blocks: text (image, logo_width, heading, subtext, alignment) | text block with image, logo_width, heading, subtext/text, alignment | Done |
+| Blocks: newsletter (heading, newsletter_subtext, alignment, button_style) | newsletter + newsletter_subtext, alignment, button_style | Done |
+| Blocks: address (image, address_heading, footer_address, phone, email, office_hours, alignment) | address block with ug-icon-location, ug-icon-mail, ug-icon-phone | Done |
+| show_social | show_social + ug-social-icons | Done |
+| copyright_content (richtext) | copyright_content; else default theme + shop name | Done |
+| Bottom menu + list_style | menu, bottom_menu_style | Done |
+| payment_enable | payment_enable | Done |
+| footer_default, border_right, margin_top | footer_default, border_right, margin_top | Done |
+| enable_accordian (mobile) | enable_accordion + data-ug-footer-toggle + JS toggle | Done |
+| padding_top, padding_bottom, page_full_width | Section settings | Done |
 
 - theme.liquid uses footer_style (default, style_a … style_d) → ug-footer, ug-footer-style-a … ug-footer-style-d. Mapping done.
 
@@ -77,9 +92,11 @@ Layout: source uses one row with flex-between (currency/language, contact, text,
 
 ---
 
-## Next steps
+## Replication checklist (mirror source exactly)
 
-1. Slider: finish content_width/promo heights CSS and section-level promo 1 & 2 rendering.
-2. Slide block: add subheading, heading_1, subheading_1, text, mobile_image, box_align, text_alignment, show_text_box, image_overlay_opacity, heading_size.
-3. Layout: add suggested-products section to default template if present in source.
-4. Footer: verify footer_type (e.g. footer_style) mapping in source config.
+- [x] Layout order, favicon, CSS variables, suggested-products in layout
+- [x] Top bar: contact (mail, phone), address, social, locale
+- [x] Slider-with-promo: content_width, section-level promo 1 & 2, slide fields (subheading, box_align, etc.)
+- [x] Footer: banner image, link_list (alignment, list_style), text (logo, subtext), newsletter (subtext, button_style), address block, show_social, copyright_content, bottom menu, payment_enable, margin_top, border_right, enable_accordion
+- [ ] Header: optional layout variants (top-center, middle with secondary menu) if needed
+- [ ] Remaining sections: compare each ug-* section schema and markup to source for full parity

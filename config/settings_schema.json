@@ -3,7 +3,7 @@
     "name": "theme_info",
     "theme_name": "Ukiyo-Glam",
     "theme_version": "1.0.0",
-    "theme_author": "Your Studio",
+    "theme_author": "Ukiyo-Glam",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://support.shopify.com/"
   },
@@ -30,9 +30,9 @@
   {
     "name": "Typography",
     "settings": [
-      { "type": "checkbox", "id": "use_asset_fonts", "default": false, "label": "Use theme asset fonts (add cormorant.woff2, poppins.woff2 to Assets)" },
-      { "type": "font_picker", "id": "font_heading", "default": "cormorant_n4", "label": "Heading font" },
-      { "type": "font_picker", "id": "font_body", "default": "poppins_n4", "label": "Body font" },
+      { "type": "checkbox", "id": "use_asset_fonts", "default": false, "label": "Use theme asset fonts (add italiana.woff2, poppins.woff2 to Assets for source look)" },
+      { "type": "font_picker", "id": "font_heading", "default": "cormorant_n4", "label": "Heading font (for source look: enable asset fonts + add Italiana)" },
+      { "type": "font_picker", "id": "font_body", "default": "poppins_n4", "label": "Body font (source: Poppins)" },
       { "type": "font_picker", "id": "font_additional", "default": "poppins_n4", "label": "Additional font" },
       { "type": "range", "id": "heading_scale", "min": 80, "max": 150, "step": 5, "default": 100, "unit": "%", "label": "Heading scale" },
       { "type": "range", "id": "body_scale", "min": 80, "max": 120, "step": 5, "default": 100, "unit": "%", "label": "Body scale" }
@@ -82,8 +82,62 @@
       { "type": "header", "content": "Search" },
       { "type": "checkbox", "id": "enable_predictive_search", "default": true, "label": "Enable predictive search popup" },
       { "type": "select", "id": "search_popup_type", "options": [{"value": "predictive", "label": "Predictive search"}, {"value": "overlay", "label": "Search overlay (full page)"}], "default": "predictive", "label": "Search icon opens" },
+      { "type": "header", "content": "Newsletter" },
+      { "type": "checkbox", "id": "enable_newsletter_modal", "default": true, "label": "Show newsletter modal (first visit / delay)" },
       { "type": "header", "content": "Other" },
       { "type": "checkbox", "id": "enable_scroll_to_top", "default": true, "label": "Show scroll to top button" }
+    ]
+  },
+  {
+    "name": "Preloader",
+    "settings": [
+      { "type": "checkbox", "id": "enable_preloader", "default": false, "label": "Show preloader on page load" },
+      { "type": "image_picker", "id": "preloader_logo", "label": "Preloader logo (optional)" }
+    ]
+  },
+  {
+    "name": "Product badges",
+    "settings": [
+      { "type": "checkbox", "id": "show_sale_badge", "default": true, "label": "Show sale badge on product cards" },
+      { "type": "checkbox", "id": "show_sold_out_badge", "default": true, "label": "Show sold out badge" },
+      { "type": "text", "id": "sale_badge_text", "default": "Sale", "label": "Sale badge text" },
+      { "type": "text", "id": "sold_out_badge_text", "default": "Sold out", "label": "Sold out badge text" }
+    ]
+  },
+  {
+    "name": "Product card",
+    "settings": [
+      { "type": "select", "id": "card_image_ratio", "options": [{"value": "adapt", "label": "Adapt to image"}, {"value": "portrait", "label": "Portrait"}, {"value": "square", "label": "Square"}], "default": "adapt", "label": "Image ratio" },
+      { "type": "checkbox", "id": "card_show_secondary_image", "default": true, "label": "Show second image on hover" },
+      { "type": "checkbox", "id": "card_show_vendor", "default": false, "label": "Show vendor" },
+      { "type": "checkbox", "id": "card_show_rating", "default": false, "label": "Show product rating" }
+    ]
+  },
+  {
+    "name": "Media",
+    "settings": [
+      { "type": "checkbox", "id": "enable_image_zoom", "default": true, "label": "Enable image zoom on product page" },
+      { "type": "select", "id": "product_media_ratio", "options": [{"value": "adapt", "label": "Adapt"}, {"value": "portrait", "label": "Portrait"}, {"value": "square", "label": "Square"}], "default": "adapt", "label": "Product gallery ratio" }
+    ]
+  },
+  {
+    "name": "Drawers",
+    "settings": [
+      { "type": "select", "id": "drawer_cart_position", "options": [{"value": "right", "label": "Right"}, {"value": "left", "label": "Left"}], "default": "right", "label": "Cart drawer position" }
+    ]
+  },
+  {
+    "name": "Breadcrumb",
+    "settings": [
+      { "type": "checkbox", "id": "show_breadcrumb", "default": true, "label": "Show breadcrumb" },
+      { "type": "select", "id": "breadcrumb_style", "options": [{"value": "minimal", "label": "Minimal"}, {"value": "with_bg", "label": "With background"}], "default": "minimal", "label": "Breadcrumb style" }
+    ]
+  },
+  {
+    "name": "Search input",
+    "settings": [
+      { "type": "text", "id": "search_placeholder", "default": "Search", "label": "Search placeholder" },
+      { "type": "checkbox", "id": "search_show_only_products", "default": false, "label": "Show only products in predictive search" }
     ]
   }
 ]

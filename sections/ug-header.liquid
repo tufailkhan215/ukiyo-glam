@@ -1,10 +1,77 @@
-<header class="ug-header ug-header--logo-{{ section.settings.logo_position }} color-{{ section.settings.color_scheme }}" role="banner">
-  <div class="page-width">
-    <div class="ug-header__inner">
+{%- liquid
+  assign bp = section.settings.mobile_screen_width | default: '1280' | plus: 0
+  if bp == 0
+    assign bp = 1280
+  endif
+-%}
+{%- style -%}
+  #shopify-section-{{ section.id }} .ug-header { margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px; }
+  @media (min-width: 750px) {
+    #shopify-section-{{ section.id }} .ug-header { margin-bottom: {{ section.settings.margin_bottom }}px; }
+  }
+  @media (min-width: {{ bp }}px) {
+    #shopify-section-{{ section.id }} .ug-header__row {
+      display: grid;
+      align-items: center;
+      column-gap: 1rem;
+      row-gap: 1rem;
+    }
+    #shopify-section-{{ section.id }} .ug-header__mobile-toggle { display: none; }
+    #shopify-section-{{ section.id }} .ug-header__nav { display: flex; }
+    #shopify-section-{{ section.id }} .ug-header__logo { grid-area: logo; }
+    #shopify-section-{{ section.id }} .ug-header__nav { grid-area: nav; }
+    #shopify-section-{{ section.id }} .ug-header__nav--secondary { grid-area: secondary; }
+    #shopify-section-{{ section.id }} .ug-header__category { grid-area: category; }
+    #shopify-section-{{ section.id }} .ug-header__icons { grid-area: icons; }
+    {%- if section.settings.logo_position == 'middle-left' %}
+    #shopify-section-{{ section.id }} .ug-header__row {
+      grid-template-areas: "logo nav icons";
+      grid-template-columns: 1fr auto 1fr;
+    }
+    {%- elsif section.settings.logo_position == 'middle' %}
+    #shopify-section-{{ section.id }} .ug-header__row {
+      {%- if section.settings.show_secondary_menu and section.settings.secondary_menu != blank %}
+      grid-template-areas: "nav logo secondary icons";
+      grid-template-columns: 1.5fr auto 1.5fr 1fr;
+      {%- else %}
+      grid-template-areas: "nav logo icons";
+      grid-template-columns: 1fr auto 1fr;
+      {%- endif %}
+    }
+    #shopify-section-{{ section.id }} .ug-header--logo-middle .ug-header__nav-list { justify-content: center; }
+    {%- elsif section.settings.logo_position == 'top-left' %}
+    #shopify-section-{{ section.id }} .ug-header__row {
+      {%- if section.settings.show_category_menu and section.settings.category_menu != blank %}
+      grid-template-areas: "logo category icons" "nav nav nav";
+      grid-template-columns: auto 1fr auto;
+      {%- else %}
+      grid-template-areas: "logo . icons" "nav nav nav";
+      grid-template-columns: 1fr 1fr 1fr;
+      {%- endif %}
+    }
+    {%- elsif section.settings.logo_position == 'top-center' %}
+    #shopify-section-{{ section.id }} .ug-header__row {
+      {%- if section.settings.show_category_menu and section.settings.category_menu != blank %}
+      grid-template-areas: "category logo icons" "nav nav nav";
+      grid-template-columns: auto 1fr auto;
+      {%- else %}
+      grid-template-areas: ". logo icons" "nav nav nav";
+      grid-template-columns: 1fr auto 1fr;
+      {%- endif %}
+    }
+    #shopify-section-{{ section.id }} .ug-header--logo-top-center .ug-header__logo { justify-self: center; text-align: center; }
+    #shopify-section-{{ section.id }} .ug-header--logo-top-center .ug-header__logo img { margin: 0 auto; }
+    {%- endif %}
+  }
+{%- endstyle -%}
+<div id="shopify-section-{{ section.id }}" class="ug-header-wrapper{% if section.settings.show_line_separator %} ug-header-wrapper--border{% endif %}{% if section.settings.enable_sticky_header %} ug-header-wrapper--sticky{% endif %}">
+<header class="ug-header ug-header--logo-{{ section.settings.logo_position }} color-{{ section.settings.color_scheme }}{% if section.settings.show_secondary_menu %} ug-header--secondary-enabled{% endif %}{% if section.settings.show_category_menu %} ug-header--category-enabled{% endif %}{% if request.page_type == 'index' and section.settings.enable_transparent_header %} ug-header--transparent{% endif %}" role="banner">
+  <div class="{% if section.settings.page_full_width %}page-width page-width--full{% else %}page-width{% endif %}{% if section.settings.page_full_width_spacing %} page-width--full-spacing{% endif %}">
+    <div class="ug-header__row">
       <div class="ug-header__mobile-toggle" aria-label="Menu" data-open-menu>
         {% render 'ug-icon-menu' %}
       </div>
-      <a href="{{ routes.root_url }}" class="ug-header__logo">
+      <a href="{{ routes.root_url }}" class="ug-header__logo" {% if request.page_type == 'index' %}aria-label="{{ shop.name }}"{% endif %}>
         {% if section.settings.logo != blank %}
           <img src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" alt="{{ shop.name }}" width="{{ section.settings.logo_width }}" loading="eager">
         {% else %}
@@ -13,7 +80,7 @@
       </a>
       <nav class="ug-header__nav" aria-label="Main">
         {% if section.settings.menu != blank %}
-          <ul class="ug-header__nav-list">
+          <ul class="ug-header__nav-list ug-header__nav-list--{{ section.settings.menu_alignment }}">
             {% for link in linklists[section.settings.menu].links %}
               {% assign has_mega = false %}
               {% for block in section.blocks %}
@@ -25,7 +92,7 @@
               <li class="ug-header__nav-item{% if has_mega %} ug-header__nav-item--mega{% endif %}{% if link.links != blank or has_mega %} ug-header__nav-item--has-dropdown{% endif %}">
                 <a href="{{ link.url }}" class="ug-header__nav-link">{{ link.title }}{% if section.settings.show_dropdown_arrows and (link.links != blank or has_mega) %}<span class="ug-header__nav-arrow" aria-hidden="true">{% render 'ug-icon-caret' %}</span>{% endif %}</a>
                 {% if link.links != blank or has_mega %}
-                  <div class="ug-header__subnav">
+                  <div class="ug-header__subnav ug-header__subnav--{{ section.settings.dropdown_style }}">
                     {% if link.links != blank %}
                       <ul class="ug-header__subnav-links">
                         {% for child in link.links %}
@@ -64,6 +131,25 @@
           </ul>
         {% endif %}
       </nav>
+      {% if section.settings.logo_position == 'middle' and section.settings.show_secondary_menu and section.settings.secondary_menu != blank %}
+        <nav class="ug-header__nav ug-header__nav--secondary" aria-label="Secondary">
+          <ul class="ug-header__nav-list ug-header__nav-list--{{ section.settings.menu_alignment }}">
+            {% for link in linklists[section.settings.secondary_menu].links %}
+              <li class="ug-header__nav-item"><a href="{{ link.url }}" class="ug-header__nav-link">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
+      {% if section.settings.show_category_menu and section.settings.category_menu != blank and section.settings.logo_position != 'middle' and section.settings.logo_position != 'middle-left' %}
+        <div class="ug-header__category">
+          <button type="button" class="ug-header__category-btn" aria-expanded="false" aria-controls="ug-header-category-list" data-ug-header-category>{{ section.settings.category_heading }}</button>
+          <ul id="ug-header-category-list" class="ug-header__category-list" hidden>
+            {% for link in linklists[section.settings.category_menu].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
       <div class="ug-header__icons">
         {% if section.settings.show_search %}
           <button type="button" class="ug-header__icon" aria-label="{{ 'general.search.title' | t }}" data-open-search>{% render 'ug-icon-search' %}</button>
@@ -71,10 +157,18 @@
         {% if shop.customer_accounts_enabled and section.settings.show_account %}
           <a href="{{ routes.account_url }}" class="ug-header__icon" aria-label="Account">{% render 'ug-icon-account' %}</a>
         {% endif %}
-        <a href="{{ routes.cart_url }}" class="ug-header__icon ug-header__cart" aria-label="{{ 'sections.cart.title' | t }}" {% if settings.cart_type == 'drawer' %}data-open-cart-drawer{% endif %}>
-          {% render 'ug-icon-cart' %}
-          <span class="ug-header__cart-count" data-cart-count>{{ cart.item_count }}</span>
-        </a>
+        {% if section.settings.show_header_wishlist %}
+          <a href="{{ routes.root_url }}pages/wishlist" class="ug-header__icon" aria-label="Wishlist">{% render 'ug-icon-wishlist' %}</a>
+        {% endif %}
+        {% if section.settings.show_header_compare %}
+          <a href="{{ routes.root_url }}pages/compare" class="ug-header__icon" aria-label="Compare">{% render 'ug-icon-compare' %}</a>
+        {% endif %}
+        {% if section.settings.show_header_cart %}
+          <a href="{{ routes.cart_url }}" class="ug-header__icon ug-header__cart" aria-label="{{ 'sections.cart.title' | t }}" {% if settings.cart_type == 'drawer' %}data-open-cart-drawer{% endif %}>
+            {% render 'ug-icon-cart' %}
+            <span class="ug-header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+          </a>
+        {% endif %}
         {% if section.settings.show_currency_in_header and localization.available_countries.size > 1 %}
           <div class="ug-header__currency">
             {% form 'localization', id: 'HeaderCountryForm' %}
@@ -96,33 +190,73 @@
           {% for link in linklists[section.settings.menu].links %}
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
+          {% if section.settings.show_secondary_menu and section.settings.secondary_menu != blank %}
+            {% for link in linklists[section.settings.secondary_menu].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          {% endif %}
         </ul>
       {% endif %}
     </div>
   </div>
 </header>
+</div>
 
 {% schema %}
 {
   "name": "Header",
   "max_blocks": 10,
   "settings": [
-    { "type": "image_picker", "id": "logo", "label": "Logo" },
-    { "type": "range", "id": "logo_width", "min": 50, "max": 250, "step": 10, "default": 120, "unit": "px", "label": "Logo width" },
-    { "type": "select", "id": "logo_position", "options": [
-      { "value": "left", "label": "Logo left" },
-      { "value": "center", "label": "Logo center (nav left, icons right)" }
-    ], "default": "left", "label": "Logo position" },
-    { "type": "link_list", "id": "menu", "default": "main-menu", "label": "Menu" },
-    { "type": "checkbox", "id": "show_dropdown_arrows", "default": true, "label": "Show dropdown arrows on menu" },
-    { "type": "checkbox", "id": "show_search", "default": true, "label": "Show search" },
-    { "type": "checkbox", "id": "show_account", "default": true, "label": "Show account" },
-    { "type": "checkbox", "id": "show_currency_in_header", "default": false, "label": "Show currency in header" },
+    { "type": "header", "content": "Layout" },
+    { "type": "checkbox", "id": "page_full_width", "default": false, "label": "Page full width" },
+    { "type": "checkbox", "id": "page_full_width_spacing", "default": false, "label": "Page full width spacing" },
+    { "type": "header", "content": "Logo" },
     { "type": "select", "id": "color_scheme", "options": [
+      { "value": "accent-1", "label": "Accent 1" },
+      { "value": "accent-2", "label": "Accent 2" },
       { "value": "background-1", "label": "Background 1" },
       { "value": "background-2", "label": "Background 2" },
-      { "value": "accent", "label": "Accent" }
-    ], "default": "background-1", "label": "Color scheme" }
+      { "value": "inverse", "label": "Inverse" }
+    ], "default": "background-1", "label": "Color scheme" },
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "range", "id": "logo_width", "min": 50, "max": 250, "step": 10, "default": 100, "unit": "px", "label": "Logo width" },
+    { "type": "select", "id": "logo_position", "options": [
+      { "value": "middle-left", "label": "Middle left" },
+      { "value": "middle", "label": "Middle" },
+      { "value": "top-left", "label": "Top left" },
+      { "value": "top-center", "label": "Top center" }
+    ], "default": "middle-left", "label": "Logo position" },
+    { "type": "select", "id": "menu_alignment", "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Center" },
+      { "value": "right", "label": "Right" }
+    ], "default": "center", "label": "Menu alignment" },
+    { "type": "link_list", "id": "menu", "default": "main-menu", "label": "Primary menu" },
+    { "type": "checkbox", "id": "show_secondary_menu", "default": false, "label": "Show secondary menu" },
+    { "type": "link_list", "id": "secondary_menu", "label": "Secondary menu" },
+    { "type": "checkbox", "id": "show_category_menu", "default": false, "label": "Show category menu" },
+    { "type": "link_list", "id": "category_menu", "label": "Category menu" },
+    { "type": "text", "id": "category_heading", "default": "Categories", "label": "Category heading" },
+    { "type": "text", "id": "mobile_screen_width", "default": "1280", "label": "Mobile menu breakpoint (px)" },
+    { "type": "checkbox", "id": "enable_sticky_header", "default": true, "label": "Enable sticky header" },
+    { "type": "checkbox", "id": "show_line_separator", "default": false, "label": "Show line separator" },
+    { "type": "checkbox", "id": "enable_transparent_header", "default": false, "label": "Transparent header on homepage" },
+    { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "default": 0, "unit": "px", "label": "Margin bottom" },
+    { "type": "header", "content": "Dropdown" },
+    { "type": "select", "id": "dropdown_style", "options": [
+      { "value": "default_dropdown", "label": "Default (header width)" },
+      { "value": "fullwidth_dropdown", "label": "Fullwidth" },
+      { "value": "container_width_dropdown", "label": "Container width" },
+      { "value": "custom_width_dropdown", "label": "Custom width" }
+    ], "default": "default_dropdown", "label": "Dropdown style" },
+    { "type": "checkbox", "id": "show_dropdown_arrows", "default": true, "label": "Show dropdown arrows" },
+    { "type": "header", "content": "Icons" },
+    { "type": "checkbox", "id": "show_search", "default": true, "label": "Show search" },
+    { "type": "checkbox", "id": "show_account", "default": true, "label": "Show account" },
+    { "type": "checkbox", "id": "show_header_wishlist", "default": true, "label": "Show wishlist" },
+    { "type": "checkbox", "id": "show_header_compare", "default": true, "label": "Show compare" },
+    { "type": "checkbox", "id": "show_header_cart", "default": true, "label": "Show cart" },
+    { "type": "checkbox", "id": "show_currency_in_header", "default": false, "label": "Show country/currency selector" }
   ],
   "blocks": [
     {

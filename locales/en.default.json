@@ -84,7 +84,8 @@
       "cart_quantity_error_html": "You can only add {{ quantity }} of this item to the cart."
     },
     "footer": {
-      "powered_by": "Powered by"
+      "powered_by": "Powered by",
+      "theme_by": "Theme by Ukiyo-Glam"
     },
     "collection_list": {
       "title": "Collections",

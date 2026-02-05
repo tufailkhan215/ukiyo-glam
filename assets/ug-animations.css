@@ -1,4 +1,4 @@
-/* Ukiyo-Glam theme – keyframes and animation utilities */
+/* Ukiyo-Glam theme – keyframes and animation utilities (source-like: AOS-style entrance, marquee, transitions) */
 
 @keyframes ug-marquee {
   0% { transform: translateX(0); }
@@ -11,8 +11,18 @@
 }
 
 @keyframes ug-fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ug-fadeInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes ug-fadeInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes ug-slideInRight {
@@ -20,5 +30,23 @@
   to { transform: translateX(0); }
 }
 
-.ug-animate-fade-in { animation: ug-fadeIn 0.5s ease forwards; }
-.ug-animate-fade-in-up { animation: ug-fadeInUp 0.6s ease forwards; }
+@keyframes ug-zoomIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Utility classes – use on sections for entrance (source uses AOS; we use CSS) */
+.ug-animate-fade-in { animation: ug-fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+.ug-animate-fade-in-up { animation: ug-fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+.ug-animate-fade-in-left { animation: ug-fadeInLeft 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+.ug-animate-fade-in-right { animation: ug-fadeInRight 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+.ug-animate-zoom-in { animation: ug-zoomIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+
+/* Section entrance – add class ug-section-animate to section wrapper for scroll-in effect */
+.ug-section-animate { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
+.ug-section-animate.ug-section-animate--visible { opacity: 1; transform: translateY(0); }
+
+/* Marquee – pause on hover (source behavior) */
+.ug-marquee-wrap { overflow: hidden; }
+.ug-marquee-wrap:hover .ug-marquee-track { animation-play-state: paused; }
+.ug-marquee-track { animation: ug-marquee 25s linear infinite; display: flex; width: max-content; }
